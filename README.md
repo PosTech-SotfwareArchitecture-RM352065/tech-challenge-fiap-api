@@ -1,8 +1,8 @@
 # tech-challenge-fiap'
 Projeto de entrega para POS Tech FIAP de Victor Cangelosi de Lima RM352065
 
-![API Build](https://github.com/PosTech-SotfwareArchitecture-RM352065/tech-challenge-fiap/main/.github/build.yml/badge.svg)
-
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=PosTech-SotfwareArchitecture-RM352065_tech-challenge-fiap&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=PosTech-SotfwareArchitecture-RM352065_tech-challenge-fiap)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=PosTech-SotfwareArchitecture-RM352065_tech-challenge-fiap&metric=coverage)](https://sonarcloud.io/summary/new_code?id=PosTech-SotfwareArchitecture-RM352065_tech-challenge-fiap)
 
 > [!Note]
 > 
