@@ -1,7 +1,7 @@
 # tech-challenge-fiap'
 Projeto de entrega para POS Tech FIAP de Victor Cangelosi de Lima RM352065
 
-![API Build](https://github.com/PosTech-SotfwareArchitecture-RM352065/tech-challenge-fiap/blob/main/.github/build.yml/badge.svg)
+![API Build](https://github.com/PosTech-SotfwareArchitecture-RM352065/tech-challenge-fiap/main/.github/build.yml/badge.svg)
 
 
 > [!Note]
