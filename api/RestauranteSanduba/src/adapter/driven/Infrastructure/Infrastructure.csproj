@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <RootNamespace>RestauranteSanduba.Adapter.Driven.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
+    <AssemblyName>RestauranteSanduba.Adapter.Driven.$(MSBuildProjectName.Replace(" ", "_"))</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\core\Domain\Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Clientes\" />
+    <Folder Include="Cardapio\" />
+    <Folder Include="Pedidos\Data\" />
+  </ItemGroup>
+
+</Project>

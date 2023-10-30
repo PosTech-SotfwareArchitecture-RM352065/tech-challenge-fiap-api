@@ -13,12 +13,13 @@ Esta API foi construida como parte das entregas da pós-gradução de Software Arch
 - [ASP.NET Core](https://learn.microsoft.com/pt-br/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-7.0)
 - [Swashbuckcle](https://aka.ms/aspnetcore/swashbuckle)
 - [SpecFlow](https://specflow.org/)
+- [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks)
 
 ### Módulos do sistema
-A aplicação está consolidada dentro da pasta `\src` e dentro dela teremos:
+A aplicação está consolidada dentro da pasta `\src` e está desenhada pelo padrão de [Ports and Adapters] dentro dela teremos:
 - Core
 	- Domain
-	- SharedKernel
+	- Appli
 - Application
 	- API
 

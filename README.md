@@ -17,10 +17,14 @@ Projeto de entrega para POS Tech FIAP de Victor Cangelosi de Lima RM352065
 ### Documentação
 ### API Restaurante
 ### Docker
-### Testes
 ### Postman
 
 ## Desenvolvimento e teste
+
+Primeiro será necessário subir as imagens dockers:
+```powershell
+cd .\.docker\ | docker-compose up
+```
 
 Para realizar o `build` da solution
 ```powershell
