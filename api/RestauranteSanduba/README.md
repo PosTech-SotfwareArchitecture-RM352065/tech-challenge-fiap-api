@@ -26,7 +26,8 @@ A aplicação está consolidada dentro da pasta `\src` e está desenhada pelo padrão
 
 ### Comandos
 
-#### Lint (Formação)
+#### Inicializar o banco de dados
 ```powershell
-dotnet format RestauranteSanduba.sln
+dotnet ef database update --project .\src\adapter\driven\Infrastructure\Infrastructure.csproj
 ```
+

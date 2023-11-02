@@ -7,10 +7,10 @@ namespace RestauranteSanduba.Core.Domain.Clientes
     {
         private ClienteIdentificado(Guid id) : base(id) { }
 
-        public static Cliente CriarCliente(string numeroDocumento, string nome, string email)
+        public static Cliente CriarCliente(Guid id, string numeroDocumento, string nome, string email)
         {
             CPF cpf = new CPF(numeroDocumento);
-            var cliente = new ClienteIdentificado(Guid.NewGuid())
+            var cliente = new ClienteIdentificado(id)
             {
                 CPF = cpf,
                 Tipo = AcessoCliente.Identificado,

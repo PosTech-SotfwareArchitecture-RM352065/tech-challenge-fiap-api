@@ -11,9 +11,9 @@ namespace RestauranteSanduba.Core.Domain.Clientes
     {
         private ClienteAnonimo(Guid id) : base(id) { }
 
-        public static Cliente CriarCliente()
+        public static Cliente CriarCliente(Guid id)
         {
-            var cliente = new ClienteAnonimo(Guid.NewGuid())
+            var cliente = new ClienteAnonimo(id)
             {
                 CPF = null,
                 Tipo = AcessoCliente.Anonimo,

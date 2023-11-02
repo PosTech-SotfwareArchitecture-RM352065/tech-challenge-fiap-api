@@ -23,7 +23,7 @@ namespace RestauranteSanduba.Core.Domain.Pedidos
             }
         }
 
-        public int NumeroPedido { get; init; }
+        public int? NumeroPedido { get; init; }
 
         private Pedido(Guid id) : base(id) { }
 
@@ -33,9 +33,9 @@ namespace RestauranteSanduba.Core.Domain.Pedidos
 
         public Cliente Cliente { get; init; }
 
-        public static Pedido CriarPedido(int numeroPedido, Cliente cliente)
+        public static Pedido CriarPedido(Guid id, Cliente cliente, int? numeroPedido = null)
         {
-            var pedido = new Pedido(Guid.NewGuid())
+            var pedido = new Pedido(id)
             {
                 NumeroPedido = numeroPedido,
                 Cliente = cliente
@@ -54,6 +54,20 @@ namespace RestauranteSanduba.Core.Domain.Pedidos
             };
 
             _itens.Add(item);
+        }
+
+        public void AdicionaProdutos(List<Produto> produtos)
+        {
+            var itens = produtos.Select(produto =>
+                new ItemPedido()
+                {
+                    Codigo = Itens.Count + 1,
+                    Produto = produto,
+                    Preco = produto.Preco
+                });
+
+
+            _itens.AddRange(itens);
         }
 
         public ItemPedido RemoveItem(int codigo)

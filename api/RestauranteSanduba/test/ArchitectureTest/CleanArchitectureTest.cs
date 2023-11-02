@@ -2,7 +2,7 @@ using NetArchTest.Rules;
 using System.Linq;
 using Xunit;
 
-namespace ArchitectureTest
+namespace RestauranteSanduba.Test.ArchitectureTest
 {
     public class CleanArchitectureTest
     {
@@ -19,7 +19,7 @@ namespace ArchitectureTest
                 .That().ResideInNamespace(DomainNamespace)
                 .ShouldNot().HaveDependencyOnAny(
                     ApplicationNamespace,
-                    InfrastructureNamespace, 
+                    InfrastructureNamespace,
                     PresentantionNamespace,
                     ApiNamespace
                 )

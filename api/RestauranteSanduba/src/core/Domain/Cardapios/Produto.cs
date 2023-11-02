@@ -11,15 +11,17 @@ namespace RestauranteSanduba.Core.Domain.Cardapios
         public string Descricao { get; private set; }
         public double Preco { get; private set; }
         public Categoria Categoria { get; private set; }
+        public bool Ativo { get; private set; }
 
-        public static Produto CriarProduto(Categoria categoria, string Nome, string Descricao, double Preco)
+        public static Produto CriarProduto(Guid id, Categoria categoria, string Nome, string Descricao, double Preco, bool ativo)
         {
-            var novoProduto = new Produto(Guid.NewGuid())
+            var novoProduto = new Produto(id)
             {
                 Categoria = categoria,
                 Nome = Nome,
                 Descricao = Descricao,
-                Preco = Preco
+                Preco = Preco,
+                Ativo = ativo
             };
 
             return novoProduto;
@@ -35,6 +37,11 @@ namespace RestauranteSanduba.Core.Domain.Cardapios
         public override int GetHashCode()
         {
             throw new NotImplementedException();
+        }
+
+        public void InativarProduto()
+        {
+            this.Ativo = false;
         }
 
         public override void ValidateEntity()

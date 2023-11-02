@@ -1,30 +1,52 @@
-﻿using RestauranteSanduba.Core.Domain.Pedidos;
-using RestauranteSanduba.Core.Domain.Pedidos.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using Domain = RestauranteSanduba.Core.Domain.Pedidos;
+using Application = RestauranteSanduba.Core.Application.Pedidos.Abstractions;
+using Data = RestauranteSanduba.Adapter.Driven.Infrastructure.Pedidos.Schema;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+
 
 namespace RestauranteSanduba.Adapter.Driven.Infrastructure.Pedidos
 {
-    public class PedidoRepository : IPedidoRepository
+    public class PedidoRepository : Application.IPedidoRepository
     {
-        public void AtualizaPedido(Pedido pedido)
+        private readonly InfrastructureDbContext _dbContext;
+
+        public PedidoRepository(InfrastructureDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
         }
 
-        public Pedido ObtemPedido(int numeroPedido)
+        public Domain.Pedido ConsultaPedido(int numeroPedido)
         {
-            throw new NotImplementedException();
+            return _dbContext.Pedidos
+                .Include(item => item.Cliente)
+                .Include(item => item.Items)
+                .Where(item => item.Numero == numeroPedido)
+                .Select(item => item.ToDomain())
+                .FirstOrDefault(); 
         }
 
-        public List<Pedido> ObtemPedidosPorCliente(Guid clienteId)
+        public List<Domain.Pedido> ConsultaPedidosPorCliente(Guid clienteId)
         {
-            throw new NotImplementedException();
+            return _dbContext.Pedidos
+            .Include(item => item.Cliente)
+            .Include(item => item.Items)
+            .Where(item => item.Cliente.Id == clienteId)
+            .Select(item => Domain.Pedido.CriarPedido(item.Id, item.Cliente.ToDomain(), item.Numero))
+            .ToList();
         }
 
-        public void SalvarPedido(Pedido pedido)
+        public int ConsultaProximoNumeroPedido()
         {
-            throw new NotImplementedException();
+            return _dbContext.Pedidos.Count() + 1;
+        }
+
+        public void CadastraPedido(Domain.Pedido pedido)
+        {
+            _dbContext.Add(Data.Pedido.ToSchema(pedido));
+            _dbContext.SaveChanges();
         }
     }
 }

@@ -1,13 +1,12 @@
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using RestauranteSanduba.Adapter.Driven.Infrastructure.Pedidos;
-using RestauranteSanduba.Core.Application.Pedidos;
-using RestauranteSanduba.Core.Domain.Pedidos.Interfaces;
-using System;
+using RestauranteSanduba.Adapter.Driven.Infrastructure;
+using RestauranteSanduba.Core.Application;
 
 namespace RestauranteSanduba.Adapter.Driven.API
 {
@@ -17,9 +16,8 @@ namespace RestauranteSanduba.Adapter.Driven.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddHealthChecks();
-            //    .AddSqlServer(
-            //        builder.Configuration.GetConnectionString("DefaultConnection"));
+            builder.Services.AddHealthChecks()
+                .AddSqlServer(builder.Configuration.GetConnectionString("Default"));
 
             builder.Services.AddHealthChecksUI(options =>
             {
@@ -31,7 +29,8 @@ namespace RestauranteSanduba.Adapter.Driven.API
             }).AddInMemoryStorage();
 
             // Add services to the container.
-
+            builder.Services.AddInfrastructure(builder.Configuration);
+            builder.Services.AddApplication(builder.Configuration);
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(options =>
@@ -50,12 +49,8 @@ namespace RestauranteSanduba.Adapter.Driven.API
 
                 options.EnableAnnotations();
             });
-
-            builder.Services.AddTransient<IPedidoService, PedidoService>();
-
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
