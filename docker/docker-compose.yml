@@ -26,6 +26,7 @@ services:
 
   mssql-sanduba:
     container_name: mssql-sanduba
+    hostname: database
     image: mcr.microsoft.com/mssql/server:latest
     environment:
       SA_PASSWORD: "P@ssW0rd!"
@@ -34,14 +35,17 @@ services:
       - 1433:1433
 
   api-sanduba:
+    container_name: restaurantesanduba.api
+    hostname: restaurantesanduba.api
     build:
       context: ../api/RestauranteSanduba
       dockerfile: ../RestauranteSanduba/src/adapter/driver/API/Dockerfile
     image: restaurantesanduba.api
-    container_name: restaurantesanduba.api
-    hostname: api
+    environment:
+      ASPNETCORE_URLS: "http://+:80"
     ports:
       - 5161:80
+      - 5162:443
     depends_on:
       - mssql-sanduba
       - grafana-sanduba
