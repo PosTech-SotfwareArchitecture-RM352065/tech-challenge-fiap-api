@@ -3,9 +3,9 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RestauranteSanduba.Adapter.Driven.Infrastructure.Clientes.Schema
+namespace RestauranteSanduba.Adapter.Driven.Persistence.Clientes.Schema
 {
-    public class Cliente 
+    public class Cliente
     {
         [Key]
         [Required]
@@ -31,7 +31,7 @@ namespace RestauranteSanduba.Adapter.Driven.Infrastructure.Clientes.Schema
 
         public Domain.Cliente ToDomain()
         {
-            if(Tipo == 0)
+            if (Tipo == 0)
             {
                 return Core.Domain.Clientes.ClienteIdentificado.CriarCliente(Id, CPF, Nome, Email);
             }

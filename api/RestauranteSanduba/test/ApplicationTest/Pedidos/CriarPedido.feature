@@ -5,7 +5,7 @@
 	Para que eu possa comer um X-Tudo com batata frita e Coca-cola
 
 Cenário: Fazer um pedido completo
-	Dado que quero fazer um pedido completo
+	Dado quero fazer um pedido completo
 	Quando selecionar o X-Tudo como lanche
 	E selecionar a batata frita como acompanhamento
 	E selecionar a Coca-cola como bebida

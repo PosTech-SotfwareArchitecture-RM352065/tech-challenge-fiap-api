@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RestauranteSanduba.Adapter.Driven.Infrastructure.Cardapios;
-using RestauranteSanduba.Adapter.Driven.Infrastructure.Clientes;
-using RestauranteSanduba.Adapter.Driven.Infrastructure.Pedidos;
-using RestauranteSanduba.Core.Application.Cardapios.Abstractions;
-using RestauranteSanduba.Core.Application.Clientes.Abstractions;
-using RestauranteSanduba.Core.Application.Pedidos.Abstractions;
+using RestauranteSanduba.Adapter.Driven.Persistence.Cardapios;
+using RestauranteSanduba.Adapter.Driven.Persistence.Clientes;
+using RestauranteSanduba.Adapter.Driven.Persistence.Pedidos;
+using RestauranteSanduba.Core.Application.Abstraction.Cardapios;
+using RestauranteSanduba.Core.Application.Abstraction.Clientes;
+using RestauranteSanduba.Core.Application.Abstraction.Pedidos;
 
-namespace RestauranteSanduba.Adapter.Driven.Infrastructure
+namespace RestauranteSanduba.Adapter.Driven.Persistence
 {
     public static class DependencyInjection
     {
@@ -22,7 +22,8 @@ namespace RestauranteSanduba.Adapter.Driven.Infrastructure
         {
             string connectionString = configuration.GetConnectionString("Default");
 
-            services.AddDbContext<InfrastructureDbContext>(options => {
+            services.AddDbContext<InfrastructureDbContext>(options =>
+            {
                 options.UseSqlServer(connectionString);
             });
 

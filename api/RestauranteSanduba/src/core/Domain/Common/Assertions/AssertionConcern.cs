@@ -27,6 +27,14 @@ namespace RestauranteSanduba.Core.Domain.Common.Assertions
             }
         }
 
+        public static void AssertArgumentNotNegative(double value, string message)
+        {
+            if (value < 0.0)
+            {
+                throw new DomainException(message);
+            }
+        }
+
         public static void AssertArgumentNotEmpty(ICollection collection, string message)
         {
             if (collection.Count < 1)

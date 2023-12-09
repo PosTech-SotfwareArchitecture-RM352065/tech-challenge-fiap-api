@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RestauranteSanduba.Core.Application.Abstraction.Cardapios;
+using RestauranteSanduba.Core.Application.Abstraction.Clientes;
+using RestauranteSanduba.Core.Application.Abstraction.Pedidos;
 using RestauranteSanduba.Core.Application.Cardapios;
-using RestauranteSanduba.Core.Application.Cardapios.Abstractions;
 using RestauranteSanduba.Core.Application.Clientes;
-using RestauranteSanduba.Core.Application.Clientes.Abstractions;
 using RestauranteSanduba.Core.Application.Pedidos;
-using RestauranteSanduba.Core.Application.Pedidos.Abstractions;
 
 namespace RestauranteSanduba.Core.Application
 {

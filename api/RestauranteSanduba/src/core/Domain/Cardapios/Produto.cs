@@ -48,6 +48,7 @@ namespace RestauranteSanduba.Core.Domain.Cardapios
         {
             AssertionConcern.AssertArgumentNotEmpty(Nome, "Nome inválido. Não deve ser vazio");
             AssertionConcern.AssertArgumentNotEmpty(Descricao, "Descrição inválida. Não deve ser vazia");
+            AssertionConcern.AssertArgumentNotNegative(Preco, "Preço inválido. Não deve ser negativo");
         }
     }
 }

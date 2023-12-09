@@ -3,7 +3,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RestauranteSanduba.Adapter.Driven.Infrastructure.Cardapios.Schema
+namespace RestauranteSanduba.Adapter.Driven.Persistence.Cardapios.Schema
 {
     public class Produto
     {
@@ -20,11 +20,11 @@ namespace RestauranteSanduba.Adapter.Driven.Infrastructure.Cardapios.Schema
         [MaxLength(50)]
         [Column(TypeName = "varchar(50)")]
         public string Descricao { get; set; }
-        
+
         [Required]
         [Column(TypeName = "decimal(18,2)")]
         public double Preco { get; set; }
-        
+
         [Required]
         public int Categoria { get; set; }
 
@@ -33,15 +33,15 @@ namespace RestauranteSanduba.Adapter.Driven.Infrastructure.Cardapios.Schema
 
         public Domain.Produto ToDomain()
         {
-            return Domain.Produto.CriarProduto(this.Id, (Domain.Categoria)this.Categoria, this.Nome, this.Descricao, this.Preco, this.Ativo);
+            return Domain.Produto.CriarProduto(Id, (Domain.Categoria)Categoria, Nome, Descricao, Preco, Ativo);
         }
 
-        public static Schema.Produto ToSchema(Domain.Produto produto)
+        public static Produto ToSchema(Domain.Produto produto)
         {
-            return new Schema.Produto 
-            { 
+            return new Produto
+            {
                 Preco = produto.Preco,
-                Id  = produto.Id,
+                Id = produto.Id,
                 Nome = produto.Nome,
                 Categoria = (int)produto.Categoria,
                 Descricao = produto.Descricao,

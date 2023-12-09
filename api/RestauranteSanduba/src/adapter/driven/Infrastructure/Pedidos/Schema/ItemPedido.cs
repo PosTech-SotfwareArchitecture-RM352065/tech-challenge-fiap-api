@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Domain = RestauranteSanduba.Core.Domain.Pedidos;
-using RestauranteSanduba.Adapter.Driven.Infrastructure.Cardapios.Schema;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using RestauranteSanduba.Adapter.Driven.Persistence.Cardapios.Schema;
 
-namespace RestauranteSanduba.Adapter.Driven.Infrastructure.Pedidos.Schema
+namespace RestauranteSanduba.Adapter.Driven.Persistence.Pedidos.Schema
 {
     [PrimaryKey(nameof(Id))]
     public class ItemPedido
@@ -27,9 +27,9 @@ namespace RestauranteSanduba.Adapter.Driven.Infrastructure.Pedidos.Schema
         {
             return new Domain.Pedido.ItemPedido()
             {
-                Codigo = this.Codigo,
-                Preco = this.Preco,
-                Produto = this.Produto.ToDomain(),
+                Codigo = Codigo,
+                Preco = Preco,
+                Produto = Produto.ToDomain(),
             };
         }
 

@@ -1,9 +1,8 @@
-﻿using MediatR;
-using System;
+﻿using System;
 
 namespace RestauranteSanduba.Core.Domain.Common.Events
 {
-    public record DomainEvent : INotification
+    public record DomainEvent
     {
         public DateTimeOffset OccurredAt { get; protected set; } = DateTimeOffset.UtcNow;
     }

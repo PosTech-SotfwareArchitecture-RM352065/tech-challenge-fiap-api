@@ -1,8 +1,8 @@
-﻿using RestauranteSanduba.Core.Application.Cardapios.Abstractions;
-using RestauranteSanduba.Core.Application.Clientes.Abstractions;
-using RestauranteSanduba.Core.Application.Pedidos.Abstractions;
-using RestauranteSanduba.Core.Application.Pedidos.Request;
-using RestauranteSanduba.Core.Application.Pedidos.Response;
+﻿using RestauranteSanduba.Core.Application.Abstraction.Cardapios;
+using RestauranteSanduba.Core.Application.Abstraction.Clientes;
+using RestauranteSanduba.Core.Application.Abstraction.Pedidos;
+using RestauranteSanduba.Core.Application.Abstraction.Pedidos.Request;
+using RestauranteSanduba.Core.Application.Abstraction.Pedidos.Response;
 using RestauranteSanduba.Core.Domain.Pedidos;
 using System;
 using System.Collections.Generic;

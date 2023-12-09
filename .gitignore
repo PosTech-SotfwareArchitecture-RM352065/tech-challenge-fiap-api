@@ -420,4 +420,4 @@ bundles/
 vendor/pkg/
 pyenv
 Vagrantfile
-./docker/prometehus/data/
+/docker/prometehus/data/

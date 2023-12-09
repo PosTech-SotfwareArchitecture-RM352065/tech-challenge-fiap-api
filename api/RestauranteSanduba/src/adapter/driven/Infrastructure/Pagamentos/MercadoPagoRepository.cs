@@ -1,6 +1,6 @@
-﻿using RestauranteSanduba.Core.Domain.Pegamentos;
+﻿using RestauranteSanduba.Core.Application.Abstraction.Pagamentos;
 
-namespace RestauranteSanduba.Adapter.Driven.Infrastructure.Pagamentos
+namespace RestauranteSanduba.Adapter.Driven.Persistence.Pagamentos
 {
     public class MercadoPagoRepository : IPagamentoRepository
     {

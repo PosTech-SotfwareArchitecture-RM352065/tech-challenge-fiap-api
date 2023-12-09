@@ -1,12 +1,15 @@
 ﻿using Domain = RestauranteSanduba.Core.Domain.Clientes;
-using Application = RestauranteSanduba.Core.Application.Clientes.Abstractions;
-using Data = RestauranteSanduba.Adapter.Driven.Infrastructure.Clientes.Schema;
+using Application = RestauranteSanduba.Core.Application.Abstraction.Clientes;
+using Data = RestauranteSanduba.Adapter.Driven.Persistence.Clientes.Schema;
 using System;
 using System.Linq;
+using RestauranteSanduba.Core.Application.Abstraction.Clientes;
+using RestauranteSanduba.Adapter.Driven.Persistence;
+using RestauranteSanduba.Adapter.Driven.Persistence.Clientes.Schema;
 
-namespace RestauranteSanduba.Adapter.Driven.Infrastructure.Clientes
+namespace RestauranteSanduba.Adapter.Driven.Persistence.Clientes
 {
-    public class ClienteRepository : Application.IClienteRepository
+    public class ClienteRepository : IClienteRepository
     {
         private readonly InfrastructureDbContext _dbContext;
 
@@ -17,7 +20,7 @@ namespace RestauranteSanduba.Adapter.Driven.Infrastructure.Clientes
 
         public void CadastrarCliente(Domain.Abstractions.Cliente cliente)
         {
-            _dbContext.Clientes.Add(Data.Cliente.ToSchema(cliente));
+            _dbContext.Clientes.Add(Cliente.ToSchema(cliente));
             _dbContext.SaveChanges();
         }
 

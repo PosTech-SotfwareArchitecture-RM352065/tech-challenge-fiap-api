@@ -1,15 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Domain = RestauranteSanduba.Core.Domain.Pedidos;
-using Application = RestauranteSanduba.Core.Application.Pedidos.Abstractions;
-using Data = RestauranteSanduba.Adapter.Driven.Infrastructure.Pedidos.Schema;
+using Application = RestauranteSanduba.Core.Application.Abstraction.Pedidos;
+using Data = RestauranteSanduba.Adapter.Driven.Persistence.Pedidos.Schema;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using RestauranteSanduba.Core.Application.Abstraction.Pedidos;
+using RestauranteSanduba.Adapter.Driven.Persistence.Pedidos.Schema;
 
-
-namespace RestauranteSanduba.Adapter.Driven.Infrastructure.Pedidos
+namespace RestauranteSanduba.Adapter.Driven.Persistence.Pedidos
 {
-    public class PedidoRepository : Application.IPedidoRepository
+    public class PedidoRepository : IPedidoRepository
     {
         private readonly InfrastructureDbContext _dbContext;
 
@@ -25,7 +26,7 @@ namespace RestauranteSanduba.Adapter.Driven.Infrastructure.Pedidos
                 .Include(item => item.Items)
                 .Where(item => item.Numero == numeroPedido)
                 .Select(item => item.ToDomain())
-                .FirstOrDefault(); 
+                .FirstOrDefault();
         }
 
         public List<Domain.Pedido> ConsultaPedidosPorCliente(Guid clienteId)
@@ -45,7 +46,7 @@ namespace RestauranteSanduba.Adapter.Driven.Infrastructure.Pedidos
 
         public void CadastraPedido(Domain.Pedido pedido)
         {
-            _dbContext.Add(Data.Pedido.ToSchema(pedido));
+            _dbContext.Add(Pedido.ToSchema(pedido));
             _dbContext.SaveChanges();
         }
     }

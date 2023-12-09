@@ -2,10 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using RestauranteSanduba.Adapter.Driven.Infrastructure.Cardapios.Schema;
-using RestauranteSanduba.Core.Application.Cardapios.Abstractions;
+using RestauranteSanduba.Core.Application.Abstraction.Cardapios;
+using RestauranteSanduba.Adapter.Driven.Persistence.Cardapios.Schema;
 
-namespace RestauranteSanduba.Adapter.Driven.Infrastructure.Cardapios
+namespace RestauranteSanduba.Adapter.Driven.Persistence.Cardapios
 {
     public class CardapioRepository : ICardapioRepository
     {
@@ -25,6 +25,14 @@ namespace RestauranteSanduba.Adapter.Driven.Infrastructure.Cardapios
         {
             return _dbContext.Produtos
                 .Where(item => item.Id == id)
+                .Select(item => item.ToDomain())
+                .FirstOrDefault();
+        }
+
+        public Domain.Produto ConsultarProduto(string nome)
+        {
+            return _dbContext.Produtos
+                .Where(item => item.Nome == nome)
                 .Select(item => item.ToDomain())
                 .FirstOrDefault();
         }

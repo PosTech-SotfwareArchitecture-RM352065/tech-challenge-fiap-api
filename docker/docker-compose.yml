@@ -12,6 +12,8 @@ services:
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
+    networks:
+        - sanduba-network
   
   grafana-sanduba:
     container_name: grafana-sanduba
@@ -23,30 +25,40 @@ services:
       - 3000:3000
     depends_on:
       - prometheus-sanduba
+    networks:
+        - sanduba-network
 
   mssql-sanduba:
-    container_name: mssql-sanduba
-    hostname: database
-    image: mcr.microsoft.com/mssql/server:latest
+    container_name: database-sanduba
+    hostname: database-sanduba
+    image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
       SA_PASSWORD: "P@ssW0rd!"
       ACCEPT_EULA: "Y"
     ports:
       - 1433:1433
+    networks:
+        - sanduba-network
 
   api-sanduba:
     container_name: restaurantesanduba.api
     hostname: restaurantesanduba.api
     build:
       context: ../api/RestauranteSanduba
-      dockerfile: ../RestauranteSanduba/src/adapter/driver/API/Dockerfile
+      dockerfile: ../RestauranteSanduba/src/api/Dockerfile
     image: restaurantesanduba.api
+
     environment:
-      ASPNETCORE_URLS: "http://+:80"
+      ASPNETCORE_URLS: "http://+:9000"
     ports:
-      - 5161:80
-      - 5162:443
+      - 5161:9000
     depends_on:
       - mssql-sanduba
       - grafana-sanduba
       - prometheus-sanduba
+    networks:
+        - sanduba-network
+
+networks:
+   sanduba-network:
+       driver: bridge

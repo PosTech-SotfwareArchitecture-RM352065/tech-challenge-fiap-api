@@ -26,8 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\adapter\driven\Infrastructure\Infrastructure.csproj" />
-    <ProjectReference Include="..\..\src\adapter\driver\API\API.csproj" />
+    <ProjectReference Include="..\..\src\adapter\driven\Infrastructure\Persistence.csproj" />
     <ProjectReference Include="..\..\src\core\Application\Application.csproj" />
     <ProjectReference Include="..\..\src\core\Domain\Domain.csproj" />
   </ItemGroup>

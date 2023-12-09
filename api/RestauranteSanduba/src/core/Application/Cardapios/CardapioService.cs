@@ -1,8 +1,9 @@
 ﻿using MediatR;
-using RestauranteSanduba.Core.Application.Cardapios.Abstractions;
-using RestauranteSanduba.Core.Application.Cardapios.Abstractions.Request;
-using RestauranteSanduba.Core.Application.Cardapios.Abstractions.Response;
+using RestauranteSanduba.Core.Application.Abstraction.Cardapios;
+using RestauranteSanduba.Core.Application.Abstraction.Cardapios.Request;
+using RestauranteSanduba.Core.Application.Abstraction.Cardapios.Response;
 using RestauranteSanduba.Core.Domain.Cardapios;
+using RestauranteSanduba.Core.Domain.Common.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,13 +28,26 @@ namespace RestauranteSanduba.Core.Application.Cardapios
 
         public CadastroProdutoResponse CadastrarProduto(CadastroProdutoRequest request)
         {
-            var produto = Produto.CriarProduto(Guid.NewGuid(), request.categoria, request.Nome, request.Descricao, request.Preco, true);
-            _cardapioRepository.CadastrarProduto(produto);
+            var produtoExistente = _cardapioRepository.ConsultarProduto(request.Nome);
 
-            return new CadastroProdutoResponse
+            if(produtoExistente != null) throw new ProdutoDuplicadoException(produtoExistente.Id, produtoExistente.Nome);
+
+            try
             {
-                Id = produto.Id
-            };
+                var produto = Produto.CriarProduto(Guid.NewGuid(), request.categoria, request.Nome, request.Descricao, request.Preco, true);
+                produto.ValidateEntity();
+
+                _cardapioRepository.CadastrarProduto(produto);
+
+                return new CadastroProdutoResponse
+                {
+                    Id = produto.Id
+                };
+            }
+            catch (DomainException ex) 
+            {
+                throw new ProdutoDomainException(ex);
+            }
         }
 
         public ConsultaProdutoResponse ConsultarProduto(ConsultaProdutoRequest request)
@@ -82,7 +96,7 @@ namespace RestauranteSanduba.Core.Application.Cardapios
 
         public ConsultaProdutoResponse InativarProduto(AtualizaProdutoRequest request)
         {
-            var produto = Produto.CriarProduto(Guid.NewGuid(), request.categoria, request.Nome, request.Descricao, request.Preco, false);
+            var produto = Produto.CriarProduto(Guid.NewGuid(), request.Categoria, request.Nome, request.Descricao, request.Preco, false);
             _cardapioRepository.InativarProduto(produto);
 
             return new ConsultaProdutoResponse

@@ -6,76 +6,92 @@ namespace RestauranteSanduba.Test.ArchitectureTest
 {
     public class CleanArchitectureTest
     {
-        private const string DomainNamespace = "RestauranteSanduba.Core.Domain";
-        private const string ApplicationNamespace = "RestauranteSanduba.Core.Application";
-        private const string InfrastructureNamespace = "RestauranteSanduba.Adapter.Driven.Infrastructure";
+        private const string CoreDomainNamespace = "RestauranteSanduba.Core.Domain";
+        private const string CoreApplicationNamespace = "RestauranteSanduba.Core.Application";
+        private const string CoreApplicationAbstractionNamespace = "RestauranteSanduba.Core.Application.Abstraction";
+
+        private const string GatewayPersistenceNamespace = "RestauranteSanduba.Adapter.Driven.Persistence";
         private const string PresentantionNamespace = "RestauranteSanduba.Adapter.Driver.Presentation";
+        
         private const string ApiNamespace = "RestauranteSanduba.Adapter.Driver.API";
 
         [Fact]
         public void Domain_Should_Not_HaveDependencyOnOtherProjects()
         {
-            Assert.True(Types.InCurrentDomain()
-                .That().ResideInNamespace(DomainNamespace)
+            Assert.True(Types.InCurrentDomain().That().ResideInNamespace(CoreDomainNamespace)
                 .ShouldNot().HaveDependencyOnAny(
-                    ApplicationNamespace,
-                    InfrastructureNamespace,
+                    CoreApplicationNamespace,
+                    GatewayPersistenceNamespace,
                     PresentantionNamespace,
                     ApiNamespace
                 )
                 .GetResult().IsSuccessful);
-
         }
 
         [Fact]
-        public void Application_Should_Only_HaveDependencyOnDomain()
+        public void ApplicationAbstraction_Should_Only_HaveDependencyOnDomain()
         {
-            Assert.True(Types.InCurrentDomain()
-                .That().ResideInNamespace(ApplicationNamespace)
-                .ShouldNot().HaveDependencyOnAny(
-                    InfrastructureNamespace,
-                    PresentantionNamespace,
-                    ApiNamespace
+            Assert.True(Types.InCurrentDomain().That().ResideInNamespace(CoreApplicationAbstractionNamespace)
+                .Should().HaveDependencyOnAny(
+                    CoreDomainNamespace
                 ).GetResult().IsSuccessful);
 
-            Assert.True(Types.InCurrentDomain()
-                .That().ResideInNamespace(ApplicationNamespace)
-                .Should().HaveDependencyOnAny(
-                    DomainNamespace
+            Assert.True(Types.InCurrentDomain().That().ResideInNamespace(CoreApplicationAbstractionNamespace)
+                .ShouldNot().HaveDependencyOnAny(
+                    CoreApplicationNamespace,
+                    PresentantionNamespace,
+                    GatewayPersistenceNamespace,
+                    ApiNamespace
                 ).GetResult().IsSuccessful);
         }
 
         [Fact]
-        public void Infrastructure_Should_Only_HaveDependencyOnCore()
+        public void Application_Should_Only_HaveDependencyOnCoreNamespaces()
         {
-            Assert.True(Types.InCurrentDomain()
-                .That().ResideInNamespace(InfrastructureNamespace)
+            Assert.True(Types.InCurrentDomain().That().ResideInNamespace(CoreApplicationNamespace)
                 .ShouldNot().HaveDependencyOnAny(
-                    PresentantionNamespace,
-                    ApiNamespace
+                    CoreDomainNamespace,
+                    CoreApplicationAbstractionNamespace
                 ).GetResult().IsSuccessful);
 
-            Assert.True(Types.InCurrentDomain()
-                .That().ResideInNamespace(ApplicationNamespace)
+            Assert.True(Types.InCurrentDomain().That().ResideInNamespace(CoreApplicationNamespace)
                 .Should().HaveDependencyOnAny(
-                    DomainNamespace, ApplicationNamespace
+                    PresentantionNamespace,
+                    GatewayPersistenceNamespace,
+                    ApiNamespace
+                ).GetResult().IsSuccessful);
+        }
+
+        [Fact]
+        public void Infrastructure_Should_Only_HaveDependencyOnApplicationAbstraction()
+        {
+            Assert.True(Types.InCurrentDomain().That().ResideInNamespace(GatewayPersistenceNamespace)
+                .Should().HaveDependencyOn(
+                    CoreApplicationAbstractionNamespace
+                ).GetResult().IsSuccessful);
+
+            Assert.True(Types.InCurrentDomain().That().ResideInNamespace(GatewayPersistenceNamespace)
+                .ShouldNot().HaveDependencyOnAny(
+                    CoreDomainNamespace,
+                    PresentantionNamespace,
+                    GatewayPersistenceNamespace,
+                    ApiNamespace
                 ).GetResult().IsSuccessful);
         }
 
         [Fact]
         public void Presentation_Should_Only_HaveDependencyOnApplication()
         {
-            Assert.True(Types.InCurrentDomain()
-                .That().ResideInNamespace(PresentantionNamespace)
+            Assert.True(Types.InCurrentDomain().That().ResideInNamespace(PresentantionNamespace)
                 .ShouldNot().HaveDependencyOnAny(
-                    DomainNamespace,
-                    InfrastructureNamespace,
+                    CoreDomainNamespace,
+                    GatewayPersistenceNamespace,
                     ApiNamespace
                 ).GetResult().IsSuccessful);
 
             Assert.True(Types.InCurrentDomain().That().ResideInNamespace(PresentantionNamespace)
                 .Should().OnlyHaveDependenciesOn(
-                    ApplicationNamespace
+                    CoreApplicationNamespace
                 ).GetResult().IsSuccessful);
         }
     }

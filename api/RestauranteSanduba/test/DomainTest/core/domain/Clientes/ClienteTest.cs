@@ -77,7 +77,7 @@ namespace RestauranteSanduba.Test.Core.DomainTest.core.domain.Clientes
             var cpfFormatado = "000.000.000-00";
             var email = "joao.silva@mail.com";
 
-            Assert.Throws<ArgumentException>(() =>
+            Assert.Throws<DomainException>(() =>
             {
                 ClienteIdentificado.CriarCliente(id, cpfFormatado, nome, email);
             });
@@ -91,7 +91,7 @@ namespace RestauranteSanduba.Test.Core.DomainTest.core.domain.Clientes
             var cpfFormatado = "000.000.000-00";
             var email = string.Empty;
 
-            Assert.Throws<ArgumentException>(() =>
+            Assert.Throws<DomainException>(() =>
             {
                 ClienteIdentificado.CriarCliente(id, cpfFormatado, nome, email);
             });

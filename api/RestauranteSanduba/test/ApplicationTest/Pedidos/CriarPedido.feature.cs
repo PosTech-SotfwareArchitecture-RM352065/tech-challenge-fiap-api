@@ -100,7 +100,7 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 8
- testRunner.Given("que quero fazer um pedido completo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+ testRunner.Given("quero fazer um pedido completo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
 #line 9
  testRunner.When("selecionar o X-Tudo como lanche", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");

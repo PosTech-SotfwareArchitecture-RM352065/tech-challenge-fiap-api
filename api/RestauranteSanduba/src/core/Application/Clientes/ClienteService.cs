@@ -1,7 +1,7 @@
-﻿using RestauranteSanduba.Core.Application.Clientes.Abstractions;
-using RestauranteSanduba.Core.Application.Clientes.Abstractions.Request;
-using RestauranteSanduba.Core.Application.Clientes.Abstractions.Response;
-using RestauranteSanduba.Core.Application.Pedidos.Abstractions;
+﻿using RestauranteSanduba.Core.Application.Abstraction.Clientes;
+using RestauranteSanduba.Core.Application.Abstraction.Clientes.Request;
+using RestauranteSanduba.Core.Application.Abstraction.Clientes.Response;
+using RestauranteSanduba.Core.Application.Abstraction.Pedidos;
 using RestauranteSanduba.Core.Domain.Clientes;
 using System;
 using System.Linq;

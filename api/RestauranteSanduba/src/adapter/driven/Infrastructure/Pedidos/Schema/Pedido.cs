@@ -1,12 +1,13 @@
-﻿using RestauranteSanduba.Adapter.Driven.Infrastructure.Cardapios.Schema;
-using Data = RestauranteSanduba.Adapter.Driven.Infrastructure.Clientes.Schema;
+﻿using RestauranteSanduba.Adapter.Driven.Persistence.Cardapios.Schema;
+using Data = RestauranteSanduba.Adapter.Driven.Persistence.Clientes.Schema;
 using Domain = RestauranteSanduba.Core.Domain.Pedidos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using RestauranteSanduba.Adapter.Driven.Persistence.Clientes.Schema;
 
-namespace RestauranteSanduba.Adapter.Driven.Infrastructure.Pedidos.Schema
+namespace RestauranteSanduba.Adapter.Driven.Persistence.Pedidos.Schema
 {
     public class Pedido
     {
@@ -18,14 +19,14 @@ namespace RestauranteSanduba.Adapter.Driven.Infrastructure.Pedidos.Schema
         public int Numero { get; set; }
 
         [Required]
-        public Data.Cliente Cliente { get; set; }
+        public Cliente Cliente { get; set; }
 
         [Required]
         public List<ItemPedido> Items { get; set; }
 
         public Domain.Pedido ToDomain()
         {
-            return Domain.Pedido.CriarPedido(Id, this.Cliente.ToDomain(), Numero);
+            return Domain.Pedido.CriarPedido(Id, Cliente.ToDomain(), Numero);
         }
 
         public static Pedido ToSchema(Domain.Pedido pedido)
@@ -34,7 +35,7 @@ namespace RestauranteSanduba.Adapter.Driven.Infrastructure.Pedidos.Schema
             {
                 Id = pedido.Id,
                 Numero = (int)pedido.NumeroPedido,
-                Cliente = Data.Cliente.ToSchema(pedido.Cliente),
+                Cliente = Cliente.ToSchema(pedido.Cliente),
                 Items = pedido.Itens.Select(item => ItemPedido.ToSchema(item)).ToList()
             };
         }
