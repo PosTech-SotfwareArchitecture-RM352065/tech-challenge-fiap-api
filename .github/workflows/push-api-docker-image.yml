@@ -28,7 +28,7 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./api/RestauranteSanduba/src
           file: ./api/RestauranteSanduba/src/api/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/restaurantesanduba.api:latest
