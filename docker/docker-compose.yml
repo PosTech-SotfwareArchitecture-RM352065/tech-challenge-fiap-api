@@ -28,7 +28,7 @@ services:
     networks:
         - sanduba-network
 
-  mssql-sanduba:
+  database-sanduba:
     container_name: database-sanduba
     hostname: database-sanduba
     image: mcr.microsoft.com/mssql/server:2022-latest
@@ -44,16 +44,16 @@ services:
     container_name: restaurantesanduba.api
     hostname: restaurantesanduba.api
     build:
-      context: ../api/RestauranteSanduba
-      dockerfile: ../RestauranteSanduba/src/api/Dockerfile
-    image: restaurantesanduba.api
+      context: ./api/RestauranteSanduba/src 
+      dockerfile: ./api/RestauranteSanduba/src/api/Dockerfile
+    image: cangelosilima/restaurantesanduba.api:2023-12-15.01
 
     environment:
       ASPNETCORE_URLS: "http://+:9000"
     ports:
       - 5161:9000
     depends_on:
-      - mssql-sanduba
+      - database-sanduba
       - grafana-sanduba
       - prometheus-sanduba
     networks:

@@ -29,12 +29,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArchitectureTest", "test\Ar
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{041D382F-BBCA-48BF-970C-40D4C849CD51}"
 	ProjectSection(SolutionItems) = preProject
-		1.0.0.0.sql = 1.0.0.0.sql
-		database\Dockerfile = database\Dockerfile
+		database\1.0.0.0.sql = database\1.0.0.0.sql
 		database\flyway.conf = database\flyway.conf
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Abstraction", "src\core\Application.Abstraction\Application.Abstraction.csproj", "{DBBBCA9F-C602-424C-8450-E0DF6B55EEBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Abstraction", "src\core\Application.Abstraction\Application.Abstraction.csproj", "{DBBBCA9F-C602-424C-8450-E0DF6B55EEBB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{6AF7C00A-0579-4325-962B-BBCC329DB861}"
 	ProjectSection(SolutionItems) = preProject

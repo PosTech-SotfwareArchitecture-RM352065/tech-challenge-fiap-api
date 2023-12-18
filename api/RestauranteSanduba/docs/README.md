@@ -1,5 +1,5 @@
 # API Restaurante Sanduba
-Esta API foi construida como parte das entregas da pós-gradução de Software Architecture da FIAP PosTech. O objetivo foi explorar, para o contexto de um restaurante com autoatendimento, novas téncologias e paradigmas como:
+Esta API foi construida como parte das entregas da pï¿½s-graduï¿½ï¿½o de Software Architecture da FIAP PosTech. O objetivo foi explorar, para o contexto de um restaurante com autoatendimento, novas tï¿½ncologias e paradigmas como:
 - DDD
 - Event Sourcing
 - Microservices
@@ -13,8 +13,8 @@ Esta API foi construida como parte das entregas da pós-gradução de Software Arch
 - [SpecFlow](https://specflow.org/)
 - [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks)
 
-## Módulos do sistema
-A aplicação está consolidada dentro da pasta `\src` e está desenhada pelo padrão de `Clean Architecture` com "toques" de `Domain Driven Design` e `Ports and Adapters`. Assim:
+## Mï¿½dulos do sistema
+A aplicaï¿½ï¿½o estï¿½ consolidada dentro da pasta `\src` e estï¿½ desenhada pelo padrï¿½o de `Clean Architecture` com "toques" de `Domain Driven Design` e `Ports and Adapters`. Assim:
 - Core
 	- Domain
 	- Application
@@ -29,23 +29,23 @@ A aplicação está consolidada dentro da pasta `\src` e está desenhada pelo padrão
 ### API
 
 #### Core Domain
-Camada com as entidades do domínio Esta camada está 
+Camada com as entidades do domï¿½nio Esta camada estï¿½ 
 
 #### Core Application
 Camada com todos os casos de uso. 
 
 ### Testes
-Testes estão consolidados dentro da pasta `\tests`. Sendo utilizado estratégias específicas para cada tipo de camada e teste.
+Testes estï¿½o consolidados dentro da pasta `\tests`. Sendo utilizado estratï¿½gias especï¿½ficas para cada tipo de camada e teste.
 
-#### Testes Unitários (Unit Test)
+#### Testes Unitï¿½rios (Unit Test)
 
-- Domínio
+- Domï¿½nio
 
 #### Testes de Comportamento (Behavior Tests)
 
 - Aplication (.Abstraction)
 
-#### Testes de Integração (Integration Tests)
+#### Testes de Integraï¿½ï¿½o (Integration Tests)
 
 *Adapters*
 - Persistence
@@ -61,6 +61,6 @@ Testes estão consolidados dentro da pasta `\tests`. Sendo utilizado estratégias 
 
 ### API
 ```powershell
-docker build -f .\src\api\Dockerfile --force-rm --tag 'restaurantesanduba.api' . | docker run restaurantesanduba.api
+docker build ./api/RestauranteSanduba/src -f ./api/RestauranteSanduba/src/api/Dockerfile --force-rm --tag 'restaurantesanduba.api'  --progress=plain --no-cache | docker run restaurantesanduba.api
 ```
 

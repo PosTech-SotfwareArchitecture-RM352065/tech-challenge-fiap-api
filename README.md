@@ -21,9 +21,26 @@ Projeto de entrega para POS Tech FIAP de Victor Cangelosi de Lima RM352065
 
 ## Desenvolvimento e teste
 
-Primeiro será necessário subir as imagens dockers:
+Para inicializar todo o ambiente exsite a opção via docker compose:
 ```powershell
-cd .\.docker\ | docker-compose up
+cd .\.docker\ | docker-compose up --build
+```
+
+Para inicializar cada componente
+
+Base de dados SQL Server:
+```powershell
+docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=P@ssW0rd!" --name database-sanduba -p 1433:1433 -d mcr.microsoft.com/mssql/server:latest 
+```
+Migration SQL
+```powershell
+docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=P@ssW0rd!" --name database-sanduba -p 1433:1433 -d mcr.microsoft.com/mssql/server:latest 
+```
+
+
+Remover todos os containers:
+```powershell
+docker stop $(docker ps -a -q) | docker rm $(docker ps -a -q)
 ```
 
 Para realizar o `build` da solution

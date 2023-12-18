@@ -5,19 +5,22 @@ WORKDIR /app
 EXPOSE 9000
 
 ENV ASPNETCORE_URLS=http://+:9000
-ENV ASPNETCORE_ENVIRONMENT Development
+ENV ASPNETCORE_ENVIRONMENT=Development
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
-WORKDIR /src
+WORKDIR /staging
 
-COPY ["src/core/Domain/Domain.csproj", "src/core/Domain/"]
-COPY ["src/core/Application/Application.csproj", "src/core/Application/"]
-COPY ["src/core/Application.Abstraction/Application.Abstraction.csproj", "src/core/Application.Abstraction/"]
-COPY ["src/adapter/driven/Infrastructure/Persistence.csproj", "src/adapter/driven/Infrastructure/"]
-COPY ["src/api/API.csproj", "src/api/"]
-RUN dotnet restore "src/api/API.csproj"
+COPY ["core/Domain/Domain.csproj", "core/Domain/"]
+COPY ["core/Application/Application.csproj", "core/Application/"]
+COPY ["core/Application.Abstraction/Application.Abstraction.csproj", "core/Application.Abstraction/"]
+COPY ["adapter/driven/Infrastructure/Persistence.csproj", "adapter/driven/Infrastructure/"]
+COPY ["api/API.csproj", "api/"]
+
+RUN dotnet restore "api/API.csproj"
+
 COPY . .
-WORKDIR "src/api"
+
+WORKDIR "/staging/api"
 RUN dotnet build "API.csproj" -c Release -o /app/build
 
 FROM build AS publish

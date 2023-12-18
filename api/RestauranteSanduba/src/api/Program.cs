@@ -64,7 +64,7 @@ namespace RestauranteSanduba.API
                 });
             }
 
-            app.UseHealthChecks("/healthz", new HealthCheckOptions
+            app.UseHealthChecks("/health", new HealthCheckOptions
             {
                 Predicate = _ => true,
                 ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
