@@ -30,7 +30,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{041D382F-BBCA-48BF-970C-40D4C849CD51}"
 	ProjectSection(SolutionItems) = preProject
 		database\1.0.0.0.sql = database\1.0.0.0.sql
-		database\flyway.conf = database\flyway.conf
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Abstraction", "src\core\Application.Abstraction\Application.Abstraction.csproj", "{DBBBCA9F-C602-424C-8450-E0DF6B55EEBB}"

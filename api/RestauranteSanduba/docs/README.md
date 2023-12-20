@@ -1,5 +1,5 @@
 # API Restaurante Sanduba
-Esta API foi construida como parte das entregas da p�s-gradu��o de Software Architecture da FIAP PosTech. O objetivo foi explorar, para o contexto de um restaurante com autoatendimento, novas t�ncologias e paradigmas como:
+Esta API foi construida como parte das entregas da pós-gradução de Software Architecture da FIAP PosTech. O objetivo foi explorar, para o contexto de um restaurante com autoatendimento, novas téncologias e paradigmas como:
 - DDD
 - Event Sourcing
 - Microservices
@@ -13,8 +13,8 @@ Esta API foi construida como parte das entregas da p�s-gradu��o de Softwar
 - [SpecFlow](https://specflow.org/)
 - [AspNetCore.Diagnostics.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks)
 
-## M�dulos do sistema
-A aplica��o est� consolidada dentro da pasta `\src` e est� desenhada pelo padr�o de `Clean Architecture` com "toques" de `Domain Driven Design` e `Ports and Adapters`. Assim:
+## Módulos do sistema
+A aplicação está consolidada dentro da pasta `\src` e está desenhada pelo padrão de `Clean Architecture` com "toques" de `Domain Driven Design` e `Ports and Adapters`. Assim:
 - Core
 	- Domain
 	- Application
@@ -29,23 +29,23 @@ A aplica��o est� consolidada dentro da pasta `\src` e est� desenhada pel
 ### API
 
 #### Core Domain
-Camada com as entidades do dom�nio Esta camada est� 
+Camada com as entidades do domínio.
 
 #### Core Application
 Camada com todos os casos de uso. 
 
 ### Testes
-Testes est�o consolidados dentro da pasta `\tests`. Sendo utilizado estrat�gias espec�ficas para cada tipo de camada e teste.
+Testes estão consolidados dentro da pasta `\tests`. Sendo utilizado estratégias específicas para cada tipo de camada e teste.
 
-#### Testes Unit�rios (Unit Test)
+#### Testes Unitários (Unit Test)
 
-- Dom�nio
+- Domínio
 
 #### Testes de Comportamento (Behavior Tests)
 
 - Aplication (.Abstraction)
 
-#### Testes de Integra��o (Integration Tests)
+#### Testes de Integração (Integration Tests)
 
 *Adapters*
 - Persistence

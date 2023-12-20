@@ -23,7 +23,7 @@ Projeto de entrega para POS Tech FIAP de Victor Cangelosi de Lima RM352065
 
 Para inicializar todo o ambiente exsite a opção via docker compose:
 ```powershell
-cd .\.docker\ | docker-compose up --build
+docker-compose --file ./docker/docker-compose.yml up --build --detach
 ```
 
 Para inicializar cada componente
@@ -36,7 +36,6 @@ Migration SQL
 ```powershell
 docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=P@ssW0rd!" --name database-sanduba -p 1433:1433 -d mcr.microsoft.com/mssql/server:latest 
 ```
-
 
 Remover todos os containers:
 ```powershell
