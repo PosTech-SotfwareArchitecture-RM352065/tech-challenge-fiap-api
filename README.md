@@ -20,7 +20,7 @@ Além disso, para tornar a referência e navegação ainda mais fácil, cada lin
 ### API Restaurante
 O projeto `RestauranteSanduba` é centralizado em uma solução do Visual Studio, que abriga os diversos projetos relacionados à implementação da API, testes, documentação, entre outros. Essa estrutura organizada proporciona uma visão abrangente do ecossistema do projeto, permitindo fácil acesso e gerenciamento dos diferentes componentes, desde a implementação da API até os projetos de testes e documentação.
 
-[>> Documentação da API](.\api\RestauranteSanduba\docs\README.md)
+[>> Documentação da API](api/RestauranteSanduba/docs/README.md)
 
 ### Docker
 [Docker](https://www.docker.com/) é uma plataforma de código aberto projetada para facilitar a criação, implantação e execução de aplicativos em contêineres. Os contêineres são ambientes leves e portáteis que empacotam tudo o que é necessário para executar um software, incluindo o código, as bibliotecas e as dependências.
@@ -28,9 +28,9 @@ O projeto `RestauranteSanduba` é centralizado em uma solução do Visual Studio
 ### Postman
 O Postman é uma ferramenta de colaboração para o desenvolvimento de APIs. Ele oferece uma interface gráfica amigável que permite aos desenvolvedores criar, testar e documentar APIs de maneira eficiente.
 
-[>> Documentação Postman](.\postman\docs\README.md)
+[>> Documentação Postman](postman/docs/README.md)
 
  ### Kubernetes (aka k8s)
 
- [>> Documentação Kubernetes](.\kubernetes\docs\README.md)
+ [>> Documentação Kubernetes](kubernetes/docs/README.md)
 
