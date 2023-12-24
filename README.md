@@ -6,7 +6,7 @@ Projeto de entrega para POS Tech FIAP de Victor Cangelosi de Lima RM352065
 
 > [!Note]
 > 
-> Algumas das configurações que fiz em minha máquina estão concentradas em [Windows Developer Config](https://github.com/cangelosilima/windows-developer-config)
+> Algumas das configurações que fiz estão concentradas na minha página de "atalhos" [TRDR](https://github.com/cangelosilima/TLDR). Estou usando o [Windows Developer Environment](https://github.com/cangelosilima/TLDR/tree/main/developer-env)
 
 ## Estrutura do projeto
 
