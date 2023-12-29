@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sanduba-db-pod
+  labels:
+    app: sanduba-db-pod
+spec:
+  securityContext:
+    fsGroup: 10001
+  containers:
+    - name: sanduba-db
+      image: mcr.microsoft.com/mssql/server:2022-latest
+      ports:
+        - containerPort: 1433
+      env:
+        - name: ACCEPT_EULA
+          value: "Y"
+        - name: SA_PASSWORD
+          valueFrom: 
+            secretKeyRef:
+              name: sanduba-db-secret
+              key: SA_PASSWORD
+      volumeMounts:
+        - name: mssqldb
+          mountPath: /mssql/data
+  volumes:
+    - name: mssqldb
+      persistentVolumeClaim:
+        claimName: sanduba-db-pvc

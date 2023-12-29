@@ -12,7 +12,7 @@ services:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
     networks:
-        - sanduba-network
+      - sanduba-network
   
   grafana-sanduba:
     container_name: grafana-sanduba
@@ -25,19 +25,31 @@ services:
     depends_on:
       - prometheus-sanduba
     networks:
-        - sanduba-network
+      - sanduba-network
+
+  nfs-sanduba:
+    container_name: nfs-sanduba
+    image: itsthenetwork/nfs-server-alpine:12
+    restart: unless-stopped
+    privileged: true
+    environment:
+      - SHARED_DIRECTORY=/data
+    volumes:
+      - /data/nfs-storage:/data
+    ports:
+      - 2049:2049
 
   database-sanduba:
     container_name: database-sanduba
     hostname: database-sanduba
     image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
-      SA_PASSWORD: "P@ssW0rd!"
+      MSSQL_SA_PASSWORD: "P@ssW0rd!"
       ACCEPT_EULA: "Y"
     ports:
       - 1433:1433
     networks:
-        - sanduba-network
+      - sanduba-network
 
   api-sanduba:
     container_name: restaurantesanduba.api
@@ -52,7 +64,7 @@ services:
       - grafana-sanduba
       - prometheus-sanduba
     networks:
-        - sanduba-network
+      - sanduba-network
 
 networks:
    sanduba-network:
