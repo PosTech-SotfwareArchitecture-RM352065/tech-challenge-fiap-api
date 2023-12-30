@@ -4,6 +4,7 @@ metadata:
   name: sanduba-db-pvc
   labels: 
     name: sanduba-db-pvc
+    app: sanduba-db-pvc
 spec:
   accessModes:
     - ReadWriteOnce

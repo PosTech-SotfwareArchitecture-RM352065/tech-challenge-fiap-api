@@ -4,6 +4,7 @@ metadata:
   name: sanduba-volume
   labels:
     disk: sanduba-volume
+    app: sanduba
 spec:
   capacity:
     storage: 5Gi
@@ -13,9 +14,3 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   hostPath:
     path: /data/shared
-  # mountOptions:
-  #   - hard
-  #   - nfsvers=4.1
-  # nfs:
-  #   path: /data/nfs-storage
-  #   server: 10.10.10.69

@@ -10,6 +10,18 @@ spec:
       image: cangelosilima/restaurantesanduba.api:latest
       ports: 
         - containerPort: 9000
+      env:
+        - name: ASPNETCORE_URLS
+          valueFrom:
+            configMapKeyRef:
+              name: api-config
+              key: ASPNETCORE_URLS
+        - name: ASPNETCORE_ConnectionStrings__DefaultConnection
+          valueFrom:
+            configMapKeyRef:
+              name: db-config
+              key: CONNECTION_STRING
+              
       resources:
         limits:
           cpu: "0.5"
