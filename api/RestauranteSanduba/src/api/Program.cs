@@ -15,6 +15,8 @@ namespace RestauranteSanduba.API
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            
+            builder.Configuration.AddEnvironmentVariables();
 
             builder.Services.AddHealthChecks()
                 .AddSqlServer(builder.Configuration.GetConnectionString("Default"));
@@ -51,18 +53,15 @@ namespace RestauranteSanduba.API
             });
             var app = builder.Build();
 
-            if (app.Environment.IsDevelopment())
+            app.UseSwagger();
+            app.UseSwaggerUI();
+
+            app.UseReDoc(doc =>
             {
-                app.UseSwagger();
-                app.UseSwaggerUI();
+                doc.DocumentTitle = "Documentação da API Restaurante Sanduba";
+                doc.SpecUrl = "/swagger/v1/swagger.json";
 
-                app.UseReDoc(doc =>
-                {
-                    doc.DocumentTitle = "Documentação da API Restaurante Sanduba";
-                    doc.SpecUrl = "/swagger/v1/swagger.json";
-
-                });
-            }
+            });
 
             app.UseHealthChecks("/health", new HealthCheckOptions
             {
