@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sanduba-api-deployment
+  labels:
+    app: sanduba-api-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sanduba-api-deployment
+  template:
+    metadata:
+      labels:
+        app: sanduba-api-deployment
+    spec:
+      containers:
+        - name: restaurantesanduba-pod-api
+          image: cangelosilima/restaurantesanduba.api:latest
+          ports: 
+            - containerPort: 9000
+          env:
+            - name: ASPNETCORE_URLS
+              valueFrom:
+                configMapKeyRef:
+                  name: api-config
+                  key: ASPNETCORE_URLS
+            - name: ASPNETCORE_ENVIRONMENT
+              valueFrom:
+                configMapKeyRef:
+                  name: api-config
+                  key: ASPNETCORE_ENVIRONMENT
+            - name: ASPNETCORE_ConnectionStrings__Default
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: CONNECTION_STRING         
+          resources:
+            limits:
+              cpu: "0.5"
+              memory: "512Mi"
+            requests:
+              cpu: "0.2"
+              memory: "256Mi"

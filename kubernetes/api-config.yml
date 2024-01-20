@@ -5,5 +5,5 @@ metadata:
   labels:
     name: api-config
 data:
-  CONNECTION_STRING: "http://+:9000"
-  ENVIRONMENT: "Development"
+  ASPNETCORE_URLS: "http://+:9000"
+  ASPNETCORE_ENVIRONMENT: "Development"

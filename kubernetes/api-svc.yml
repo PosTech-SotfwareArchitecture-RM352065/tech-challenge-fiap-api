@@ -11,4 +11,4 @@ spec:
       port: 80
       targetPort: 9000
   selector:
-    app: sanduba-api-pod
+    app: sanduba-api-deployment

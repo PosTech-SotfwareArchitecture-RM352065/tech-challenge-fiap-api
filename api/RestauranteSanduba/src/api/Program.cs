@@ -1,12 +1,15 @@
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using RestauranteSanduba.Adapter.Driven.Persistence;
 using RestauranteSanduba.Core.Application;
+using System;
+using System.Reflection;
 
 namespace RestauranteSanduba.API
 {
@@ -15,11 +18,13 @@ namespace RestauranteSanduba.API
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            
-            builder.Configuration.AddEnvironmentVariables();
+
+            var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
+
+            var connectionString = builder.Configuration.GetConnectionString("Default") ?? throw new InvalidOperationException("Connection string 'Default' not found.");
 
             builder.Services.AddHealthChecks()
-                .AddSqlServer(builder.Configuration.GetConnectionString("Default"));
+                .AddSqlServer(connectionString);
 
             builder.Services.AddHealthChecksUI(options =>
             {
@@ -29,7 +34,6 @@ namespace RestauranteSanduba.API
 
             }).AddInMemoryStorage();
 
-            // Add services to the container.
             builder.Services.AddInfrastructure(builder.Configuration);
             builder.Services.AddApplication(builder.Configuration);
 
@@ -40,7 +44,7 @@ namespace RestauranteSanduba.API
                 options.SwaggerDoc("v1",
                     new OpenApiInfo
                     {
-                        Title = "Documentação Swagger da APU Restaurante Sanduba",
+                        Title = $"Documentação Swagger da APU Restaurante Sanduba - {builder.Configuration["API:Environment"]}",
                         Version = "v1",
                         Contact = new OpenApiContact
                         {
