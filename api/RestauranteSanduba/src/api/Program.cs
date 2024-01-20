@@ -23,8 +23,8 @@ namespace RestauranteSanduba.API
 
             var connectionString = builder.Configuration.GetConnectionString("Default") ?? throw new InvalidOperationException("Connection string 'Default' not found.");
 
-            builder.Services.AddHealthChecks()
-                .AddSqlServer(connectionString);
+            builder.Services.AddHealthChecks();
+            //    .AddSqlServer(connectionString);
 
             builder.Services.AddHealthChecksUI(options =>
             {
@@ -44,7 +44,7 @@ namespace RestauranteSanduba.API
                 options.SwaggerDoc("v1",
                     new OpenApiInfo
                     {
-                        Title = $"Documentação Swagger da APU Restaurante Sanduba - {builder.Configuration["API:Environment"]}",
+                        Title = $"Documentação Swagger da APU Restaurante Sanduba - {environment}",
                         Version = "v1",
                         Contact = new OpenApiContact
                         {
