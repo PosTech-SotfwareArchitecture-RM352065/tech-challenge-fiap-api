@@ -4,10 +4,6 @@ FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 WORKDIR /app
 EXPOSE 9000
 
-ENV ASPNETCORE_URLS=http://+:9000
-ENV ASPNETCORE_ENVIRONMENT=Development
-ENV ASPNETCORE_ConnectionStrings__DefaultConnection= 
-
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /staging
 
