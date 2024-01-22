@@ -1,14 +1,47 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: sanduba-db-pvc
+  name: sanduba-db-pvc-data
   labels: 
-    name: sanduba-db-pvc
-    app: sanduba-db-pvc
+    name: sanduba-db-pvc-data
+    app: sanduba-db-pvc-data
+  annotations:
+    volume.beta.kubernetes.io/storage-class: default
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 5Gi
-  storageClassName: local-storage-db
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sanduba-db-pvc-log
+  labels: 
+    name: sanduba-db-pvc-log
+    app: sanduba-db-pvc-log
+  annotations:
+    volume.beta.kubernetes.io/storage-class: default
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sanduba-db-pvc-system
+  labels: 
+    name: sanduba-db-pvc-system
+    app: sanduba-db-pvc-system
+  annotations:
+    volume.beta.kubernetes.io/storage-class: default
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

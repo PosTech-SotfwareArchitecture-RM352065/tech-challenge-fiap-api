@@ -5,5 +5,5 @@ metadata:
   labels:
     name: db-config
 data:
-  CONNECTION_STRING: "Data Source=localhost, 31433;Initial Catalog=master;Persist Security Info=True;User ID=sa;Password=P@ssW0rd!;Trust Server Certificate=True"
+  CONNECTION_STRING: "Data Source=localhost, 31433;Initial Catalog=master;Persist Security Info=True;User ID=sa;Password=QL1Ty4AjK3kpLQXX;Trust Server Certificate=True"
   DB_PORT: "1433" 

@@ -4,10 +4,9 @@ metadata:
   name: sanduba-db-svc
 spec:
   selector:
-    app: sanduba-db-pod
-  type: NodePort
+    app: sanduba-db-deployment
+  type: LoadBalancer
   ports: 
     - protocol: TCP
       port: 1433
       targetPort: 1433
-      nodePort: 31433

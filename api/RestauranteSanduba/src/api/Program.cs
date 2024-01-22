@@ -1,15 +1,12 @@
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using RestauranteSanduba.Adapter.Driven.Persistence;
 using RestauranteSanduba.Core.Application;
 using System;
-using System.Reflection;
 
 namespace RestauranteSanduba.API
 {
@@ -23,14 +20,15 @@ namespace RestauranteSanduba.API
 
             var connectionString = builder.Configuration.GetConnectionString("Default") ?? throw new InvalidOperationException("Connection string 'Default' not found.");
 
-            builder.Services.AddHealthChecks();
-            //    .AddSqlServer(connectionString);
+            builder.Services.AddHealthChecks()
+                .AddSqlServer(connectionString, name: "database");
 
             builder.Services.AddHealthChecksUI(options =>
             {
                 options.SetEvaluationTimeInSeconds(15);
                 options.MaximumHistoryEntriesPerEndpoint(60);
                 options.SetApiMaxActiveRequests(1);
+                options.AddHealthCheckEndpoint("API", "/healthz");
 
             }).AddInMemoryStorage();
 
@@ -50,11 +48,12 @@ namespace RestauranteSanduba.API
                         {
                             Name = "Victor Cangelosi de Lima - RM352065",
                             Email = "mktcangel@gmail.com"
-                        },
+                        }
                     });
 
                 options.EnableAnnotations();
             });
+            
             var app = builder.Build();
 
             app.UseSwagger();
@@ -69,11 +68,14 @@ namespace RestauranteSanduba.API
 
             app.UseHealthChecks("/health", new HealthCheckOptions
             {
+                Predicate = _ => true
+            })
+            .UseHealthChecks("/healthz", new HealthCheckOptions
+            {
                 Predicate = _ => true,
                 ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-            });
-            
-            app.UseHealthChecksUI(options => options.UIPath = "/healthz-ui");
+            })
+            .UseHealthChecksUI( options => options.UIPath = "/healthz-ui");
 
             app.UseAuthorization();
 
