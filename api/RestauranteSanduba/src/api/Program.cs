@@ -28,7 +28,7 @@ namespace RestauranteSanduba.API
                 options.SetEvaluationTimeInSeconds(15);
                 options.MaximumHistoryEntriesPerEndpoint(60);
                 options.SetApiMaxActiveRequests(1);
-                options.AddHealthCheckEndpoint("API", "/healthz");
+                //options.AddHealthCheckEndpoint("API", "/healthz");
 
             }).AddInMemoryStorage();
 
