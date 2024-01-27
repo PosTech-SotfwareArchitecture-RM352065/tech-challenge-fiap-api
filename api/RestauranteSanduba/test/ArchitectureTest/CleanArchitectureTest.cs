@@ -1,5 +1,4 @@
 using NetArchTest.Rules;
-using System.Linq;
 using Xunit;
 
 namespace RestauranteSanduba.Test.ArchitectureTest
@@ -11,88 +10,61 @@ namespace RestauranteSanduba.Test.ArchitectureTest
         private const string CoreApplicationAbstractionNamespace = "RestauranteSanduba.Core.Application.Abstraction";
 
         private const string GatewayPersistenceNamespace = "RestauranteSanduba.Adapter.Driven.Persistence";
-        private const string PresentantionNamespace = "RestauranteSanduba.Adapter.Driver.Presentation";
-        
+        private const string ControllerNamespace = "RestauranteSanduba.Adapter.Driver.Controller";
+
         private const string ApiNamespace = "RestauranteSanduba.Adapter.Driver.API";
 
-        [Fact]
-        public void Domain_Should_Not_HaveDependencyOnOtherProjects()
+        private string[] CoreLayer = new[]
         {
-            Assert.True(Types.InCurrentDomain().That().ResideInNamespace(CoreDomainNamespace)
-                .ShouldNot().HaveDependencyOnAny(
-                    CoreApplicationNamespace,
-                    GatewayPersistenceNamespace,
-                    PresentantionNamespace,
-                    ApiNamespace
-                )
-                .GetResult().IsSuccessful);
+            CoreDomainNamespace,
+            CoreApplicationNamespace,
+            CoreApplicationAbstractionNamespace
+        };
+
+
+        private string[] InterfaceAdapterLayer = new[]
+        {
+            ControllerNamespace,
+        };
+
+        private string[] DriverFrameworkLayer = new[]
+        {
+            GatewayPersistenceNamespace,
+            ApiNamespace
+        };
+
+        [Fact]
+        public void CoreLayer_ShouldNot_HaveDependencyOnExternalLayer()
+        {
+
+            foreach (var projectNamescpace in CoreLayer)
+            {
+                Assert.True(Types.InCurrentDomain().That().ResideInNamespace(projectNamescpace)
+                    .ShouldNot().HaveDependencyOnAny(
+                        InterfaceAdapterLayer
+                    ).GetResult().IsSuccessful);
+
+                Assert.True(Types.InCurrentDomain().That().ResideInNamespace(projectNamescpace)
+                    .ShouldNot().HaveDependencyOnAny(
+                        DriverFrameworkLayer
+                    ).GetResult().IsSuccessful);
+            }
         }
 
         [Fact]
-        public void ApplicationAbstraction_Should_Only_HaveDependencyOnDomain()
+        public void InterfaceAdapterLayer_Should_Only_HaveDependencyOnCoreNamespaces()
         {
-            Assert.True(Types.InCurrentDomain().That().ResideInNamespace(CoreApplicationAbstractionNamespace)
-                .Should().HaveDependencyOnAny(
-                    CoreDomainNamespace
-                ).GetResult().IsSuccessful);
+            foreach (var projectNamescpace in InterfaceAdapterLayer)
+            {
+                Assert.True(Types.InCurrentDomain().That().ResideInNamespace(projectNamescpace)
+                    .Should().HaveDependencyOnAny(CoreLayer)
+                    .GetResult().IsSuccessful);
 
-            Assert.True(Types.InCurrentDomain().That().ResideInNamespace(CoreApplicationAbstractionNamespace)
-                .ShouldNot().HaveDependencyOnAny(
-                    CoreApplicationNamespace,
-                    PresentantionNamespace,
-                    GatewayPersistenceNamespace,
-                    ApiNamespace
-                ).GetResult().IsSuccessful);
-        }
-
-        [Fact]
-        public void Application_Should_Only_HaveDependencyOnCoreNamespaces()
-        {
-            Assert.True(Types.InCurrentDomain().That().ResideInNamespace(CoreApplicationNamespace)
-                .ShouldNot().HaveDependencyOnAny(
-                    CoreDomainNamespace,
-                    CoreApplicationAbstractionNamespace
-                ).GetResult().IsSuccessful);
-
-            Assert.True(Types.InCurrentDomain().That().ResideInNamespace(CoreApplicationNamespace)
-                .Should().HaveDependencyOnAny(
-                    PresentantionNamespace,
-                    GatewayPersistenceNamespace,
-                    ApiNamespace
-                ).GetResult().IsSuccessful);
-        }
-
-        [Fact]
-        public void Infrastructure_Should_Only_HaveDependencyOnApplicationAbstraction()
-        {
-            Assert.True(Types.InCurrentDomain().That().ResideInNamespace(GatewayPersistenceNamespace)
-                .Should().HaveDependencyOn(
-                    CoreApplicationAbstractionNamespace
-                ).GetResult().IsSuccessful);
-
-            Assert.True(Types.InCurrentDomain().That().ResideInNamespace(GatewayPersistenceNamespace)
-                .ShouldNot().HaveDependencyOnAny(
-                    CoreDomainNamespace,
-                    PresentantionNamespace,
-                    GatewayPersistenceNamespace,
-                    ApiNamespace
-                ).GetResult().IsSuccessful);
-        }
-
-        [Fact]
-        public void Presentation_Should_Only_HaveDependencyOnApplication()
-        {
-            Assert.True(Types.InCurrentDomain().That().ResideInNamespace(PresentantionNamespace)
-                .ShouldNot().HaveDependencyOnAny(
-                    CoreDomainNamespace,
-                    GatewayPersistenceNamespace,
-                    ApiNamespace
-                ).GetResult().IsSuccessful);
-
-            Assert.True(Types.InCurrentDomain().That().ResideInNamespace(PresentantionNamespace)
-                .Should().OnlyHaveDependenciesOn(
-                    CoreApplicationNamespace
-                ).GetResult().IsSuccessful);
+                Assert.True(Types.InCurrentDomain().That().ResideInNamespace(projectNamescpace)
+                    .ShouldNot().HaveDependencyOnAny(
+                        DriverFrameworkLayer
+                    ).GetResult().IsSuccessful);
+            }
         }
     }
 }
