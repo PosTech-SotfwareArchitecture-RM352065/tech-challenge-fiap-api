@@ -4,9 +4,12 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <RootNamespace>RestauranteSanduba.Adapter.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
+    <AssemblyName>RestauranteSanduba.Adapter.$(MSBuildProjectName.Replace(" ", "_"))</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\core\Application.Abstraction\Application.Abstraction.csproj" />
   </ItemGroup>
 
 </Project>

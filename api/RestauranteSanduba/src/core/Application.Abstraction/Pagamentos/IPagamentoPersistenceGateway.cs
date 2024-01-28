@@ -1,6 +1,6 @@
 ﻿namespace RestauranteSanduba.Core.Application.Abstraction.Pagamentos
 {
-    public interface IPagamentoRepository
+    public interface IPagamentoPersistenceGateway
     {
 
     }

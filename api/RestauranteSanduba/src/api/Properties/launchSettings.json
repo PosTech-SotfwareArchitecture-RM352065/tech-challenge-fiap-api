@@ -21,10 +21,11 @@
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api-docs",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
       "environmentVariables": {
         "ASPNETCORE_URLS": "http://+:9000",
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ConnectionStrings__Default": "Data Source=172.17.0.2,1433;Initial Catalog=master;Persist Security Info=True;User ID=sa;Password=QL1Ty4AjK3kpLQXX;Trust Server Certificate=True"
       },
       "publishAllPorts": true
     }

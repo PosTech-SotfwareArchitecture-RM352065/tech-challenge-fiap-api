@@ -9,7 +9,7 @@ using RestauranteSanduba.Adapter.Driven.Persistence.Clientes.Schema;
 
 namespace RestauranteSanduba.Adapter.Driven.Persistence.Clientes
 {
-    public class ClienteRepository : IClienteRepository
+    public class ClienteRepository : IClientePersistenceGateway
     {
         private readonly InfrastructureDbContext _dbContext;
 

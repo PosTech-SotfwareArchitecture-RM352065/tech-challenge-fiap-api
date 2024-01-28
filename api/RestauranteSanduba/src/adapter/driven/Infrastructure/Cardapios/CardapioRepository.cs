@@ -7,7 +7,7 @@ using RestauranteSanduba.Adapter.Driven.Persistence.Cardapios.Schema;
 
 namespace RestauranteSanduba.Adapter.Driven.Persistence.Cardapios
 {
-    public class CardapioRepository : ICardapioRepository
+    public class CardapioRepository : ICardapioPersistenceGateway
     {
         private readonly InfrastructureDbContext _dbContext;
 
@@ -47,7 +47,7 @@ namespace RestauranteSanduba.Adapter.Driven.Persistence.Cardapios
 
         public List<Domain.Produto> ConsultarProdutos(List<Guid> ids)
         {
-            return _dbContext.Produtos
+            return _dbContext.Produtos  
                 .Where(item => ids.Contains(item.Id))
                 .Select(item => item.ToDomain())
                 .ToList();

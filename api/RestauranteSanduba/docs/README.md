@@ -3,9 +3,7 @@
 
 Esta API foi construida como parte das entregas da pós-gradução de Software Architecture da FIAP PosTech. O objetivo foi explorar, para o contexto de um restaurante com autoatendimento, novas téncologias e paradigmas como:
 - DDD
-- Event Sourcing
-- Microservices
-- TDD
+- Clean Architecture
 
 ## Tecnologias utilizadas
 - [.NET 7](https://dotnet.microsoft.com/pt-br/download/dotnet/7.0)
@@ -34,7 +32,7 @@ A aplicação está consolidada dentro da pasta `\src` e está desenhada pelo pa
 Camada com as entidades do domínio.
 
 #### Core Application
-Camada com todos os casos de uso. 
+Camada com todos os casos de uso.
 
 ### Testes
 Testes estão consolidados dentro da pasta `\tests`. Sendo utilizado estratégias específicas para cada tipo de camada e teste.

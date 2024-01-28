@@ -5,8 +5,8 @@ using System;
 using TechTalk.SpecFlow;
 using Xunit;
 using RestauranteSanduba.Core.Application.Abstraction.Cardapios;
-using RestauranteSanduba.Core.Application.Abstraction.Cardapios.Request;
-using RestauranteSanduba.Core.Application.Abstraction.Cardapios.Response;
+using RestauranteSanduba.Core.Application.Abstraction.Cardapios.RequestModel;
+using RestauranteSanduba.Core.Application.Abstraction.Cardapios.ResponseModel;
 
 namespace RestauranteSanduba.Test.Core.ApplicationTest.Cardapio
 {
@@ -14,9 +14,9 @@ namespace RestauranteSanduba.Test.Core.ApplicationTest.Cardapio
     public class CadastroDeProdutosStepDefinitions
     {
         [ThreadStatic]
-        private static CardapioService _cardapioService;
+        private static CardapioInteractor _cardapioService;
         [ThreadStatic]
-        private static Mock<ICardapioRepository> _cardapioRepository;
+        private static Mock<ICardapioPersistenceGateway> _cardapioRepository;
         [ThreadStatic]
         private static CadastroProdutoRequest request;
         [ThreadStatic]
@@ -27,8 +27,8 @@ namespace RestauranteSanduba.Test.Core.ApplicationTest.Cardapio
         [BeforeScenario]
         public static void SetupScenario()
         {
-            _cardapioRepository = new Mock<ICardapioRepository>();
-            _cardapioService = new CardapioService(_cardapioRepository.Object);
+            _cardapioRepository = new Mock<ICardapioPersistenceGateway>();
+            _cardapioService = new CardapioInteractor(_cardapioRepository.Object);
         }
 
         [AfterScenario]

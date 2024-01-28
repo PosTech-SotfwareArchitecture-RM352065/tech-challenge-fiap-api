@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RestauranteSanduba.Core.Application.Abstraction.Clientes.Response
+namespace RestauranteSanduba.Core.Application.Abstraction.Clientes.ResponseModel
 {
     public record ConsultaPedidosClienteResponse
     {

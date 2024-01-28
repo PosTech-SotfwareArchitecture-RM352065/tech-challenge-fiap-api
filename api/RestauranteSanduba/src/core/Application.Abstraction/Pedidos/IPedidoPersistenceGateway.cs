@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace RestauranteSanduba.Core.Application.Abstraction.Pedidos
 {
-    public interface IPedidoRepository
+    public interface IPedidoPersistenceGateway
     {
         public Pedido ConsultaPedido(int numeroPedido);
         public List<Pedido> ConsultaPedidosPorCliente(Guid clienteId);

@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RestauranteSanduba.Core.Application.Abstraction.Clientes;
-using RestauranteSanduba.Core.Application.Abstraction.Clientes.Request;
-using RestauranteSanduba.Core.Application.Abstraction.Clientes.Response;
+using RestauranteSanduba.Core.Application.Abstraction.Clientes.RequestModel;
+using RestauranteSanduba.Core.Application.Abstraction.Clientes.ResponseModel;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace RestauranteSanduba.API.Controllers
@@ -12,9 +12,9 @@ namespace RestauranteSanduba.API.Controllers
     public class ClienteController : ControllerBase
     {
         private readonly ILogger<ClienteController> _logger;
-        private readonly IClienteService _clienteService;
+        private readonly IClienteInteractor _clienteService;
 
-        public ClienteController(ILogger<ClienteController> logger, IClienteService clienteService)
+        public ClienteController(ILogger<ClienteController> logger, IClienteInteractor clienteService)
         {
             _logger = logger;
             _clienteService = clienteService;
@@ -23,7 +23,7 @@ namespace RestauranteSanduba.API.Controllers
         [HttpGet(Name = "ConsultaCliente")]
         [SwaggerOperation(
             Summary = "Consulta dados do cliente",
-            Description = "Consulta deve retornar nome e codigo de identificação a partir de um CPF",
+            Description = "Consulta deve retornar nome e codigo de identificaÃ§Ã£o a partir de um CPF",
             OperationId = "Get",
             Tags = new[] { "Cliente" })]
         [SwaggerResponse(200, "Dados do Cliente", typeof(ConsultaClienteResponse))]

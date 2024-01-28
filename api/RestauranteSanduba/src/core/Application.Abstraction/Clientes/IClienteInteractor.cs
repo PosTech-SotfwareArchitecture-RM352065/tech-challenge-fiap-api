@@ -1,9 +1,9 @@
-﻿using RestauranteSanduba.Core.Application.Abstraction.Clientes.Request;
-using RestauranteSanduba.Core.Application.Abstraction.Clientes.Response;
+﻿using RestauranteSanduba.Core.Application.Abstraction.Clientes.RequestModel;
+using RestauranteSanduba.Core.Application.Abstraction.Clientes.ResponseModel;
 
 namespace RestauranteSanduba.Core.Application.Abstraction.Clientes
 {
-    public interface IClienteService
+    public interface IClienteInteractor
     {
         public CadastroClienteResponse CadastrarCliente(CadastroClienteRequest request);
         public ConsultaClienteResponse ConsultarCliente(ConsultaClienteRequest request);

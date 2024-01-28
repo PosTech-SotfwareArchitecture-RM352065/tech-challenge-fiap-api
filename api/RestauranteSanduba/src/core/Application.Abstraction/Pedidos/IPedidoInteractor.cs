@@ -1,12 +1,12 @@
-﻿using RestauranteSanduba.Core.Application.Abstraction.Pedidos.Request;
-using RestauranteSanduba.Core.Application.Abstraction.Pedidos.Response;
+﻿using RestauranteSanduba.Core.Application.Abstraction.Pedidos.RequestModel;
+using RestauranteSanduba.Core.Application.Abstraction.Pedidos.ResponseModel;
 using RestauranteSanduba.Core.Domain.Pedidos;
 using System;
 using System.Collections.Generic;
 
 namespace RestauranteSanduba.Core.Application.Abstraction.Pedidos
 {
-    public interface IPedidoService
+    public interface IPedidoInteractor
     {
         public Pedido ObtemPedido(int numeroPedido);
         public List<Pedido> ObtemPedidoPorCliente(Guid clienteId);

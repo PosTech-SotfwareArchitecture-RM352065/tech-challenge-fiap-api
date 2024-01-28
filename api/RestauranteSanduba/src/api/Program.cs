@@ -28,7 +28,6 @@ namespace RestauranteSanduba.API
                 options.SetEvaluationTimeInSeconds(15);
                 options.MaximumHistoryEntriesPerEndpoint(60);
                 options.SetApiMaxActiveRequests(1);
-                //options.AddHealthCheckEndpoint("API", "/healthz");
 
             }).AddInMemoryStorage();
 
@@ -42,7 +41,7 @@ namespace RestauranteSanduba.API
                 options.SwaggerDoc("v1",
                     new OpenApiInfo
                     {
-                        Title = $"Documentação Swagger da APU Restaurante Sanduba - {environment}",
+                        Title = $"DocumentaÃ§Ã£o Swagger da API Restaurante Sanduba - {environment}",
                         Version = "v1",
                         Contact = new OpenApiContact
                         {
@@ -53,7 +52,7 @@ namespace RestauranteSanduba.API
 
                 options.EnableAnnotations();
             });
-            
+
             var app = builder.Build();
 
             app.UseSwagger();
@@ -61,7 +60,7 @@ namespace RestauranteSanduba.API
 
             app.UseReDoc(doc =>
             {
-                doc.DocumentTitle = "Documentação da API Restaurante Sanduba";
+                doc.DocumentTitle = "DocumentaÃ§Ã£o da API Restaurante Sanduba";
                 doc.SpecUrl = "/swagger/v1/swagger.json";
 
             });
@@ -75,7 +74,7 @@ namespace RestauranteSanduba.API
                 Predicate = _ => true,
                 ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
             })
-            .UseHealthChecksUI( options => options.UIPath = "/healthz-ui");
+            .UseHealthChecksUI(options => options.UIPath = "/healthz-ui");
 
             app.UseAuthorization();
 

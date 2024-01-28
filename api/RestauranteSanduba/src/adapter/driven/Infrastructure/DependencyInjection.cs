@@ -27,9 +27,9 @@ namespace RestauranteSanduba.Adapter.Driven.Persistence
                 options.UseSqlServer(connectionString);
             });
 
-            services.AddTransient<IClienteRepository, ClienteRepository>();
-            services.AddTransient<IPedidoRepository, PedidoRepository>();
-            services.AddTransient<ICardapioRepository, CardapioRepository>();
+            services.AddTransient<IClientePersistenceGateway, ClienteRepository>();
+            services.AddTransient<IPedidoPersistenceGateway, PedidoRepository>();
+            services.AddTransient<ICardapioPersistenceGateway, CardapioRepository>();
 
             return services;
         }

@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RestauranteSanduba.Core.Application.Abstraction.Cardapios;
-using RestauranteSanduba.Core.Application.Abstraction.Cardapios.Request;
-using RestauranteSanduba.Core.Application.Abstraction.Cardapios.Response;
+using RestauranteSanduba.Core.Application.Abstraction.Cardapios.RequestModel;
+using RestauranteSanduba.Core.Application.Abstraction.Cardapios.ResponseModel;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Collections.Generic;
 
@@ -13,9 +13,9 @@ namespace RestauranteSanduba.API.Controllers
     public class CardapioController : ControllerBase
     {
         private readonly ILogger<CardapioController> _logger;
-        private readonly ICardapioService _cardapioService;
+        private readonly ICardapioInputport _cardapioService;
 
-        public CardapioController(ILogger<CardapioController> logger, ICardapioService cardapioService)
+        public CardapioController(ILogger<CardapioController> logger, ICardapioInputport cardapioService)
         {
             _logger = logger;
             _cardapioService = cardapioService;
@@ -23,11 +23,11 @@ namespace RestauranteSanduba.API.Controllers
 
         [HttpGet(Name = "ConsultaCardapio")]
         [SwaggerOperation(
-            Summary = "Obtem opÁıes do card·rpio",
-            Description = "Consulta deve retornar os itens ativos do card·rpio",
+            Summary = "Obtem op√ß√µes do card√°pio",
+            Description = "Consulta deve retornar os itens ativos do card√°pio",
             OperationId = "Get",
             Tags = new[] { "Cardapio" })]
-        [SwaggerResponse(200, "Itens do card·rpio", typeof(List<ConsultaProdutoResponse>))]
+        [SwaggerResponse(200, "Itens do card√°pio", typeof(List<ConsultaProdutoResponse>))]
         public IActionResult Get()
         {
             return Ok(_cardapioService.ConsultarProdutosAtivos());
@@ -36,10 +36,10 @@ namespace RestauranteSanduba.API.Controllers
         [HttpPost(Name = "CadastraProduto")]
         [SwaggerOperation(
             Summary = "Cadastra novo Produto",
-            Description = "Cadastra novo produto no card·rpio",
+            Description = "Cadastra novo produto no card√°pio",
             OperationId = "Post",
             Tags = new[] { "Cardapio" })]
-        [SwaggerResponse(200, "N˙mero do Produto", typeof(CadastroProdutoResponse))]
+        [SwaggerResponse(200, "N√∫mero do Produto", typeof(CadastroProdutoResponse))]
         public IActionResult Post(CadastroProdutoRequest request)
         {
             return Ok(_cardapioService.CadastrarProduto(request));

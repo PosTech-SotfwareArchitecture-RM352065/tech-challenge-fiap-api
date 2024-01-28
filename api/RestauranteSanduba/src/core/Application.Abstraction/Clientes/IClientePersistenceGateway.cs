@@ -4,7 +4,7 @@ using System;
 
 namespace RestauranteSanduba.Core.Application.Abstraction.Clientes
 {
-    public interface IClienteRepository
+    public interface IClientePersistenceGateway
     {
         public Cliente ConsultarCliente(Guid clienteId);
         public Cliente ConsultarCliente(CPF numeroDocumento);

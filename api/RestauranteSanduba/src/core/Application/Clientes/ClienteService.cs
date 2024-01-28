@@ -1,6 +1,6 @@
 ﻿using RestauranteSanduba.Core.Application.Abstraction.Clientes;
-using RestauranteSanduba.Core.Application.Abstraction.Clientes.Request;
-using RestauranteSanduba.Core.Application.Abstraction.Clientes.Response;
+using RestauranteSanduba.Core.Application.Abstraction.Clientes.RequestModel;
+using RestauranteSanduba.Core.Application.Abstraction.Clientes.ResponseModel;
 using RestauranteSanduba.Core.Application.Abstraction.Pedidos;
 using RestauranteSanduba.Core.Domain.Clientes;
 using System;
@@ -9,12 +9,12 @@ using System.Linq;
 
 namespace RestauranteSanduba.Core.Application.Clientes
 {
-    public class ClienteService : IClienteService
+    public class ClienteService : IClienteInteractor
     {
-        private readonly IClienteRepository _clienteRepository;
-        private readonly IPedidoRepository _pedidoRepository;
+        private readonly IClientePersistenceGateway _clienteRepository;
+        private readonly IPedidoPersistenceGateway _pedidoRepository;
 
-        public ClienteService(IClienteRepository clienteRepository, IPedidoRepository pedidoRepository)
+        public ClienteService(IClientePersistenceGateway clienteRepository, IPedidoPersistenceGateway pedidoRepository)
         {
             _clienteRepository = clienteRepository;
             _pedidoRepository = pedidoRepository;

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace RestauranteSanduba.Core.Application.Abstraction.Cardapios
 {
-    public interface ICardapioRepository 
+    public interface ICardapioPersistenceGateway 
     {
         public void CadastrarProduto(Produto produto);
         public void InativarProduto(Produto produto);

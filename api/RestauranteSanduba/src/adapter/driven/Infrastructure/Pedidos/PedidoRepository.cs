@@ -10,7 +10,7 @@ using RestauranteSanduba.Adapter.Driven.Persistence.Pedidos.Schema;
 
 namespace RestauranteSanduba.Adapter.Driven.Persistence.Pedidos
 {
-    public class PedidoRepository : IPedidoRepository
+    public class PedidoRepository : IPedidoPersistenceGateway
     {
         private readonly InfrastructureDbContext _dbContext;
 

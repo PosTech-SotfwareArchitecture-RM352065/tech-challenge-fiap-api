@@ -19,9 +19,9 @@ namespace RestauranteSanduba.Core.Application
         /// <returns>The same service collection.</returns>
         public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddTransient<IPedidoService, PedidoService>();
-            services.AddTransient<IClienteService, ClienteService>();
-            services.AddTransient<ICardapioService, CardapioService>(); 
+            services.AddTransient<IPedidoInteractor, PedidoService>();
+            services.AddTransient<IClienteInteractor, ClienteService>();
+            services.AddTransient<ICardapioInputport, CardapioInteractor>(); 
 
             return services;
         }

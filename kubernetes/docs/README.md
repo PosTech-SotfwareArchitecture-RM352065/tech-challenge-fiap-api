@@ -18,9 +18,6 @@ kubectl apply $(ls ./kubernetes/*-pv.yml | awk ' { print " -f " $1 } ' )
 kubectl apply $(ls ./kubernetes/*-pvc.yml | awk ' { print " -f " $1 } ' )
 ```
 ```zsh
-kubectl apply $(ls ./kubernetes/*-pod.yml | awk ' { print " -f " $1 } ' )
-```
-```zsh
 kubectl apply $(ls ./kubernetes/*-deployment.yml | awk ' { print " -f " $1 } ' )
 ```
 ```zsh

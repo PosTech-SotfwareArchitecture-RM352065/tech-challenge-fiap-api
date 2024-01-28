@@ -1,6 +1,6 @@
 ﻿using RestauranteSanduba.Core.Domain.Cardapios;
 
-namespace RestauranteSanduba.Core.Application.Abstraction.Cardapios.Request
+namespace RestauranteSanduba.Core.Application.Abstraction.Cardapios.RequestModel
 {
     public record CadastroProdutoRequest
     {

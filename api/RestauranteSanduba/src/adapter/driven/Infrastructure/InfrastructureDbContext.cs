@@ -7,11 +7,7 @@ namespace RestauranteSanduba.Adapter.Driven.Persistence
 {
     public class InfrastructureDbContext : DbContext
     {
-        public InfrastructureDbContext(DbContextOptions options) : base(options)
-        {
-
-            base.Database.Migrate();
-        }
+        public InfrastructureDbContext(DbContextOptions options) : base(options) { }
 
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Produto> Produtos { get; set; }

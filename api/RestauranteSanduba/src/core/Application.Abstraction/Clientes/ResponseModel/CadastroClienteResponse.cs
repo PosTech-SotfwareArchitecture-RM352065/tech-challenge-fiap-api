@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RestauranteSanduba.Core.Application.Abstraction.Clientes.Response
+namespace RestauranteSanduba.Core.Application.Abstraction.Clientes.ResponseModel
 {
     public record CadastroClienteResponse
     {

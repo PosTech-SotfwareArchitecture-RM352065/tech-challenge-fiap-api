@@ -1,21 +1,21 @@
 ﻿using RestauranteSanduba.Core.Application.Abstraction.Cardapios;
 using RestauranteSanduba.Core.Application.Abstraction.Clientes;
 using RestauranteSanduba.Core.Application.Abstraction.Pedidos;
-using RestauranteSanduba.Core.Application.Abstraction.Pedidos.Request;
-using RestauranteSanduba.Core.Application.Abstraction.Pedidos.Response;
+using RestauranteSanduba.Core.Application.Abstraction.Pedidos.RequestModel;
+using RestauranteSanduba.Core.Application.Abstraction.Pedidos.ResponseModel;
 using RestauranteSanduba.Core.Domain.Pedidos;
 using System;
 using System.Collections.Generic;
 
 namespace RestauranteSanduba.Core.Application.Pedidos
 {
-    public sealed class PedidoService : IPedidoService
+    public sealed class PedidoService : IPedidoInteractor
     {
-        private readonly IPedidoRepository _pedidoRepository;
-        private readonly IClienteRepository _clienteRepository;
-        private readonly ICardapioRepository _cardapioRepository;
+        private readonly IPedidoPersistenceGateway _pedidoRepository;
+        private readonly IClientePersistenceGateway _clienteRepository;
+        private readonly ICardapioPersistenceGateway _cardapioRepository;
 
-        public PedidoService(IPedidoRepository pedidoRepository, IClienteRepository clienteRepository, ICardapioRepository cardapioRepository)
+        public PedidoService(IPedidoPersistenceGateway pedidoRepository, IClientePersistenceGateway clienteRepository, ICardapioPersistenceGateway cardapioRepository)
         {
             _pedidoRepository = pedidoRepository;
             _clienteRepository = clienteRepository;
