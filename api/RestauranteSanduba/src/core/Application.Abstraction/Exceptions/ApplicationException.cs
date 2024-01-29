@@ -2,10 +2,10 @@
 
 namespace RestauranteSanduba.Core.Application.Abstraction.Exceptions
 {
-    public class ApplicationException : Exception
+    public abstract class ApplicationException : Exception
     {
-        internal protected ApplicationException() { }
-        internal protected ApplicationException(string message) : base(message) { }
-        internal protected ApplicationException(string message, Exception innerException) : base(message, innerException) { }
+        protected ApplicationException() { }
+        protected ApplicationException(string message) : base(message) { }
+        protected ApplicationException(string message, Exception innerException) : base(message, innerException) { }
     }
 }

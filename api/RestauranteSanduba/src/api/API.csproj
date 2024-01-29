@@ -33,7 +33,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\adapter\driven\Infrastructure\Persistence.csproj" />
+    <ProjectReference Include="..\adapter\Controller\ApiAdapter.csproj" />
+    <ProjectReference Include="..\infra\PersistenceGateway\PersistenceGateway.csproj" />
     <ProjectReference Include="..\core\Application\Application.csproj" />
   </ItemGroup>
 

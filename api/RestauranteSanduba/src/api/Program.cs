@@ -4,9 +4,10 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using RestauranteSanduba.Adapter.Driven.Persistence;
+using RestauranteSanduba.Infra.PersistenceGateway;
 using RestauranteSanduba.Core.Application;
 using System;
+using RestauranteSanduba.Adapter.ApiAdapter;
 
 namespace RestauranteSanduba.API
 {
@@ -33,6 +34,7 @@ namespace RestauranteSanduba.API
 
             builder.Services.AddInfrastructure(builder.Configuration);
             builder.Services.AddApplication(builder.Configuration);
+            builder.Services.AddApiAdapter(builder.Configuration);
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();

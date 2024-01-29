@@ -6,7 +6,7 @@ namespace RestauranteSanduba.Core.Application.Abstraction.Pedidos
 {
     public interface IPedidoPersistenceGateway
     {
-        public Pedido ConsultaPedido(int numeroPedido);
+        public Pedido ConsultaPedido(Guid pedidoId);
         public List<Pedido> ConsultaPedidosPorCliente(Guid clienteId);
         public void CadastraPedido(Pedido pedido);
         public int ConsultaProximoNumeroPedido();

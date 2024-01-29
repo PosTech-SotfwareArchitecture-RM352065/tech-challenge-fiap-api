@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace RestauranteSanduba.Core.Application.Cardapios
 {
-    public class CardapioInteractor : ICardapioInputport
+    public class CardapioInteractor : ICardapioInteractor
     {
         private readonly ICardapioPersistenceGateway cardapioPersistenteceGateway;
 
@@ -31,7 +31,8 @@ namespace RestauranteSanduba.Core.Application.Cardapios
 
             try
             {
-                var produto = Produto.CriarProduto(Guid.NewGuid(), request.categoria, request.Nome, request.Descricao, request.Preco, true);
+                var categoria = (Categoria)Enum.Parse(typeof(Categoria), request.Categoria);
+                var produto = Produto.CriarProduto(Guid.NewGuid(), categoria, request.Nome, request.Descricao, request.Preco, true);
                 produto.ValidateEntity();
 
                 cardapioPersistenteceGateway.CadastrarProduto(produto);

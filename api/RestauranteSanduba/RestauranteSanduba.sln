@@ -17,11 +17,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "adapter", "adapter", "{41A8
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.ApplicationTest", "test\ApplicationTest\Core.ApplicationTest.csproj", "{5EFBF276-AF5F-4DB5-9EDD-D6D30AEC5B49}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "driver", "driver", "{8A24EC1F-DAB0-4B98-A10D-9F4418BD6FC9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infra", "infra", "{8A24EC1F-DAB0-4B98-A10D-9F4418BD6FC9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "src\core\Application\Application.csproj", "{AA32605C-9D76-433D-B37C-AB0838898F99}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "src\adapter\driven\Infrastructure\Persistence.csproj", "{31B4BB66-852C-4338-AE54-86C75C65DB99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersistenceGateway", "src\infra\PersistenceGateway\PersistenceGateway.csproj", "{31B4BB66-852C-4338-AE54-86C75C65DB99}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArchitectureTest", "test\ArchitectureTest\ArchitectureTest.csproj", "{91D9D240-E9DA-45C8-9DCA-22BCD2E4E034}"
 EndProject
@@ -39,7 +39,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{6AF7C00A-0
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "src\api\API.csproj", "{9DB1D2A1-1D9D-4D40-BBA0-E3DEF2D4B48A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Controller", "src\adapter\driver\Controller\Controller.csproj", "{D1F19EF0-A257-47D2-9E9A-38330CDE2F9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiAdapter", "src\adapter\Controller\ApiAdapter.csproj", "{D1F19EF0-A257-47D2-9E9A-38330CDE2F9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

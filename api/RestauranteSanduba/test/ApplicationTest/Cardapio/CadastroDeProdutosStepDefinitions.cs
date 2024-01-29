@@ -46,13 +46,13 @@ namespace RestauranteSanduba.Test.Core.ApplicationTest.Cardapio
             Categoria categoriaLanche;
             Assert.True(Enum.TryParse(categoria, out categoriaLanche));
 
-            request = new()
-            {
-                categoria = categoriaLanche,
-                Nome = nome,
-                Descricao = descricao,
-                Preco = preco
-            };
+            request = new
+            (
+                Categoria: categoria,
+                Nome: nome,
+                Descricao: descricao,
+                Preco: preco
+            );
         }
 
         [When(@"adicionar o novo lanche no cardápio")]
@@ -76,13 +76,12 @@ namespace RestauranteSanduba.Test.Core.ApplicationTest.Cardapio
             var produtoExistente = Produto.CriarProduto(Guid.NewGuid(), Categoria.Lanche, nome, "Nosso lanche gigante", 15.99, true);
             _cardapioRepository.Setup(repo => repo.ConsultarProduto(produtoExistente.Nome)).Returns(produtoExistente);
 
-            request = new CadastroProdutoRequest()
-            {
-                categoria = Categoria.Lanche,
-                Nome = "Mega Lanche",
-                Descricao = "Nosso lanche gigante",
-                Preco = 15.99
-            };
+            request = new CadastroProdutoRequest(
+                Categoria: "Lanche",
+                Nome: "Mega Lanche",
+                Descricao: "Nosso lanche gigante",
+                Preco: 15.99
+            );
         }
 
         [When(@"adicionar o lanche existente no cardápio")]
@@ -108,16 +107,12 @@ namespace RestauranteSanduba.Test.Core.ApplicationTest.Cardapio
         {
             _cardapioRepository.Setup(repo => repo.CadastrarProduto(It.IsAny<Produto>()));
 
-            Categoria categoriaLanche;
-            Assert.True(Enum.TryParse(categoria, out categoriaLanche));
-
-            request = new CadastroProdutoRequest()
-            {
-                categoria = categoriaLanche,
-                Nome = nome,
-                Descricao = string.Empty,
-                Preco = preco
-            };
+            request = new CadastroProdutoRequest(
+                Categoria: categoria,
+                Nome: nome,
+                Descricao: string.Empty,
+                Preco: preco
+            );
         }
 
         [Then(@"deve retornar erro informando a descrição inválida")]

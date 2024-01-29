@@ -33,12 +33,15 @@ namespace RestauranteSanduba.Core.Domain.Pedidos
 
         public Cliente Cliente { get; init; }
 
+        public StatusPedido Status { get; private set; }
+
         public static Pedido CriarPedido(Guid id, Cliente cliente, int? numeroPedido = null)
         {
             var pedido = new Pedido(id)
             {
                 NumeroPedido = numeroPedido,
-                Cliente = cliente
+                Cliente = cliente,
+                Status = StatusPedido.Recebido
             };
 
             return pedido;
@@ -54,6 +57,34 @@ namespace RestauranteSanduba.Core.Domain.Pedidos
             };
 
             _itens.Add(item);
+        }
+
+        public void InciaPreparo()
+        {
+            AssertionConcern.AssertArgumentEqual(Status, StatusPedido.Recebido, "Pedido deve estar com status de RECEBIDO");
+
+            Status = StatusPedido.EmPreparacao;
+        }
+
+        public void CancelaPedido()
+        {
+            AssertionConcern.AssertArgumentEqual(Status, StatusPedido.Recebido, "Pedido deve estar com status de RECEBIDO");
+
+            Status = StatusPedido.Cancelado;
+        }
+
+        public void PreparoFinalizado()
+        {
+            AssertionConcern.AssertArgumentEqual(Status, StatusPedido.EmPreparacao, "Pedido deve estar com status de EM PREPARAÇÃO");
+
+            Status = StatusPedido.Pronto;
+        }
+
+        public void Retirado()
+        {
+            AssertionConcern.AssertArgumentEqual(Status, StatusPedido.Pronto, "Pedido deve estar com status de PRONTO");
+
+            Status = StatusPedido.Finalizado;
         }
 
         public void AdicionaProdutos(List<Produto> produtos)

@@ -30,22 +30,22 @@ GO
 CREATE TABLE Pedidos (
     Id          UNIQUEIDENTIFIER    NOT NULL
 ,   Numero      INT                 NOT NULL
-,   Cliente     UNIQUEIDENTIFIER        NULL
+,   ClienteId   UNIQUEIDENTIFIER        NULL
 ,   CriadoEm    DATETIME            NOT NULL DEFAULT (CURRENT_TIMESTAMP)
 ,   CONSTRAINT Pk_Pedidos PRIMARY KEY NONCLUSTERED (Id)
-,   CONSTRAINT Fk1_Pedidos FOREIGN KEY (Cliente) REFERENCES Clientes (Id)
+,   CONSTRAINT Fk1_Pedidos FOREIGN KEY (ClienteId) REFERENCES Clientes (Id)
 )
 GO
 
 CREATE TABLE ItensPedido (
     Id          UNIQUEIDENTIFIER    NOT NULL
-,   Pedido      UNIQUEIDENTIFIER    NOT NULL
+,   PedidoId    UNIQUEIDENTIFIER    NOT NULL
 ,   Codigo      INT                 NOT NULL
-,   Produto     UNIQUEIDENTIFIER    NOT NULL
+,   ProdutoId   UNIQUEIDENTIFIER    NOT NULL
 ,   Preco       DECIMAL(18, 2)      NOT NULL
 ,   CONSTRAINT Pk_ItensPedido PRIMARY KEY NONCLUSTERED (Id)
-,   CONSTRAINT Fk1_ItensPedido FOREIGN KEY (Pedido) REFERENCES Pedidos (Id)
-,   CONSTRAINT Fk2_ItensPedido FOREIGN KEY (Produto) REFERENCES Produtos (Id)
-,   INDEX Ak1_ItensPedido CLUSTERED (Pedido)
+,   CONSTRAINT Fk1_ItensPedido FOREIGN KEY (PedidoId) REFERENCES Pedidos (Id)
+,   CONSTRAINT Fk2_ItensPedido FOREIGN KEY (ProdutoId) REFERENCES Produtos (Id)
+,   INDEX Ak1_ItensPedido CLUSTERED (PedidoId)
 )
 GO

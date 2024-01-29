@@ -1,4 +1,5 @@
 ﻿using RestauranteSanduba.Core.Domain.Common.Exceptions;
+using System;
 using System.Collections;
 
 namespace RestauranteSanduba.Core.Domain.Common.Assertions
@@ -38,6 +39,22 @@ namespace RestauranteSanduba.Core.Domain.Common.Assertions
         public static void AssertArgumentNotEmpty(ICollection collection, string message)
         {
             if (collection.Count < 1)
+            {
+                throw new DomainException(message);
+            }
+        }
+
+        public static void AssertArgumentEqual(Enum left, Enum right, string message)
+        {
+            if (left != right)
+            {
+                throw new DomainException(message);
+            }
+        }
+
+        public static void AssertArgumentNotEqual(Enum left, Enum right, string message)
+        {
+            if (left == right)
             {
                 throw new DomainException(message);
             }
