@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using RestauranteSanduba.Infra.PersistenceGateway.Clientes.Schema;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RestauranteSanduba.Infra.PersistenceGateway.Pedidos.Schema
 {
@@ -17,6 +18,9 @@ namespace RestauranteSanduba.Infra.PersistenceGateway.Pedidos.Schema
         public int Numero { get; set; }
 
         [Required]
+        public Guid ClienteId { get; set; }
+
+        [NotMapped]
         public Cliente Cliente { get; set; }
 
         [Required]
