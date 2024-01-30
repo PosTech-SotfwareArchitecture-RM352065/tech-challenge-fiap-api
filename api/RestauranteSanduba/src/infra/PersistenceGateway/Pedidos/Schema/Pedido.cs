@@ -18,7 +18,6 @@ namespace RestauranteSanduba.Infra.PersistenceGateway.Pedidos.Schema
         [Required] 
         public Guid ClienteId { get; set; }
 
-        public DateTime CriadoEm { get; set; }
         [Required] 
         public int Status { get; set; }
 
