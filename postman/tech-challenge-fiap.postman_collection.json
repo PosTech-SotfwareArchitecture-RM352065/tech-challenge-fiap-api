@@ -1,0 +1,225 @@
+{
+	"info": {
+		"_postman_id": "b9909752-86d0-42c6-8d3d-42eec306f8d8",
+		"name": "tech-challenge-fiap",
+		"description": "Endpoint para consumo da api desenvolvido para o tech challenge do curso Pos Tech da FIAP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8476249"
+	},
+	"item": [
+		{
+			"name": "Pedidos",
+			"item": [
+				{
+					"name": "Pedidos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/pedido",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"pedido"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Novo Pedido X-Tudo e Coca",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"clienteId\": \"c0c013a6-7b43-4884-b29d-1d338640d58e\",\r\n  \"itens\": [\r\n    \"6d8ac3e8-628a-49ce-8a23-2dfad8789671\",\r\n    \"2c2166c2-9740-49f7-92a5-c95bce3e5303\"\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUrl}}/pedido/",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"pedido",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cardapios",
+			"item": [
+				{
+					"name": "Cardapio",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/cardapio",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"cardapio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Novo X-Tudo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categoria\": \"Lanche\",\r\n    \"nome\": \"X-Tudo\",\r\n    \"descricao\": \"Nosso lanche gigante\",\r\n    \"preco\": 39.90\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUrl}}/cardapio",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"cardapio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Nova Coca Cola",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categoria\": \"Bebida\",\r\n    \"nome\": \"Coca Cola\",\r\n    \"descricao\": \"Coca Cola 350ml\",\r\n    \"preco\": 5.90\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUrl}}/cardapio",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"cardapio"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Clientes",
+			"item": [
+				{
+					"name": "Cliente por CPF",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/cliente/:numeroDocumento",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"cliente",
+								":numeroDocumento"
+							],
+							"variable": [
+								{
+									"id": 0,
+									"key": "numeroDocumento",
+									"value": "39201098804",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Clientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/cliente",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"cliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cliente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cpf\": \"39201098804\",\r\n  \"nome\": \"Joao da Silva\",\r\n  \"email\": \"joao.silva@mail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUrl}}/cliente",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"cliente"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apiUrl}}/health",
+					"host": [
+						"{{apiUrl}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

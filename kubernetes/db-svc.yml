@@ -5,8 +5,9 @@ metadata:
 spec:
   selector:
     app: sanduba-db-deployment
-  type: LoadBalancer
+  type: NodePort
   ports: 
     - protocol: TCP
       port: 1433
       targetPort: 1433
+      nodePort: 31433

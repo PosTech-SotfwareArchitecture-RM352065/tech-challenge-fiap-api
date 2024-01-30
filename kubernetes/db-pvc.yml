@@ -6,7 +6,7 @@ metadata:
     name: sanduba-db-pvc-data
     app: sanduba-db-pvc-data
   annotations:
-    volume.beta.kubernetes.io/storage-class: default
+    storageClassName: local-storage-db
 spec:
   accessModes:
     - ReadWriteOnce
@@ -22,7 +22,7 @@ metadata:
     name: sanduba-db-pvc-log
     app: sanduba-db-pvc-log
   annotations:
-    volume.beta.kubernetes.io/storage-class: default
+    storageClassName: local-storage-db
 spec:
   accessModes:
     - ReadWriteOnce
@@ -38,7 +38,7 @@ metadata:
     name: sanduba-db-pvc-system
     app: sanduba-db-pvc-system
   annotations:
-    volume.beta.kubernetes.io/storage-class: default
+    storageClassName: local-storage-db
 spec:
   accessModes:
     - ReadWriteOnce
