@@ -7,19 +7,22 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RestauranteSanduba.Infra.PersistenceGateway.Pedidos.Schema
 {
-    [PrimaryKey(nameof(Id))]
+    [PrimaryKey(nameof(PedidoId), nameof(Codigo))]
     public class ItemPedido
     {
-        [Required] 
-        public Guid Id { get; set; }
-        [Required] 
-        public int Codigo { get; set; }
         [Required]
         public Guid PedidoId { get; set; }
-        public Pedido Pedido { get; set; } = null;
+
+        [Required] 
+        public int Codigo { get; set; }
+
         [Required]
         public Guid ProdutoId { get; set; }
+
+        public Pedido Pedido { get; set; } = null;
+
         public Produto Produto { get; set; } = null;
+
         [Required]
         [Column(TypeName = "decimal(18,2)")]
         public double Preco { get; set; }

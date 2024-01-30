@@ -39,14 +39,12 @@ CREATE TABLE Pedidos (
 GO
 
 CREATE TABLE ItensPedido (
-    Id          UNIQUEIDENTIFIER    NOT NULL
-,   PedidoId    UNIQUEIDENTIFIER    NOT NULL
+    PedidoId    UNIQUEIDENTIFIER    NOT NULL
 ,   Codigo      INT                 NOT NULL
 ,   ProdutoId   UNIQUEIDENTIFIER    NOT NULL
 ,   Preco       DECIMAL(18, 2)      NOT NULL
-,   CONSTRAINT Pk_ItensPedido PRIMARY KEY NONCLUSTERED (Id)
+,   CONSTRAINT Pk_ItensPedido PRIMARY KEY NONCLUSTERED (PedidoId, Codigo)
 ,   CONSTRAINT Fk1_ItensPedido FOREIGN KEY (PedidoId) REFERENCES Pedidos (Id)
 ,   CONSTRAINT Fk2_ItensPedido FOREIGN KEY (ProdutoId) REFERENCES Produtos (Id)
-,   INDEX Ak1_ItensPedido CLUSTERED (PedidoId)
 )
 GO
