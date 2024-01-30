@@ -2,8 +2,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Collections.Generic;
-using RestauranteSanduba.Infra.PersistenceGateway.Pedidos.Schema;
 
 namespace RestauranteSanduba.Infra.PersistenceGateway.Clientes.Schema
 {
@@ -30,9 +28,6 @@ namespace RestauranteSanduba.Infra.PersistenceGateway.Clientes.Schema
         [MaxLength(50)]
         [Column(TypeName = "varchar(50)")]
         public string Email { get; init; }
-
-        [NotMapped]
-        public List<Pedido> Pedidos { get; init; }
 
         public Domain.Cliente ToDomain()
         {

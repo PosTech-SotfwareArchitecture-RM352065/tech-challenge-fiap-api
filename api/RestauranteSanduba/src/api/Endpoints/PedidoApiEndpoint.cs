@@ -10,6 +10,7 @@ namespace RestauranteSanduba.API.Endpoints
 {
     [ApiController]
     [Route("pedido")]
+
     public class PedidoApiEndpoint : ControllerBase
     {
         private readonly ILogger<PedidoApiEndpoint> _logger;
@@ -21,10 +22,18 @@ namespace RestauranteSanduba.API.Endpoints
             this.pedidoController = pedidoController;
         }
 
-        [HttpGet(Name = "ConsultaPedido")]
+        [HttpGet("{id}")]
         [SwaggerOperation(Summary = "Consulta pedido a partir do número de pedido")]
         [SwaggerResponse(200, "Dados do pedido", typeof(ConsultaPedidoResponse))]
         public IActionResult Get(Guid requestModel)
+        {
+            return Ok(pedidoController.ObtemPedido(new ConsultaPedidoRequest(requestModel)));
+        }
+
+        [HttpGet]
+        [SwaggerOperation(Summary = "Consulta pedido a partir do número de pedido")]
+        [SwaggerResponse(200, "Dados do pedido", typeof(ConsultaPedidoResponse))]
+        public IActionResult Get()
         {
             return Ok();
         }

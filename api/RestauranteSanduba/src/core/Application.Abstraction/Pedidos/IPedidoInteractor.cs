@@ -6,6 +6,7 @@ namespace RestauranteSanduba.Core.Application.Abstraction.Pedidos
 {
     public interface IPedidoInteractor
     {
+        public List<ConsultaPedidoResponse> OntemPedido(ConsultaPedidoPorStatus requestModel);
         public ConsultaPedidoResponse ObtemPedido(ConsultaPedidoRequest requestModel);
         public List<ConsultaPedidoResponse> ObtemPedidoPorCliente(ConsultaPedidoPorClienteRequest requestModel);
         public CriacaoPedidoResponse CriaPedido(CriacaoPedidoRequest requestModel);

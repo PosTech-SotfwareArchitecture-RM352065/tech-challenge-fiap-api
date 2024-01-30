@@ -1,10 +1,9 @@
 ﻿using Domain = RestauranteSanduba.Core.Domain.Pedidos;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using RestauranteSanduba.Infra.PersistenceGateway.Clientes.Schema;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace RestauranteSanduba.Infra.PersistenceGateway.Pedidos.Schema
 {
@@ -14,17 +13,17 @@ namespace RestauranteSanduba.Infra.PersistenceGateway.Pedidos.Schema
         [Required]
         public Guid Id { get; set; }
 
-        [Required]
+        [Required] 
         public int Numero { get; set; }
-
-        [Required]
+        [Required] 
         public Guid ClienteId { get; set; }
 
-        [NotMapped]
-        public Cliente Cliente { get; set; }
+        public DateTime CriadoEm { get; set; }
+        [Required] 
+        public int Status { get; set; }
 
-        [Required]
-        public List<ItemPedido> Itens { get; set; }
+        public Cliente Cliente { get; set; } = null;
+        public List<ItemPedido> Itens { get; set; } 
 
         public Domain.Pedido ToDomain()
         {
@@ -37,7 +36,8 @@ namespace RestauranteSanduba.Infra.PersistenceGateway.Pedidos.Schema
             {
                 Id = pedido.Id,
                 Numero = (int)pedido.NumeroPedido,
-                Cliente = Cliente.ToSchema(pedido.Cliente),
+                ClienteId = pedido.Cliente.Id,
+                Status = (int)pedido.Status,
                 Itens = pedido.Itens.Select(item => ItemPedido.ToSchema(item)).ToList()
             };
         }

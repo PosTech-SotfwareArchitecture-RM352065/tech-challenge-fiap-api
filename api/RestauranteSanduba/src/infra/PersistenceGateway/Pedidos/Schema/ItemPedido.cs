@@ -1,29 +1,30 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Domain = RestauranteSanduba.Core.Domain.Pedidos;
 using System;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using RestauranteSanduba.Infra.PersistenceGateway.Cardapios.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace RestauranteSanduba.Infra.PersistenceGateway.Pedidos.Schema
 {
     [PrimaryKey(nameof(Id))]
     public class ItemPedido
     {
-        [Required]
+        [Required] 
         public Guid Id { get; set; }
-
-        [Required]
+        [Required] 
         public int Codigo { get; set; }
-
         [Required]
-        public Produto Produto { get; set; }
-
+        public Guid PedidoId { get; set; }
+        public Pedido Pedido { get; set; } = null;
+        [Required]
+        public Guid ProdutoId { get; set; }
+        public Produto Produto { get; set; } = null;
         [Required]
         [Column(TypeName = "decimal(18,2)")]
         public double Preco { get; set; }
 
-        internal Domain.Pedido.ItemPedido ToDomain()
+        public Domain.Pedido.ItemPedido ToDomain()
         {
             return new Domain.Pedido.ItemPedido()
             {
@@ -33,13 +34,13 @@ namespace RestauranteSanduba.Infra.PersistenceGateway.Pedidos.Schema
             };
         }
 
-        internal static ItemPedido ToSchema(Domain.Pedido.ItemPedido item)
+        public static ItemPedido ToSchema(Domain.Pedido.ItemPedido item)
         {
             return new ItemPedido
             {
                 Codigo = item.Codigo,
                 Preco = item.Preco,
-                Produto = Produto.ToSchema(item.Produto)
+                ProdutoId = item.Produto.Id
             };
         }
     }

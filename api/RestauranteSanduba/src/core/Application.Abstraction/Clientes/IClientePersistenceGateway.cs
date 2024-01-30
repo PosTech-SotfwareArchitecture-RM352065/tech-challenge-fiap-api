@@ -10,6 +10,6 @@ namespace RestauranteSanduba.Core.Application.Abstraction.Clientes
         public Cliente ConsultarCliente(Guid clienteId);
         public Cliente ConsultarCliente(CPF numeroDocumento);
         public List<Cliente> ConsultarClientes();
-        public void CadastrarCliente(Cliente cliente);
+        public Guid CadastrarCliente(Cliente cliente);
     }
 }

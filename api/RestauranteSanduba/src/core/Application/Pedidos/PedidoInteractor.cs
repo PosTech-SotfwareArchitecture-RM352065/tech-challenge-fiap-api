@@ -1,4 +1,5 @@
-﻿using RestauranteSanduba.Core.Application.Abstraction.Cardapios;
+﻿using MediatR;
+using RestauranteSanduba.Core.Application.Abstraction.Cardapios;
 using RestauranteSanduba.Core.Application.Abstraction.Clientes;
 using RestauranteSanduba.Core.Application.Abstraction.Pedidos;
 using RestauranteSanduba.Core.Application.Abstraction.Pedidos.RequestModel;
@@ -6,6 +7,7 @@ using RestauranteSanduba.Core.Application.Abstraction.Pedidos.ResponseModel;
 using RestauranteSanduba.Core.Domain.Pedidos;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RestauranteSanduba.Core.Application.Pedidos
 {
@@ -22,11 +24,11 @@ namespace RestauranteSanduba.Core.Application.Pedidos
             this.cardapioPersistenceGateway = cardapioPersistenceGateway;
         }
 
-        public CriacaoPedidoResponse CriaPedido(CriacaoPedidoRequest request)
+        public CriacaoPedidoResponse CriaPedido(CriacaoPedidoRequest requestModel)
         {
-            var cliente = clientePersistenceGateway.ConsultarCliente(request.ClienteId);
+            var cliente = clientePersistenceGateway.ConsultarCliente(requestModel.ClienteId);
             var numeroPedido = pedidoPersistenceGateway.ConsultaProximoNumeroPedido();
-            var produtos = cardapioPersistenceGateway.ConsultarProdutos(request.Itens);
+            var produtos = cardapioPersistenceGateway.ConsultarProdutos(requestModel.Itens);
 
             var pedido = Pedido.CriarPedido(Guid.NewGuid(), cliente, numeroPedido);
             pedido.AdicionaProdutos(produtos);
@@ -36,9 +38,9 @@ namespace RestauranteSanduba.Core.Application.Pedidos
             return new CriacaoPedidoResponse(numeroPedido, pedido.ObtemTotal());
         }
 
-        public ConsultaPedidoResponse ObtemPedido(ConsultaPedidoRequest request)
+        public ConsultaPedidoResponse ObtemPedido(ConsultaPedidoRequest requestModel)
         {
-            var pedido = pedidoPersistenceGateway.ConsultaPedido(request.id);
+            var pedido = pedidoPersistenceGateway.ConsultaPedido(requestModel.id);
 
             return new ConsultaPedidoResponse(
                 Id: pedido.Id,
@@ -48,9 +50,9 @@ namespace RestauranteSanduba.Core.Application.Pedidos
             );
         }
 
-        public List<ConsultaPedidoResponse> ObtemPedidoPorCliente(ConsultaPedidoPorClienteRequest request)
+        public List<ConsultaPedidoResponse> ObtemPedidoPorCliente(ConsultaPedidoPorClienteRequest requestModel)
         {
-            var pedidos = pedidoPersistenceGateway.ConsultaPedidosPorCliente(request.ClienteId);
+            var pedidos = pedidoPersistenceGateway.ConsultaPedidosPorCliente(requestModel.ClienteId);
             var response = new List<ConsultaPedidoResponse>();
 
             foreach(var pedido in pedidos)
@@ -67,12 +69,24 @@ namespace RestauranteSanduba.Core.Application.Pedidos
             return response;
         }
 
-        public AtualizaPedidoResponse PedidoEmPreparacao(AtualizaPedidoRequest request)
+        public List<ConsultaPedidoResponse> OntemPedido(ConsultaPedidoPorStatus requestModel)
+        {
+            var pedidos = pedidoPersistenceGateway.ConsultaPedidoPorStatus(requestModel.Status);
+
+            return pedidos.Select(pedido => new ConsultaPedidoResponse(
+                Id: pedido.Id,
+                NumeroPedido: (int)pedido.NumeroPedido,
+                Status: pedido.Status.ToString(),
+                Total: pedido.ObtemTotal()
+            )).ToList();
+        }
+
+        public AtualizaPedidoResponse PedidoEmPreparacao(AtualizaPedidoRequest requestModel)
         {
             throw new NotImplementedException();
         }
 
-        public AtualizaPedidoResponse PedidoFinalizado(AtualizaPedidoRequest request)
+        public AtualizaPedidoResponse PedidoFinalizado(AtualizaPedidoRequest requestModel)
         {
             throw new NotImplementedException();
         }

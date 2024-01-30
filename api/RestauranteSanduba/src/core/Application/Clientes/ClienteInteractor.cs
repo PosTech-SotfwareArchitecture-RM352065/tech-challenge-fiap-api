@@ -1,5 +1,4 @@
-﻿
-using RestauranteSanduba.Core.Application.Abstraction.Clientes;
+﻿using RestauranteSanduba.Core.Application.Abstraction.Clientes;
 using RestauranteSanduba.Core.Application.Abstraction.Clientes.RequestModel;
 using RestauranteSanduba.Core.Application.Abstraction.Clientes.ResponseModel;
 using RestauranteSanduba.Core.Application.Abstraction.Pedidos;
@@ -46,7 +45,8 @@ namespace RestauranteSanduba.Core.Application.Clientes
             {
                 Id = cliente.Id,
                 Nome = cliente.Nome,
-                Email = cliente.Email
+                Email = cliente.Email,
+                Cpf = cliente.CPF.ToString(),
             };
         }
 
@@ -58,7 +58,8 @@ namespace RestauranteSanduba.Core.Application.Clientes
                 {
                     Id = cliente.Id,
                     Nome = cliente.Nome,
-                    Email = cliente.Email
+                    Email = cliente.Email,
+                    Cpf = cliente.CPF.ToString()
                 }).ToList();
         }
     }

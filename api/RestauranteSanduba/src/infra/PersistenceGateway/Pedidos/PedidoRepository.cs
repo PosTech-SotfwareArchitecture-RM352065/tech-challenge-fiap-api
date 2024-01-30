@@ -47,5 +47,15 @@ namespace RestauranteSanduba.Infra.PersistenceGateway.Pedidos
             _dbContext.Pedidos.Add(Pedido.ToSchema(pedido));
             _dbContext.SaveChanges();
         }
+
+        public List<Domain.Pedido> ConsultaPedidoPorStatus(string status)
+        {
+            return _dbContext.Pedidos
+                .Include(item => item.Cliente)
+                .Include(item => item.Itens)
+                .Where(item => item.Status == (int)Enum.Parse(typeof(Domain.StatusPedido), status))
+                .Select(item => Domain.Pedido.CriarPedido(item.Id, item.Cliente.ToDomain(), item.Numero))
+                .ToList();
+        }
     }
 }

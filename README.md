@@ -20,6 +20,23 @@ Além disso, para tornar a referência e navegação ainda mais fácil, cada lin
 ### API Restaurante
 O projeto `RestauranteSanduba` é centralizado em uma solução do Visual Studio, que abriga os diversos projetos relacionados à implementação da API, testes, documentação, entre outros. Essa estrutura organizada proporciona uma visão abrangente do ecossistema do projeto, permitindo fácil acesso e gerenciamento dos diferentes componentes, desde a implementação da API até os projetos de testes e documentação.
 
+### C4 Model
+
+#### Diagrama de Contexto
+Tem como objectivo demonstrar como os atores, no nosso caso usuário, interagem com nosso sistema e onde podemos agregar valor ao cliente:
+
+<img alt="Diagrama de Contexto" src="./docs/assets/contextDiagram.png"></img>
+
+#### Diagrama de Container
+Aplicações e bases dentro de um sistema usado pelo usuário:
+
+<img alt="Diagrama de Contexto" src="./docs/assets/containerDiagram.png"></img>
+
+#### Diagrama de Componentes
+Componentes dentro da aplicação:
+
+<img alt="Diagrama de Contexto" src="./docs/assets/componentsDiagram.png"></img>
+
 [>> Documentação da API](api/RestauranteSanduba/docs/README.md)
 
 ### Docker
@@ -31,6 +48,5 @@ O Postman é uma ferramenta de colaboração para o desenvolvimento de APIs. Ele
 [>> Documentação Postman](postman/docs/README.md)
 
  ### Kubernetes (aka k8s)
-
  [>> Documentação Kubernetes](kubernetes/docs/README.md)
 

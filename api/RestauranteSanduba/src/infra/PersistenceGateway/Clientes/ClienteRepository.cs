@@ -16,10 +16,12 @@ namespace RestauranteSanduba.Infra.PersistenceGateway.Clientes
             _dbContext = dbContext;
         }
 
-        public void CadastrarCliente(Domain.Abstractions.Cliente cliente)
+        public Guid CadastrarCliente(Domain.Abstractions.Cliente cliente)
         {
             _dbContext.Clientes.Add(Cliente.ToSchema(cliente));
             _dbContext.SaveChanges();
+
+            return cliente.Id;
         }
 
         public List<Domain.Abstractions.Cliente> ConsultarClientes()
