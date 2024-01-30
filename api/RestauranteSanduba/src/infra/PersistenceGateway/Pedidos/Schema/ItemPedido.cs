@@ -30,16 +30,17 @@ namespace RestauranteSanduba.Infra.PersistenceGateway.Pedidos.Schema
             {
                 Codigo = Codigo,
                 Preco = Preco,
-                Produto = Produto.ToDomain(),
+                Produto = Produto.ToDomain()
             };
         }
 
-        public static ItemPedido ToSchema(Domain.Pedido.ItemPedido item)
+        public static ItemPedido ToSchema(Guid pedidoId, Domain.Pedido.ItemPedido item)
         {
             return new ItemPedido
             {
                 Codigo = item.Codigo,
                 Preco = item.Preco,
+                PedidoId = pedidoId,
                 ProdutoId = item.Produto.Id
             };
         }

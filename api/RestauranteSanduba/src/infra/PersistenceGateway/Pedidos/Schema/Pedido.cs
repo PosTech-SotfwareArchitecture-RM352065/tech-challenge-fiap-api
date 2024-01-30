@@ -38,7 +38,7 @@ namespace RestauranteSanduba.Infra.PersistenceGateway.Pedidos.Schema
                 Numero = (int)pedido.NumeroPedido,
                 ClienteId = pedido.Cliente.Id,
                 Status = (int)pedido.Status,
-                Itens = pedido.Itens.Select(item => ItemPedido.ToSchema(item)).ToList()
+                Itens = pedido.Itens.Select(item => ItemPedido.ToSchema(pedido.Id, item)).ToList()
             };
         }
     }
