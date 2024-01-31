@@ -20,7 +20,5 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 7.0.x
-    - name: Restore dependencies
-      run: dotnet restore .\api\RestauranteSanduba\RestauranteSanduba.sln
     - name: Test
-      run: dotnet test .\api\RestauranteSanduba\RestauranteSanduba.sln --no-build --verbosity normal
+      run: dotnet test ./api/RestauranteSanduba/RestauranteSanduba.sln --no-build --verbosity normal
