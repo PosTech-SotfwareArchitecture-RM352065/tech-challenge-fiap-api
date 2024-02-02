@@ -26,16 +26,29 @@
 # Feel free to take a look at our documentation (https://docs.sonarcloud.io/getting-started/github/)
 # or reach out to our community forum if you need some help (https://community.sonarsource.com/c/help/sc/9)
 
-name: SonarCloud analysis
+name: Code Test & Analysis
 
 on:
   push:
     branches:
-      - main
+      - '*'
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
-  build:
+  test:
+    name: Test
+    runs-on: windows-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 7.0.x
+      - name: Test
+        run: dotnet test ./api/RestauranteSanduba/RestauranteSanduba.sln --no-build --verbosity normal
+
+  sonar:
     name: Build and analyze
     runs-on: windows-latest
     steps:
@@ -73,5 +86,6 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"PosTech-SotfwareArchitecture-RM352065_tech-challenge-fiap" /o:"postech-sotfwarearchitecture-rm352065" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          dotnet build .\api\RestauranteSanduba\RestauranteSanduba.sln 
+          dotnet build .\api\RestauranteSanduba\RestauranteSanduba.sln
+          dotnet test --collect:"XPlat Code Coverage"
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
