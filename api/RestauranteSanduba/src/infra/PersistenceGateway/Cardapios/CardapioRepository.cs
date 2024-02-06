@@ -65,9 +65,9 @@ namespace RestauranteSanduba.Infra.PersistenceGateway.Cardapios
             return produto;
         }
 
-        public Domain.Produto AtualizarProduto(Domain.Produto produtoAtualizado)
+        public Domain.Produto AtualizarProduto(Domain.Produto produto)
         {
-            var produtoEntity = _dbContext.Produtos.Update(Produto.ToSchema(produtoAtualizado));
+            var produtoEntity = _dbContext.Produtos.Update(Produto.ToSchema(produto));
             _dbContext.SaveChanges();
 
             return produtoEntity.Entity.ToDomain();
