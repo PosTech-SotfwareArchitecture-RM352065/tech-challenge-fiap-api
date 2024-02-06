@@ -33,9 +33,10 @@ on:
     branches: ['*']
   pull_request:
     types: [opened, synchronize, reopened]
+
 jobs:
   test:
-    name: Test
+    name: Code Test
     runs-on: windows-latest
     
     steps:
@@ -45,10 +46,10 @@ jobs:
         with:
           dotnet-version: 7.0.x
       - name: Test
-        run: dotnet test ./api/RestauranteSanduba/RestauranteSanduba.sln --no-build --verbosity normal
+        run: dotnet test ./api/RestauranteSanduba/RestauranteSanduba.sln --verbosity normal
 
   sonar:
-    name: Build and analyze
+    name: Code Analysis
     runs-on: windows-latest
     steps:
       - name: Set up JDK 17
@@ -90,6 +91,5 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"PosTech-SotfwareArchitecture-RM352065_tech-challenge-fiap" /o:"postech-sotfwarearchitecture-rm352065" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          dotnet build .\api\RestauranteSanduba\RestauranteSanduba.sln
           dotnet test --collect:"XPlat Code Coverage"
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
