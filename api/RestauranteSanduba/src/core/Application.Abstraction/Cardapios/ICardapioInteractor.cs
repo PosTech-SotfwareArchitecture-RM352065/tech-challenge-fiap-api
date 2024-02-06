@@ -7,8 +7,8 @@ namespace RestauranteSanduba.Core.Application.Abstraction.Cardapios
     public interface ICardapioInteractor
     {
         public CadastroProdutoResponse CadastrarProduto(CadastroProdutoRequest request);
-        public ConsultaProdutoResponse InativarProduto(AtualizaProdutoRequest request);
-        public ConsultaProdutoResponse AtualizaPrecoProduto(AtualizaProdutoRequest request);
+        public ConsultaProdutoResponse InativarProduto(InativarProdutoRequest request);
+        public ConsultaProdutoResponse AtualizaProduto(AtualizaProdutoRequest request);
         public ConsultaProdutoResponse ConsultarProduto(ConsultaProdutoRequest request);
         public List<ConsultaProdutoResponse> ConsultarProdutosAtivos();
         public List<ConsultaProdutoResponse> ConsultarProdutos(List<ConsultaProdutoRequest> id);

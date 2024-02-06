@@ -18,9 +18,25 @@ namespace RestauranteSanduba.Core.Application.Cardapios
             this.cardapioPersistenteceGateway = cardapioPersistenceGateway;
         }
 
-        public ConsultaProdutoResponse AtualizaPrecoProduto(AtualizaProdutoRequest request)
+        public ConsultaProdutoResponse AtualizaProduto(AtualizaProdutoRequest request)
         {
-            throw new NotImplementedException();
+            var produtoExistente = cardapioPersistenteceGateway.ConsultarProduto(request.Id);
+            if (produtoExistente == null) throw new ProdutoInexistenteException(request.Id);
+            if (!produtoExistente.Ativo) throw new ProdutoInativoException(request.Id);
+
+            var produto = Produto.CriarProduto(request.Id, request.Categoria, request.Nome, request.Descricao, request.Preco, true);
+            produto.ValidateEntity();
+
+            var produtoAtualizado = cardapioPersistenteceGateway.AtualizarProduto(produto);
+            return new ConsultaProdutoResponse
+            {
+                Id = produtoAtualizado.Id,
+                Categoria = produtoAtualizado.Categoria,
+                Nome = produtoAtualizado.Nome,
+                Descricao = produtoAtualizado.Descricao,
+                Preco = produtoAtualizado.Preco,
+                Ativo = produtoAtualizado.Ativo
+            };
         }
 
         public CadastroProdutoResponse CadastrarProduto(CadastroProdutoRequest request)
@@ -92,11 +108,9 @@ namespace RestauranteSanduba.Core.Application.Cardapios
                 }).ToList();
         }
 
-        public ConsultaProdutoResponse InativarProduto(AtualizaProdutoRequest request)
+        public ConsultaProdutoResponse InativarProduto(InativarProdutoRequest request)
         {
-            var produto = Produto.CriarProduto(Guid.NewGuid(), request.Categoria, request.Nome, request.Descricao, request.Preco, false);
-            cardapioPersistenteceGateway.InativarProduto(produto);
-
+            var produto = cardapioPersistenteceGateway.InativarProduto(request.Id);
             return new ConsultaProdutoResponse
             {
                 Id = produto.Id,

@@ -14,9 +14,9 @@ namespace RestauranteSanduba.Adapter.ApiAdapter.Cardapios
             this.presenter = presenter;
         }
 
-        public override string AtualizaPrecoProduto(AtualizaProdutoRequest requestModel)
+        public override string AtualizaProduto(AtualizaProdutoRequest requestModel)
         {
-            var responseModel = interactor.AtualizaPrecoProduto(requestModel);
+            var responseModel = interactor.AtualizaProduto(requestModel);
             return presenter.Present(responseModel);
         }
 
@@ -44,7 +44,7 @@ namespace RestauranteSanduba.Adapter.ApiAdapter.Cardapios
             return presenter.Present(responseModel);
         }
 
-        public override string InativarProduto(AtualizaProdutoRequest requestModel)
+        public override string InativarProduto(InativarProdutoRequest requestModel)
         {
             var responseModel = interactor.InativarProduto(requestModel);
             return presenter.Present(responseModel);

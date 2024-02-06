@@ -6,8 +6,5 @@ using System.Threading.Tasks;
 
 namespace RestauranteSanduba.Core.Application.Abstraction.Cardapios.RequestModel
 {
-    public record ConsultaProdutoRequest
-    {
-        public Guid Id { get; set; }
-    }
+    public record ConsultaProdutoRequest (Guid Id);
 }

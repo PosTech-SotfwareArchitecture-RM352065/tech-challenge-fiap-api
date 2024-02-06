@@ -14,34 +14,34 @@ namespace RestauranteSanduba.Test.Core.ApplicationTest.Cardapio
     public class CadastroDeProdutosStepDefinitions
     {
         [ThreadStatic]
-        private static CardapioInteractor _cardapioService;
+        private static CardapioInteractor cardapioInteractor;
         [ThreadStatic]
-        private static Mock<ICardapioPersistenceGateway> _cardapioRepository;
+        private static Mock<ICardapioPersistenceGateway> cardapioPersistenceGateway;
         [ThreadStatic]
         private static CadastroProdutoRequest request;
         [ThreadStatic]
-        private Func<CadastroProdutoResponse> action;
+        private static Func<CadastroProdutoResponse> action;
         [ThreadStatic]
         private static CadastroProdutoResponse response;
 
         [BeforeScenario]
         public static void SetupScenario()
         {
-            _cardapioRepository = new Mock<ICardapioPersistenceGateway>();
-            _cardapioService = new CardapioInteractor(_cardapioRepository.Object);
+            cardapioPersistenceGateway = new Mock<ICardapioPersistenceGateway>();
+            cardapioInteractor = new CardapioInteractor(cardapioPersistenceGateway.Object);
         }
 
         [AfterScenario]
         public static void DisposeScenario()
         {
-            _cardapioRepository = null;
-            _cardapioService = null;
+            cardapioPersistenceGateway = null;
+            cardapioInteractor = null;
         }
 
         [Given(@"temos um novo ""([^""]*)"" chamado ""([^""]*)"" com a descrição de ""([^""]*)"" e com preço de (.*)")]
         public void GivenTemosProdutoComNomeEDescricaoEPrecoValidos(string categoria, string nome, string descricao, double preco)
         {
-            _cardapioRepository.Setup(repo => repo.CadastrarProduto(It.IsAny<Produto>()));
+            cardapioPersistenceGateway.Setup(repo => repo.CadastrarProduto(It.IsAny<Produto>()));
 
             Categoria categoriaLanche;
             Assert.True(Enum.TryParse(categoria, out categoriaLanche));
@@ -58,7 +58,7 @@ namespace RestauranteSanduba.Test.Core.ApplicationTest.Cardapio
         [When(@"adicionar o novo lanche no cardápio")]
         public void WhenAdicionarONovoLancheNoCardapio()
         {
-            action = () => _cardapioService.CadastrarProduto(request);
+            action = () => cardapioInteractor.CadastrarProduto(request);
         }
 
         [Then(@"deve retornar o novo código cadastrado")]
@@ -66,7 +66,7 @@ namespace RestauranteSanduba.Test.Core.ApplicationTest.Cardapio
         {
             response = action.Invoke();
             
-            _cardapioRepository.Verify(repo => repo.CadastrarProduto(It.IsAny<Produto>()), Times.Once);
+            cardapioPersistenceGateway.Verify(repo => repo.CadastrarProduto(It.IsAny<Produto>()), Times.Once);
             Assert.IsType<Guid>(response.Id);
         }
 
@@ -74,7 +74,7 @@ namespace RestauranteSanduba.Test.Core.ApplicationTest.Cardapio
         public void GivenTemosUmLancheComOMesmoNomeJaCadastrado(string nome)
         {
             var produtoExistente = Produto.CriarProduto(Guid.NewGuid(), Categoria.Lanche, nome, "Nosso lanche gigante", 15.99, true);
-            _cardapioRepository.Setup(repo => repo.ConsultarProduto(produtoExistente.Nome)).Returns(produtoExistente);
+            cardapioPersistenceGateway.Setup(repo => repo.ConsultarProduto(produtoExistente.Nome)).Returns(produtoExistente);
 
             request = new CadastroProdutoRequest(
                 Categoria: "Lanche",
@@ -87,7 +87,7 @@ namespace RestauranteSanduba.Test.Core.ApplicationTest.Cardapio
         [When(@"adicionar o lanche existente no cardápio")]
         public void WhenAdicionarLancheExistenteNoCardapio()
         {
-            action = () => _cardapioService.CadastrarProduto(request);
+            action = () => cardapioInteractor.CadastrarProduto(request);
         }
 
         [Then(@"deve retornar erro informando a duplicidade")]
@@ -98,14 +98,14 @@ namespace RestauranteSanduba.Test.Core.ApplicationTest.Cardapio
                 response = action.Invoke();
             });
 
-            _cardapioRepository.Verify(repo => repo.ConsultarProduto(It.IsAny<string>()), Times.Once);
-            _cardapioRepository.Verify(repo => repo.CadastrarProduto(It.IsAny<Produto>()), Times.Never);
+            cardapioPersistenceGateway.Verify(repo => repo.ConsultarProduto(It.IsAny<string>()), Times.Once);
+            cardapioPersistenceGateway.Verify(repo => repo.CadastrarProduto(It.IsAny<Produto>()), Times.Never);
         }
 
         [Given(@"temos um novo ""([^""]*)"" chamado ""([^""]*)"" com a descrição de vazia e com preço de (.*)")]
         public void GivenTemosUmNovoProdutoComADescricaoInvalida(string categoria, string nome, double preco)
         {
-            _cardapioRepository.Setup(repo => repo.CadastrarProduto(It.IsAny<Produto>()));
+            cardapioPersistenceGateway.Setup(repo => repo.CadastrarProduto(It.IsAny<Produto>()));
 
             request = new CadastroProdutoRequest(
                 Categoria: categoria,
@@ -123,7 +123,7 @@ namespace RestauranteSanduba.Test.Core.ApplicationTest.Cardapio
                 response = action.Invoke();
             });
 
-            _cardapioRepository.Verify(repo => repo.CadastrarProduto(It.IsAny<Produto>()), Times.Never);
+            cardapioPersistenceGateway.Verify(repo => repo.CadastrarProduto(It.IsAny<Produto>()), Times.Never);
         }
     }
 }
