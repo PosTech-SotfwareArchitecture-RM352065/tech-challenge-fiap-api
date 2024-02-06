@@ -30,8 +30,7 @@ name: Code Test & Analysis
 
 on:
   push:
-    branches:
-      - '*'
+    branches: ['*']
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
