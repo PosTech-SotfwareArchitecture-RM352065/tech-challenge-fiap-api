@@ -3,7 +3,7 @@ name: Push to DockerHub
 on: [workflow_call, workflow_dispatch ]  # allow this workflow to be called from other workflows
 
 env:
-    image_tag_suffix: ${{ github.ref == 'refs/heads/main' && '' || '-beta' }}
+    image_tag_suffix: ${{ github.ref != 'refs/heads/main' && '-beta' || '' }}
 
 jobs:
   docker:
