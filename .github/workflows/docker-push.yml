@@ -1,11 +1,6 @@
 name: Push to DockerHub
 
-on:
-  workflow_run:
-    workflows: ["Code Test & Analysis"]
-    branches: [ "main", "develop" ]
-    types: 
-      - completed
+on: [workflow_call]  # allow this workflow to be called from other workflows
     
 jobs:
   docker:
