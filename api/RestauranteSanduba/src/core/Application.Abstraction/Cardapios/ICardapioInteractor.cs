@@ -6,11 +6,11 @@ namespace RestauranteSanduba.Core.Application.Abstraction.Cardapios
 {
     public interface ICardapioInteractor
     {
-        public CadastroProdutoResponse CadastrarProduto(CadastroProdutoRequest request);
-        public ConsultaProdutoResponse InativarProduto(AtualizaProdutoRequest request);
-        public ConsultaProdutoResponse AtualizaPrecoProduto(AtualizaProdutoRequest request);
-        public ConsultaProdutoResponse ConsultarProduto(ConsultaProdutoRequest request);
+        public CadastroProdutoResponse CadastrarProduto(CadastroProdutoRequest requestModel);
+        public ConsultaProdutoResponse InativarProduto(InativarProdutoRequest requestModel);
+        public ConsultaProdutoResponse AtualizaProduto(AtualizaProdutoRequest requestModel);
+        public ConsultaProdutoResponse ConsultarProduto(ConsultaProdutoRequest requestModel);
         public List<ConsultaProdutoResponse> ConsultarProdutosAtivos();
-        public List<ConsultaProdutoResponse> ConsultarProdutos(List<ConsultaProdutoRequest> id);
+        public List<ConsultaProdutoResponse> ConsultarProdutos(List<ConsultaProdutoRequest> requestModel);
     }
 }

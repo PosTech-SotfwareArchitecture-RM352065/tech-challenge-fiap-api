@@ -101,7 +101,7 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 8
- testRunner.Given("não vamos mais oferecer lanche chamado \"Mega Lanche\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+ testRunner.Given("não vamos mais oferecer \"lanche\" chamado \"Mega Lanche\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
 #line 9
  testRunner.When("remover o lanche do cardapio", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
@@ -132,10 +132,11 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 13
- testRunner.Given("um lanche já existente chamado \"Mega Lanche\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+ testRunner.Given("um \"lanche\" já existente chamado \"Mega Lanche\" pelo preço de 32,99 com o novo pre" +
+                        "ço 29,99", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
 #line 14
- testRunner.When("for informado o código e o novo preço 29,99", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
+ testRunner.When("for informado os dados de atualização", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
 #line 15
  testRunner.Then("deve retornar que a operação foi finalizada com sucesso", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
@@ -163,10 +164,11 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 18
- testRunner.Given("um lanche já existente chamado \"Mega Lanche\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+ testRunner.Given("um \"lanche\" já existente chamado \"Mega Lanche\" pelo preço de 32,99 com o novo pre" +
+                        "ço -0,10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
 #line 19
- testRunner.When("for informado o código e um novo preço -0,10", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
+ testRunner.When("for informado os dados de atualização", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
 #line 20
  testRunner.Then("deve retornar erro informando o preço inválido", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");

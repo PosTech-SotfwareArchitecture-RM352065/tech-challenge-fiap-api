@@ -18,21 +18,37 @@ namespace RestauranteSanduba.Core.Application.Cardapios
             this.cardapioPersistenteceGateway = cardapioPersistenceGateway;
         }
 
-        public ConsultaProdutoResponse AtualizaPrecoProduto(AtualizaProdutoRequest request)
+        public ConsultaProdutoResponse AtualizaProduto(AtualizaProdutoRequest requestModel)
         {
-            throw new NotImplementedException();
+            var produtoExistente = cardapioPersistenteceGateway.ConsultarProduto(requestModel.Id);
+            if (produtoExistente == null) throw new ProdutoInexistenteException(requestModel.Id);
+            if (!produtoExistente.Ativo) throw new ProdutoInativoException(requestModel.Id);
+
+            var produto = Produto.CriarProduto(requestModel.Id, requestModel.Categoria, requestModel.Nome, requestModel.Descricao, requestModel.Preco, true);
+            produto.ValidateEntity();
+
+            var produtoAtualizado = cardapioPersistenteceGateway.AtualizarProduto(produto);
+            return new ConsultaProdutoResponse
+            {
+                Id = produtoAtualizado.Id,
+                Categoria = produtoAtualizado.Categoria,
+                Nome = produtoAtualizado.Nome,
+                Descricao = produtoAtualizado.Descricao,
+                Preco = produtoAtualizado.Preco,
+                Ativo = produtoAtualizado.Ativo
+            };
         }
 
-        public CadastroProdutoResponse CadastrarProduto(CadastroProdutoRequest request)
+        public CadastroProdutoResponse CadastrarProduto(CadastroProdutoRequest requestModel)
         {
-            var produtoExistente = cardapioPersistenteceGateway.ConsultarProduto(request.Nome);
+            var produtoExistente = cardapioPersistenteceGateway.ConsultarProduto(requestModel.Nome);
 
             if (produtoExistente != null) throw new ProdutoDuplicadoException(produtoExistente.Id, produtoExistente.Nome);
 
             try
             {
-                var categoria = (Categoria)Enum.Parse(typeof(Categoria), request.Categoria);
-                var produto = Produto.CriarProduto(Guid.NewGuid(), categoria, request.Nome, request.Descricao, request.Preco, true);
+                var categoria = (Categoria)Enum.Parse(typeof(Categoria), requestModel.Categoria);
+                var produto = Produto.CriarProduto(Guid.NewGuid(), categoria, requestModel.Nome, requestModel.Descricao, requestModel.Preco, true);
                 produto.ValidateEntity();
 
                 cardapioPersistenteceGateway.CadastrarProduto(produto);
@@ -48,9 +64,9 @@ namespace RestauranteSanduba.Core.Application.Cardapios
             }
         }
 
-        public ConsultaProdutoResponse ConsultarProduto(ConsultaProdutoRequest request)
+        public ConsultaProdutoResponse ConsultarProduto(ConsultaProdutoRequest requestModel)
         {
-            var produto = cardapioPersistenteceGateway.ConsultarProduto(request.Id);
+            var produto = cardapioPersistenteceGateway.ConsultarProduto(requestModel.Id);
             return new ConsultaProdutoResponse
             {
                 Id = produto.Id,
@@ -62,9 +78,9 @@ namespace RestauranteSanduba.Core.Application.Cardapios
             };
         }
 
-        public List<ConsultaProdutoResponse> ConsultarProdutos(List<ConsultaProdutoRequest> request)
+        public List<ConsultaProdutoResponse> ConsultarProdutos(List<ConsultaProdutoRequest> requestModel)
         {
-            var produtos = cardapioPersistenteceGateway.ConsultarProdutos(request.Select(item => item.Id).ToList());
+            var produtos = cardapioPersistenteceGateway.ConsultarProdutos(requestModel.Select(item => item.Id).ToList());
             return produtos.Select(produto =>
                 new ConsultaProdutoResponse
                 {
@@ -92,11 +108,9 @@ namespace RestauranteSanduba.Core.Application.Cardapios
                 }).ToList();
         }
 
-        public ConsultaProdutoResponse InativarProduto(AtualizaProdutoRequest request)
+        public ConsultaProdutoResponse InativarProduto(InativarProdutoRequest requestModel)
         {
-            var produto = Produto.CriarProduto(Guid.NewGuid(), request.Categoria, request.Nome, request.Descricao, request.Preco, false);
-            cardapioPersistenteceGateway.InativarProduto(produto);
-
+            var produto = cardapioPersistenteceGateway.InativarProduto(requestModel.Id);
             return new ConsultaProdutoResponse
             {
                 Id = produto.Id,

@@ -23,6 +23,26 @@ namespace RestauranteSanduba.Core.Application.Cardapios
         }
     }
 
+    public class ProdutoInexistenteException : CardapioException
+    {
+        public readonly Guid Codigo;
+        public ProdutoInexistenteException(Guid id)
+            : base($"Produto inexistente! Id {id}.")
+        {
+            Codigo = id;
+        }
+    }
+
+    public class ProdutoInativoException : CardapioException
+    {
+        public readonly Guid Codigo;
+        public ProdutoInativoException(Guid id)
+            : base($"Produto inativo! Id {id}.")
+        {
+            Codigo = id;
+        }
+    }
+
     public class ProdutoDomainException : CardapioException
     {
         public readonly DomainException domainException;
