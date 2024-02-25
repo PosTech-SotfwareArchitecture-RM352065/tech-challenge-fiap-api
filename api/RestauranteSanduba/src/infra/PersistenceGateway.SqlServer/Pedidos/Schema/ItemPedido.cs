@@ -2,10 +2,10 @@
 using Domain = RestauranteSanduba.Core.Domain.Pedidos;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using RestauranteSanduba.Infra.PersistenceGateway.Cardapios.Schema;
 using System.ComponentModel.DataAnnotations;
+using RestauranteSanduba.Infra.PersistenceGateway.SqlServer.Cardapios.Schema;
 
-namespace RestauranteSanduba.Infra.PersistenceGateway.Pedidos.Schema
+namespace RestauranteSanduba.Infra.PersistenceGateway.SqlServer.Pedidos.Schema
 {
     [PrimaryKey(nameof(PedidoId), nameof(Codigo))]
     public class ItemPedido
@@ -13,7 +13,7 @@ namespace RestauranteSanduba.Infra.PersistenceGateway.Pedidos.Schema
         [Required]
         public Guid PedidoId { get; set; }
 
-        [Required] 
+        [Required]
         public int Codigo { get; set; }
 
         [Required]

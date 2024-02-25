@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RestauranteSanduba.Infra.PersistenceGateway.Cardapios.Schema;
-using RestauranteSanduba.Infra.PersistenceGateway.Clientes.Schema;
-using RestauranteSanduba.Infra.PersistenceGateway.Pedidos.Schema;
+using RestauranteSanduba.Infra.PersistenceGateway.SqlServer.Cardapios.Schema;
+using RestauranteSanduba.Infra.PersistenceGateway.SqlServer.Clientes.Schema;
+using RestauranteSanduba.Infra.PersistenceGateway.SqlServer.Pedidos.Schema;
 
-namespace RestauranteSanduba.Infra.PersistenceGateway
+namespace RestauranteSanduba.Infra.PersistenceGateway.SqlServer
 {
     public class InfrastructureDbContext : DbContext
     {
