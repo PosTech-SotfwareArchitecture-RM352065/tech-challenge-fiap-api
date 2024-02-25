@@ -2,10 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using RestauranteSanduba.Infra.PersistenceGateway.Clientes.Schema;
 using System.ComponentModel.DataAnnotations;
+using RestauranteSanduba.Infra.PersistenceGateway.SqlServer.Clientes.Schema;
 
-namespace RestauranteSanduba.Infra.PersistenceGateway.Pedidos.Schema
+namespace RestauranteSanduba.Infra.PersistenceGateway.SqlServer.Pedidos.Schema
 {
     public class Pedido
     {
@@ -13,16 +13,16 @@ namespace RestauranteSanduba.Infra.PersistenceGateway.Pedidos.Schema
         [Required]
         public Guid Id { get; set; }
 
-        [Required] 
+        [Required]
         public int Numero { get; set; }
-        [Required] 
+        [Required]
         public Guid ClienteId { get; set; }
 
-        [Required] 
+        [Required]
         public int Status { get; set; }
 
         public Cliente Cliente { get; set; } = null;
-        public List<ItemPedido> Itens { get; set; } 
+        public List<ItemPedido> Itens { get; set; }
 
         public Domain.Pedido ToDomain()
         {

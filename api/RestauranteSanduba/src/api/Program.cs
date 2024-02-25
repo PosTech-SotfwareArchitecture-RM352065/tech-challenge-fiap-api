@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using RestauranteSanduba.Infra.PersistenceGateway;
 using RestauranteSanduba.Core.Application;
 using System;
 using RestauranteSanduba.Adapter.ApiAdapter;
+using RestauranteSanduba.Infra.PersistenceGateway.SqlServer;
 
 namespace RestauranteSanduba.API
 {
@@ -19,10 +19,8 @@ namespace RestauranteSanduba.API
 
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
 
-            var connectionString = builder.Configuration.GetConnectionString("Default") ?? throw new InvalidOperationException("Connection string 'Default' not found.");
-
             builder.Services.AddHealthChecks()
-                .AddSqlServer(connectionString, name: "database");
+                .AddDatabaseHealthChecks(builder.Configuration);
 
             builder.Services.AddHealthChecksUI(options =>
             {
@@ -83,6 +81,22 @@ namespace RestauranteSanduba.API
             app.MapControllers();
 
             app.Run();
+        }
+
+        private static IHealthChecksBuilder AddDatabaseHealthChecks(this IHealthChecksBuilder services, IConfiguration configuration)
+        {
+            foreach (var databaseConfig in configuration.GetSection("ConnectionStrings").GetChildren())
+            {
+                switch(databaseConfig.GetValue<string>("Type"))
+                {
+                    case "MSSQL": services.AddSqlServer(connectionString: databaseConfig.GetValue<string>("Value"), name: databaseConfig.Key);
+                        break;
+                    case "REDIS": services.AddRedis(redisConnectionString: databaseConfig.GetValue<string>("Value"), name: databaseConfig.Key);
+                        break;
+                }
+            }
+
+            return services;
         }
     }
 }

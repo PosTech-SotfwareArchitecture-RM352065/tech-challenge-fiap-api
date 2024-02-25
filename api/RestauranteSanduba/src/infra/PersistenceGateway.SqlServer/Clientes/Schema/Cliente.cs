@@ -3,7 +3,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RestauranteSanduba.Infra.PersistenceGateway.Clientes.Schema
+namespace RestauranteSanduba.Infra.PersistenceGateway.SqlServer.Clientes.Schema
 {
     public class Cliente
     {

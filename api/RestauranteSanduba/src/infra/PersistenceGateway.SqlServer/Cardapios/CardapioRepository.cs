@@ -3,10 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using RestauranteSanduba.Core.Application.Abstraction.Cardapios;
-using RestauranteSanduba.Infra.PersistenceGateway.Cardapios.Schema;
-using RestauranteSanduba.Infra.PersistenceGateway;
+using RestauranteSanduba.Infra.PersistenceGateway.SqlServer;
+using RestauranteSanduba.Infra.PersistenceGateway.SqlServer.Cardapios.Schema;
 
-namespace RestauranteSanduba.Infra.PersistenceGateway.Cardapios
+namespace RestauranteSanduba.Infra.PersistenceGateway.SqlServer.Cardapios
 {
     public class CardapioRepository : ICardapioPersistenceGateway
     {
