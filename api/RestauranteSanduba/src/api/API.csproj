@@ -10,6 +10,7 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..\..\..</DockerfileContext>
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+    <UserSecretsId>f1d0ddc1-cf26-4566-87f5-140ad1057fda</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,6 +22,7 @@
 
   <ItemGroup>
     <PackageReference Include="AspNetCore.HealthChecks.ApplicationStatus" Version="7.0.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.Redis" Version="8.0.0" />
     <PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="7.0.0" />
     <PackageReference Include="AspNetCore.HealthChecks.UI" Version="7.0.2" />
     <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="7.1.0" />
@@ -34,7 +36,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\adapter\Controller\ApiAdapter.csproj" />
-    <ProjectReference Include="..\infra\PersistenceGateway\PersistenceGateway.csproj" />
+    <ProjectReference Include="..\infra\PersistenceGateway.Redis\PersistenceGateway.Redis.csproj" />
+    <ProjectReference Include="..\infra\PersistenceGateway.SqlServer\PersistenceGateway.SqlServer.csproj" />
     <ProjectReference Include="..\core\Application\Application.csproj" />
   </ItemGroup>
 

@@ -26,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\infra\PersistenceGateway\PersistenceGateway.csproj" />
+    <ProjectReference Include="..\..\src\infra\PersistenceGateway\PersistenceGateway.SqlServer.csproj" />
     <ProjectReference Include="..\..\src\core\Application\Application.csproj" />
     <ProjectReference Include="..\..\src\core\Domain\Domain.csproj" />
   </ItemGroup>

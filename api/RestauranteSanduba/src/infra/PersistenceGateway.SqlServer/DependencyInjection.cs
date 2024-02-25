@@ -4,11 +4,11 @@ using Microsoft.Extensions.DependencyInjection;
 using RestauranteSanduba.Core.Application.Abstraction.Cardapios;
 using RestauranteSanduba.Core.Application.Abstraction.Clientes;
 using RestauranteSanduba.Core.Application.Abstraction.Pedidos;
-using RestauranteSanduba.Infra.PersistenceGateway.Cardapios;
-using RestauranteSanduba.Infra.PersistenceGateway.Clientes;
-using RestauranteSanduba.Infra.PersistenceGateway.Pedidos;
+using RestauranteSanduba.Infra.PersistenceGateway.SqlServer.Cardapios;
+using RestauranteSanduba.Infra.PersistenceGateway.SqlServer.Clientes;
+using RestauranteSanduba.Infra.PersistenceGateway.SqlServer.Pedidos;
 
-namespace RestauranteSanduba.Infra.PersistenceGateway
+namespace RestauranteSanduba.Infra.PersistenceGateway.SqlServer
 {
     public static class DependencyInjection
     {
@@ -20,7 +20,7 @@ namespace RestauranteSanduba.Infra.PersistenceGateway
         /// <returns>The same service collection.</returns>
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            string connectionString = configuration.GetConnectionString("Default");
+            string connectionString = configuration.GetConnectionString("MainDatabase:Value");
 
             services.AddDbContext<InfrastructureDbContext>(options =>
             {

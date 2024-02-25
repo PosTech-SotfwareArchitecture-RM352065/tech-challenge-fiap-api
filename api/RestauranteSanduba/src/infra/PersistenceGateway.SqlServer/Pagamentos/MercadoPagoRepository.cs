@@ -1,6 +1,6 @@
 ﻿using RestauranteSanduba.Core.Application.Abstraction.Pagamentos;
 
-namespace RestauranteSanduba.Infra.PersistenceGateway.Pagamentos
+namespace RestauranteSanduba.Infra.PersistenceGateway.SqlServer.Pagamentos
 {
     public class MercadoPagoRepository : IPagamentoPersistenceGateway
     {

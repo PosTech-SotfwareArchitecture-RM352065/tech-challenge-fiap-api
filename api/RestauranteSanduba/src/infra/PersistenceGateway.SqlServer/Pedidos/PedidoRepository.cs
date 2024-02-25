@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using RestauranteSanduba.Core.Application.Abstraction.Pedidos;
-using RestauranteSanduba.Infra.PersistenceGateway.Pedidos.Schema;
+using RestauranteSanduba.Infra.PersistenceGateway.SqlServer.Pedidos.Schema;
 
-namespace RestauranteSanduba.Infra.PersistenceGateway.Pedidos
+namespace RestauranteSanduba.Infra.PersistenceGateway.SqlServer.Pedidos
 {
     public class PedidoRepository : IPedidoPersistenceGateway
     {
