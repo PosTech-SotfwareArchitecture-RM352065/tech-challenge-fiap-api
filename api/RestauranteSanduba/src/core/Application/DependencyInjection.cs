@@ -21,7 +21,7 @@ namespace RestauranteSanduba.Core.Application
         {
             services.AddTransient<IPedidoInteractor, PedidoInteractor>();
             services.AddTransient<IClienteInteractor, ClienteInteractor>();
-            services.AddTransient<ICardapioInteractor, CardapioInteractor>(); 
+            services.AddTransient<ICardapioInteractor, CardapioInteractor>();
 
             return services;
         }

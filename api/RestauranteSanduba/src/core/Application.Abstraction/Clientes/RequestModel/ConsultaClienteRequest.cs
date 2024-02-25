@@ -8,6 +8,6 @@ namespace RestauranteSanduba.Core.Application.Abstraction.Clientes.RequestModel
 {
     public record ConsultaClienteRequest
     {
-        public string CPF { get; set; }
+        public string? CPF { get; set; }
     }
 }

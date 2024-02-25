@@ -59,28 +59,28 @@ namespace RestauranteSanduba.Core.Domain.Pedidos
             _itens.Add(item);
         }
 
-        public void InciaPreparo()
+        public void IniciarPreparo()
         {
             AssertionConcern.AssertArgumentEqual(Status, StatusPedido.Recebido, "Pedido deve estar com status de RECEBIDO");
 
             Status = StatusPedido.EmPreparacao;
         }
 
-        public void CancelaPedido()
+        public void CancelarPedido()
         {
             AssertionConcern.AssertArgumentEqual(Status, StatusPedido.Recebido, "Pedido deve estar com status de RECEBIDO");
 
             Status = StatusPedido.Cancelado;
         }
 
-        public void PreparoFinalizado()
+        public void FinalizarPreparo()
         {
             AssertionConcern.AssertArgumentEqual(Status, StatusPedido.EmPreparacao, "Pedido deve estar com status de EM PREPARAÇÃO");
 
             Status = StatusPedido.Pronto;
         }
 
-        public void Retirado()
+        public void FinalizarPedido()
         {
             AssertionConcern.AssertArgumentEqual(Status, StatusPedido.Pronto, "Pedido deve estar com status de PRONTO");
 

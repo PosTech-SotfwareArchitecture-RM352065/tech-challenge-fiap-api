@@ -65,7 +65,7 @@ namespace RestauranteSanduba.Test.Core.ApplicationTest.Cardapio
         public void ThenDeveRetornarONovoCodigoCadastrado()
         {
             response = action.Invoke();
-            
+
             cardapioPersistenceGateway.Verify(repo => repo.CadastrarProduto(It.IsAny<Produto>()), Times.Once);
             Assert.IsType<Guid>(response.Id);
         }

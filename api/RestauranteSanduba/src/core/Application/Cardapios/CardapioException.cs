@@ -15,8 +15,8 @@ namespace RestauranteSanduba.Core.Application.Cardapios
     {
         public readonly Guid CodigoExistente;
         public readonly string NomeExistente;
-        public ProdutoDuplicadoException(Guid id, string nome) 
-            : base($"Produto duplicado! Id {id} Nome {nome}.") 
+        public ProdutoDuplicadoException(Guid id, string nome)
+            : base($"Produto duplicado! Id {id} Nome {nome}.")
         {
             CodigoExistente = id;
             NomeExistente = nome;

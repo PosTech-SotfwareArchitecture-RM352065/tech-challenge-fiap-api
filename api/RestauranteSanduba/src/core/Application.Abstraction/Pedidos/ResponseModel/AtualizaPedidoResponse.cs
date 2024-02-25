@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace RestauranteSanduba.Core.Application.Abstraction.Pedidos.ResponseModel
 {
-    public record AtualizaPedidoResponse ( string Message );
+    public record AtualizaPedidoResponse(string Message);
 }

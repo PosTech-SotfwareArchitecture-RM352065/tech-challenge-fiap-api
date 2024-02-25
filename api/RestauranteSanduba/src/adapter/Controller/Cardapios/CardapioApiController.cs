@@ -5,8 +5,8 @@ namespace RestauranteSanduba.Adapter.ApiAdapter.Cardapios
 {
     public sealed class CardapioApiController : CardapioController<string>
     {
-        private readonly ICardapioInteractor interactor;
-        private readonly CardapioPresenter<string> presenter;
+        private new readonly ICardapioInteractor interactor;
+        private new readonly CardapioPresenter<string> presenter;
 
         public CardapioApiController(ICardapioInteractor interactor, CardapioPresenter<string> presenter) : base(interactor, presenter)
         {

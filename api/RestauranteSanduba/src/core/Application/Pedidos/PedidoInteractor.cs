@@ -55,7 +55,7 @@ namespace RestauranteSanduba.Core.Application.Pedidos
             var pedidos = pedidoPersistenceGateway.ConsultaPedidosPorCliente(requestModel.ClienteId);
             var response = new List<ConsultaPedidoResponse>();
 
-            foreach(var pedido in pedidos)
+            foreach (var pedido in pedidos)
             {
                 response.Add(
                     new ConsultaPedidoResponse(
