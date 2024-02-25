@@ -87,11 +87,13 @@ namespace RestauranteSanduba.API
         {
             foreach (var databaseConfig in configuration.GetSection("ConnectionStrings").GetChildren())
             {
-                switch(databaseConfig.GetValue<string>("Type"))
+                switch (databaseConfig.GetValue<string>("Type"))
                 {
-                    case "MSSQL": services.AddSqlServer(connectionString: databaseConfig.GetValue<string>("Value"), name: databaseConfig.Key);
+                    case "MSSQL":
+                        services.AddSqlServer(connectionString: databaseConfig.GetValue<string>("Value"), name: databaseConfig.Key);
                         break;
-                    case "REDIS": services.AddRedis(redisConnectionString: databaseConfig.GetValue<string>("Value"), name: databaseConfig.Key);
+                    case "REDIS":
+                        services.AddRedis(redisConnectionString: databaseConfig.GetValue<string>("Value"), name: databaseConfig.Key);
                         break;
                 }
             }

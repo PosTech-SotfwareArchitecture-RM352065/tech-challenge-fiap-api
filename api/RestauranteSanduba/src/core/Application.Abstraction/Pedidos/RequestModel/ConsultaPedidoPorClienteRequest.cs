@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace RestauranteSanduba.Core.Application.Abstraction.Pedidos.RequestModel
 {
-    public record ConsultaPedidoPorClienteRequest (Guid ClienteId);
+    public record ConsultaPedidoPorClienteRequest(Guid ClienteId);
 }

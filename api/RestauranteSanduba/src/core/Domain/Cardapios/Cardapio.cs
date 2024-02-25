@@ -10,7 +10,7 @@ namespace RestauranteSanduba.Core.Domain.Cardapios
         private readonly List<Produto> _produtos = new();
         public IReadOnlyCollection<Produto> Produtos
         {
-            get { return _produtos;  } 
+            get { return _produtos; }
         }
 
         private Cardapio(Guid id) : base(id) { }

@@ -8,6 +8,6 @@ namespace RestauranteSanduba.Core.Application.Abstraction.Clientes.ResponseModel
 {
     public record ConsultaPedidosClienteResponse
     {
-        public List<Guid> Pedidos { get; set; }
+        public List<Guid>? Pedidos { get; set; }
     }
 }

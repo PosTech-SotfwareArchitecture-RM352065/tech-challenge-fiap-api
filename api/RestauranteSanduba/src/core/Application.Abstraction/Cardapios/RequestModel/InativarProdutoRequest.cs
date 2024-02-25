@@ -2,5 +2,5 @@
 
 namespace RestauranteSanduba.Core.Application.Abstraction.Cardapios.RequestModel
 {
-    public record InativarProdutoRequest (Guid Id);
+    public record InativarProdutoRequest(Guid Id);
 }

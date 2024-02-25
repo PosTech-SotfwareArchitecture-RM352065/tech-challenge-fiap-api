@@ -55,12 +55,12 @@ namespace RestauranteSanduba.Core.Application.Clientes
             var clientes = _clienteRepository.ConsultarClientes();
 
             return clientes.Select(cliente => new ConsultaClienteResponse()
-                {
-                    Id = cliente.Id,
-                    Nome = cliente.Nome,
-                    Email = cliente.Email,
-                    Cpf = cliente.CPF.ToString()
-                }).ToList();
+            {
+                Id = cliente.Id,
+                Nome = cliente.Nome,
+                Email = cliente.Email,
+                Cpf = cliente.CPF.ToString()
+            }).ToList();
         }
     }
 }

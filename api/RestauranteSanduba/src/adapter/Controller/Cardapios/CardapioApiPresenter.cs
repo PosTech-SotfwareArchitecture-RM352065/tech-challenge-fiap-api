@@ -20,7 +20,7 @@ namespace RestauranteSanduba.Adapter.ApiAdapter.Cardapios
             {
                 return JsonSerializer.Serialize(obj);
             }
-            catch 
+            catch
             {
                 throw;
             }
