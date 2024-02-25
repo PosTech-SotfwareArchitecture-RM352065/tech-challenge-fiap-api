@@ -106,4 +106,4 @@ jobs:
     name: Deploy
     uses: ./.github/workflows/docker-push.yml
     secrets: inherit
-    needs: [test, sonar]
+    needs: [lint-test, sonar]
