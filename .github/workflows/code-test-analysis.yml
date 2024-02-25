@@ -35,8 +35,8 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  lint-test:
-    name: Code Lint & Test
+  lint:
+    name: Code Lint
     runs-on: windows-latest
     
     steps:
@@ -50,6 +50,19 @@ jobs:
 
       - name: Lint .NET
         run: dotnet format ./api/RestauranteSanduba/RestauranteSanduba.sln --verify-no-changes --verbosity diagnostic 
+
+  test:
+    name: Code Test
+    runs-on: windows-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 7.0.x
 
       - name: Test .NET
         run: dotnet test ./api/RestauranteSanduba/RestauranteSanduba.sln --verbosity normal
@@ -106,4 +119,4 @@ jobs:
     name: Deploy
     uses: ./.github/workflows/docker-push.yml
     secrets: inherit
-    needs: [lint-test, sonar]
+    needs: [lint, test, sonar]
