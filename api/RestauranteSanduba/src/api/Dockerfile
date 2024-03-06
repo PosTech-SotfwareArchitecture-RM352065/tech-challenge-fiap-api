@@ -3,9 +3,16 @@
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 WORKDIR /app
 EXPOSE 9000
+
 ENV ASPNETCORE_URLS=http://+:9000
 ENV ASPNETCORE_ENVIRONMENT=Development
-ENV ASPNETCORE_ConnectionStrings__Default=default
+ENV ASPNETCORE_ConnectionStrings__MainDatabase__Value=default
+ENV ASPNETCORE_ConnectionStrings__MainDatabase__Type=default
+ENV ASPNETCORE_ConnectionStrings__CarrinhoDatabase__Value=default
+ENV ASPNETCORE_ConnectionStrings__CarrinhoDatabase__Type=default
+ENV ASPNETCORE_JwtSettings__SecretKey=default
+ENV ASPNETCORE_JwtSettings__Issuer=default
+ENV ASPNETCORE_JwtSettings__Audience=default
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /staging

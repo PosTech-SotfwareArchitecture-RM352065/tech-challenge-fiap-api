@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RestauranteSanduba.Core.Application.Abstraction.Cardapios;
@@ -5,6 +6,7 @@ using RestauranteSanduba.Core.Application.Abstraction.Cardapios.RequestModel;
 using RestauranteSanduba.Core.Application.Abstraction.Cardapios.ResponseModel;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace RestauranteSanduba.API.ApiEndPoints
 {
@@ -29,6 +31,7 @@ namespace RestauranteSanduba.API.ApiEndPoints
             return Ok(cardapioController.ConsultarProdutosAtivos());
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost(Name = "CadastraProduto")]
         [SwaggerOperation(Summary = "Cadastra novo Produto")]
         [SwaggerResponse(200, "Número do Produto", typeof(CadastroProdutoResponse))]

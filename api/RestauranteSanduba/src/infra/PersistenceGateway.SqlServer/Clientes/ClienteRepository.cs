@@ -3,7 +3,6 @@ using System;
 using System.Linq;
 using RestauranteSanduba.Core.Application.Abstraction.Clientes;
 using System.Collections.Generic;
-using RestauranteSanduba.Infra.PersistenceGateway.SqlServer;
 using RestauranteSanduba.Infra.PersistenceGateway.SqlServer.Clientes.Schema;
 
 namespace RestauranteSanduba.Infra.PersistenceGateway.SqlServer.Clientes
