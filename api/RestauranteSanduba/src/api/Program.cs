@@ -8,6 +8,9 @@ using RestauranteSanduba.Core.Application;
 using System;
 using RestauranteSanduba.Adapter.ApiAdapter;
 using RestauranteSanduba.Infra.PersistenceGateway.SqlServer;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace RestauranteSanduba.API
 {
@@ -18,6 +21,23 @@ namespace RestauranteSanduba.API
             var builder = WebApplication.CreateBuilder(args);
 
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
+
+            var jwtSecretKey = builder.Configuration.GetValue<string>("JwtSettings:SecretKey") ?? string.Empty;
+            var jwtIssuer = builder.Configuration.GetValue<string>("JwtSettings:Issuer") ?? string.Empty;
+            var jwtAudience = builder.Configuration.GetValue<string>("JwtSettings:Audience") ?? string.Empty;
+
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options => options.TokenValidationParameters = new()
+                {
+                    ValidateIssuer = true,
+                    ValidIssuer = jwtIssuer,
+                    ValidateAudience = true,
+                    ValidAudience = jwtAudience,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecretKey)),
+                });
+
+            builder.Services.AddAuthorization();
 
             builder.Services.AddHealthChecks()
                 .AddDatabaseHealthChecks(builder.Configuration);
@@ -36,6 +56,7 @@ namespace RestauranteSanduba.API
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
+
             builder.Services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1",
@@ -47,8 +68,32 @@ namespace RestauranteSanduba.API
                         {
                             Name = "Victor Cangelosi de Lima - RM352065",
                             Email = "mktcangel@gmail.com"
-                        }
+                        },
                     });
+
+                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Adicione o JWT",
+                    Name = "Authorization",
+                    BearerFormat = "JWT",
+                    Scheme = "bearer",
+                });
+
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        new string[]{ }
+                    }
+                });
 
                 options.EnableAnnotations();
             });
@@ -76,6 +121,7 @@ namespace RestauranteSanduba.API
             })
             .UseHealthChecksUI(options => options.UIPath = "/healthz-ui");
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllers();

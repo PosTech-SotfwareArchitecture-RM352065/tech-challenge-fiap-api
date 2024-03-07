@@ -3,7 +3,6 @@ using System;
 using System.Linq;
 using RestauranteSanduba.Core.Application.Abstraction.Clientes;
 using System.Collections.Generic;
-using RestauranteSanduba.Infra.PersistenceGateway.SqlServer;
 using RestauranteSanduba.Infra.PersistenceGateway.SqlServer.Clientes.Schema;
 
 namespace RestauranteSanduba.Infra.PersistenceGateway.SqlServer.Clientes
@@ -32,10 +31,10 @@ namespace RestauranteSanduba.Infra.PersistenceGateway.SqlServer.Clientes
                 .ToList();
         }
 
-        public Domain.Abstractions.Cliente ConsultarCliente(Guid id)
+        public Domain.Abstractions.Cliente ConsultarCliente(Guid clienteId)
         {
             return _dbContext.Clientes
-                .Where(cliente => cliente.Id == id)
+                .Where(cliente => cliente.Id == clienteId)
                 .Select(item => item.ToDomain())
                 .FirstOrDefault();
         }

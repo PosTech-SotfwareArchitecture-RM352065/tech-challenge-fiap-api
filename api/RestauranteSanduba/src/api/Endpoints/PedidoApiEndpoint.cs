@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RestauranteSanduba.Core.Application.Abstraction.Pedidos;
@@ -8,6 +9,7 @@ using System;
 
 namespace RestauranteSanduba.API.Endpoints
 {
+    [Authorize]
     [ApiController]
     [Route("pedido")]
 

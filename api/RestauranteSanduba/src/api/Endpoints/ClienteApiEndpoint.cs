@@ -1,11 +1,10 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RestauranteSanduba.Core.Application.Abstraction.Clientes;
 using RestauranteSanduba.Core.Application.Abstraction.Clientes.RequestModel;
 using RestauranteSanduba.Core.Application.Abstraction.Clientes.ResponseModel;
 using Swashbuckle.AspNetCore.Annotations;
-using System.Collections.Generic;
-using System.Net.Mime;
 
 namespace RestauranteSanduba.API.Endpoints
 {
@@ -22,6 +21,7 @@ namespace RestauranteSanduba.API.Endpoints
             this.clienteController = clienteController;
         }
 
+        [Authorize]
         [HttpGet(Name = "ConsultaClientePorCPF")]
         [SwaggerOperation(Summary = "Consulta dados do cliente")]
         [SwaggerResponse(200, "Dados do Cliente", typeof(ConsultaClienteResponse))]
