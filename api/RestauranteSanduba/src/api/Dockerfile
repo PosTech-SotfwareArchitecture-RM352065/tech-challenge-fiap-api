@@ -21,7 +21,8 @@ COPY ["core/Domain/Domain.csproj", "core/Domain/"]
 COPY ["core/Application/Application.csproj", "core/Application/"]
 COPY ["core/Application.Abstraction/Application.Abstraction.csproj", "core/Application.Abstraction/"]
 COPY ["adapter/Controller/ApiAdapter.csproj", "adapter/Controller/"]
-COPY ["infra/PersistenceGateway/PersistenceGateway.csproj", "infra/PersistenceGateway/"]
+COPY ["infra/PersistenceGateway.SqlServer/PersistenceGateway.SqlServer.csproj", "infra/PersistenceGateway.SqlServer/"]
+COPY ["infra/PersistenceGateway.Redis/PersistenceGateway.Redis.csproj", "infra/PersistenceGateway.Redis/"]
 COPY ["api/API.csproj", "api/"]
 
 RUN dotnet restore "api/API.csproj"
