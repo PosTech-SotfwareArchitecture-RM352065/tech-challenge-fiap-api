@@ -1,5 +1,6 @@
 ﻿using RestauranteSanduba.Core.Application.Abstraction.Cardapios;
 using RestauranteSanduba.Core.Application.Abstraction.Cardapios.RequestModel;
+using System.Collections.Generic;
 
 namespace RestauranteSanduba.Adapter.ApiAdapter.Cardapios
 {

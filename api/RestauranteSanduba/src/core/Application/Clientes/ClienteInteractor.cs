@@ -21,9 +21,9 @@ namespace RestauranteSanduba.Core.Application.Clientes
             _pedidoRepository = pedidoRepository;
         }
 
-        public CadastroClienteResponse CadastrarCliente(CadastroClienteRequest request)
+        public CadastroClienteResponse CadastrarCliente(CadastroClienteRequestModel request)
         {
-            var cliente = ClienteIdentificado.CriarCliente(Guid.NewGuid(), request.CPF, request.Nome, request.Email);
+            var cliente = ClienteIdentificado.CriarCliente(Guid.NewGuid(), request.CPF, request.Nome, request.Email, request.Senha);
             _clienteRepository.CadastrarCliente(cliente);
 
             return new CadastroClienteResponse() { Id = cliente.Id };

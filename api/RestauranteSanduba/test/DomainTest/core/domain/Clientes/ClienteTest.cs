@@ -15,8 +15,9 @@ namespace RestauranteSanduba.Test.Core.DomainTest.core.domain.Clientes
             var cpfFormatado = "000.000.000-00";
             var cpfSemFormatacao = "00000000000";
             var email = "joao.silva@mail.com";
+            var senha = "SenhaForte1!";
 
-            var cliente = ClienteIdentificado.CriarCliente(id, cpfFormatado, nome, email);
+            var cliente = ClienteIdentificado.CriarCliente(id, cpfFormatado, nome, email, senha);
 
             Assert.NotNull(cliente);
             Assert.Equal(cpfSemFormatacao, cliente.CPF?.ToString());
@@ -32,10 +33,11 @@ namespace RestauranteSanduba.Test.Core.DomainTest.core.domain.Clientes
             var nome = "Joao Silva";
             var cpfFormatado = "111.222.333-00";
             var email = "joao.silva@mail.com";
+            var senha = "SenhaForte1!";
 
             Assert.Throws<DomainException>(() =>
             {
-                ClienteIdentificado.CriarCliente(id, cpfFormatado, nome, email);
+                ClienteIdentificado.CriarCliente(id, cpfFormatado, nome, email, senha);
             });
         }
 
@@ -46,10 +48,11 @@ namespace RestauranteSanduba.Test.Core.DomainTest.core.domain.Clientes
             var nome = "Joao Silva";
             var cpfFormatado = string.Empty;
             var email = "joao.silva@mail.com";
+            var senha = "SenhaForte1!";
 
             Assert.Throws<DomainException>(() =>
             {
-                ClienteIdentificado.CriarCliente(id, cpfFormatado, nome, email);
+                ClienteIdentificado.CriarCliente(id, cpfFormatado, nome, email, senha);
             });
         }
 
@@ -76,10 +79,11 @@ namespace RestauranteSanduba.Test.Core.DomainTest.core.domain.Clientes
             var nome = string.Empty;
             var cpfFormatado = "000.000.000-00";
             var email = "joao.silva@mail.com";
+            var senha = "SenhaForte1!";
 
             Assert.Throws<DomainException>(() =>
             {
-                ClienteIdentificado.CriarCliente(id, cpfFormatado, nome, email);
+                ClienteIdentificado.CriarCliente(id, cpfFormatado, nome, email, senha);
             });
         }
 
@@ -90,10 +94,11 @@ namespace RestauranteSanduba.Test.Core.DomainTest.core.domain.Clientes
             var nome = "Joao Silva";
             var cpfFormatado = "000.000.000-00";
             var email = string.Empty;
+            var senha = "SenhaForte1!";
 
             Assert.Throws<DomainException>(() =>
             {
-                ClienteIdentificado.CriarCliente(id, cpfFormatado, nome, email);
+                ClienteIdentificado.CriarCliente(id, cpfFormatado, nome, email, senha);
             });
         }
     }

@@ -9,7 +9,7 @@ namespace RestauranteSanduba.Core.Application.Abstraction.Pedidos
         public List<ConsultaPedidoResponse> OntemPedido(ConsultaPedidoPorStatus requestModel);
         public ConsultaPedidoResponse ObtemPedido(ConsultaPedidoRequest requestModel);
         public List<ConsultaPedidoResponse> ObtemPedidoPorCliente(ConsultaPedidoPorClienteRequest requestModel);
-        public CriacaoPedidoResponse CriaPedido(CriacaoPedidoRequest requestModel);
+        public CriacaoPedidoResponse CriaPedido(CriacaoPedidoRequestModel requestModel);
         public AtualizaPedidoResponse PedidoEmPreparacao(AtualizaPedidoRequest requestModel);
         public AtualizaPedidoResponse PedidoFinalizado(AtualizaPedidoRequest requestModel);
     }

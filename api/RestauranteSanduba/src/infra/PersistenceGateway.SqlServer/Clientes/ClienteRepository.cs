@@ -1,9 +1,11 @@
-﻿using Domain = RestauranteSanduba.Core.Domain.Clientes;
+﻿using ClienteDomain = RestauranteSanduba.Core.Domain.Clientes.Abstractions.Cliente;
 using System;
 using System.Linq;
 using RestauranteSanduba.Core.Application.Abstraction.Clientes;
 using System.Collections.Generic;
-using RestauranteSanduba.Infra.PersistenceGateway.SqlServer.Clientes.Schema;
+using Microsoft.EntityFrameworkCore;
+using RestauranteSanduba.Core.Domain.Clientes;
+using Microsoft.Data.SqlClient;
 
 namespace RestauranteSanduba.Infra.PersistenceGateway.SqlServer.Clientes
 {
@@ -16,22 +18,33 @@ namespace RestauranteSanduba.Infra.PersistenceGateway.SqlServer.Clientes
             _dbContext = dbContext;
         }
 
-        public Guid CadastrarCliente(Domain.Abstractions.Cliente cliente)
+        public Guid CadastrarCliente(ClienteDomain cliente)
         {
-            _dbContext.Clientes.Add(Cliente.ToSchema(cliente));
+
+            if (_dbContext.Clientes.Where(existente => existente.CPF == cliente.CPF.ToString()).Any())
+                throw new Exception("Cliente já cadastrado!");
+
+            _dbContext.Database.ExecuteSqlRaw($"Sp_AdicionaCliente @Id, @Tipo, @Cpf, @Nome, @Email, @Senha",
+                new SqlParameter("@Id", cliente.Id),
+                new SqlParameter("@Tipo", (int)cliente.Tipo),
+                new SqlParameter("@Cpf", cliente.CPF.ToString()),
+                new SqlParameter("@Nome", cliente.Nome),
+                new SqlParameter("@Email", cliente.Email),
+                new SqlParameter("@Senha", cliente.Senha));
+
             _dbContext.SaveChanges();
 
             return cliente.Id;
         }
 
-        public List<Domain.Abstractions.Cliente> ConsultarClientes()
+        public List<ClienteDomain> ConsultarClientes()
         {
             return _dbContext.Clientes
                 .Select(item => item.ToDomain())
                 .ToList();
         }
 
-        public Domain.Abstractions.Cliente ConsultarCliente(Guid clienteId)
+        public ClienteDomain ConsultarCliente(Guid clienteId)
         {
             return _dbContext.Clientes
                 .Where(cliente => cliente.Id == clienteId)
@@ -39,7 +52,7 @@ namespace RestauranteSanduba.Infra.PersistenceGateway.SqlServer.Clientes
                 .FirstOrDefault();
         }
 
-        public Domain.Abstractions.Cliente ConsultarCliente(Domain.CPF numeroDocumento)
+        public ClienteDomain ConsultarCliente(CPF numeroDocumento)
         {
             return _dbContext.Clientes
                 .Where(cliente => cliente.CPF == numeroDocumento.ToString())

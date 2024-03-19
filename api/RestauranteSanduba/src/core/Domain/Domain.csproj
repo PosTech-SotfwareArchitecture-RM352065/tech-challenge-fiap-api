@@ -1,15 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>disable</Nullable>
     <AssemblyName>RestauranteSanduba.Core.$(MSBuildProjectName.Replace(" ", "_"))</AssemblyName>
     <RootNamespace>RestauranteSanduba.Core.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
   </PropertyGroup>
-
   <ItemGroup>
     <Folder Include="Pagamentos\" />
   </ItemGroup>
-
 </Project>

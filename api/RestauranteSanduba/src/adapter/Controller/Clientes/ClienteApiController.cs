@@ -7,7 +7,7 @@ namespace RestauranteSanduba.Adapter.ApiAdapter.Clientes
     {
         public ClienteApiController(IClienteInteractor interactor, ClientePresenter<string> presenter) : base(interactor, presenter) { }
 
-        public override string CadastrarCliente(CadastroClienteRequest requestModel)
+        public override string CadastrarCliente(CadastroClienteRequestModel requestModel)
         {
             var responseModel = interactor.CadastrarCliente(requestModel);
             return presenter.Present(responseModel);

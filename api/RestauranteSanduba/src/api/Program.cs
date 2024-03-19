@@ -11,6 +11,7 @@ using RestauranteSanduba.Infra.PersistenceGateway.SqlServer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Serilog;
 
 namespace RestauranteSanduba.API
 {
@@ -22,22 +23,10 @@ namespace RestauranteSanduba.API
 
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
 
-            var jwtSecretKey = builder.Configuration.GetValue<string>("JwtSettings:SecretKey") ?? string.Empty;
-            var jwtIssuer = builder.Configuration.GetValue<string>("JwtSettings:Issuer") ?? string.Empty;
-            var jwtAudience = builder.Configuration.GetValue<string>("JwtSettings:Audience") ?? string.Empty;
-
-            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options => options.TokenValidationParameters = new()
-                {
-                    ValidateIssuer = true,
-                    ValidIssuer = jwtIssuer,
-                    ValidateAudience = true,
-                    ValidAudience = jwtAudience,
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecretKey)),
-                });
-
-            builder.Services.AddAuthorization();
+            builder.Services.AddAuthConfiguration(builder.Configuration);
+            builder.Services.AddInfrastructure(builder.Configuration);
+            builder.Services.AddApplication(builder.Configuration);
+            builder.Services.AddApiAdapter(builder.Configuration);
 
             builder.Services.AddHealthChecks()
                 .AddDatabaseHealthChecks(builder.Configuration);
@@ -50,11 +39,12 @@ namespace RestauranteSanduba.API
 
             }).AddInMemoryStorage();
 
-            builder.Services.AddInfrastructure(builder.Configuration);
-            builder.Services.AddApplication(builder.Configuration);
-            builder.Services.AddApiAdapter(builder.Configuration);
+            builder.Services.AddControllers()
+                .ConfigureApiBehaviorOptions(options =>
+                {
+                    options.SuppressMapClientErrors = true;
+                });
 
-            builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
 
             builder.Services.AddSwaggerGen(options =>
@@ -98,6 +88,13 @@ namespace RestauranteSanduba.API
                 options.EnableAnnotations();
             });
 
+            builder.Host.UseSerilog(
+                (context, configuration) =>
+                {
+                    configuration.ReadFrom.Configuration(context.Configuration);
+                    configuration.Enrich.WithCorrelationId(headerName: "x-correlation-id", addValueIfHeaderAbsence: true);
+                });
+
             var app = builder.Build();
 
             app.UseSwagger();
@@ -121,6 +118,8 @@ namespace RestauranteSanduba.API
             })
             .UseHealthChecksUI(options => options.UIPath = "/healthz-ui");
 
+            app.UseSerilogRequestLogging();
+
             app.UseAuthentication();
             app.UseAuthorization();
 
@@ -129,20 +128,42 @@ namespace RestauranteSanduba.API
             app.Run();
         }
 
-        private static IHealthChecksBuilder AddDatabaseHealthChecks(this IHealthChecksBuilder services, IConfiguration configuration)
+        private static IHealthChecksBuilder AddDatabaseHealthChecks(this IHealthChecksBuilder builder, IConfiguration configuration)
         {
             foreach (var databaseConfig in configuration.GetSection("ConnectionStrings").GetChildren())
             {
                 switch (databaseConfig.GetValue<string>("Type"))
                 {
                     case "MSSQL":
-                        services.AddSqlServer(connectionString: databaseConfig.GetValue<string>("Value"), name: databaseConfig.Key);
+                        builder.AddSqlServer(connectionString: databaseConfig.GetValue<string>("Value"), name: databaseConfig.Key);
                         break;
                     case "REDIS":
-                        services.AddRedis(redisConnectionString: databaseConfig.GetValue<string>("Value"), name: databaseConfig.Key);
+                        builder.AddRedis(redisConnectionString: databaseConfig.GetValue<string>("Value"), name: databaseConfig.Key);
                         break;
                 }
             }
+
+            return builder;
+        }
+
+        private static IServiceCollection AddAuthConfiguration(this IServiceCollection services, IConfiguration configuration)
+        {
+            var jwtSecretKey = configuration.GetValue<string>("JwtSettings:SecretKey") ?? string.Empty;
+            var jwtIssuer = configuration.GetValue<string>("JwtSettings:Issuer") ?? string.Empty;
+            var jwtAudience = configuration.GetValue<string>("JwtSettings:Audience") ?? string.Empty;
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options => options.TokenValidationParameters = new()
+                {
+                    ValidateIssuer = true,
+                    ValidIssuer = jwtIssuer,
+                    ValidateAudience = true,
+                    ValidAudience = jwtAudience,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecretKey)),
+                });
+
+            services.AddAuthorization();
 
             return services;
         }

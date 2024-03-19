@@ -15,7 +15,7 @@ namespace RestauranteSanduba.Core.Application.Abstraction.Pedidos
             this.presenter = presenter;
         }
 
-        public abstract T CriaPedido(CriacaoPedidoRequest requestModel);
+        public abstract T CriaPedido(CriacaoPedidoRequestModel requestModel);
         public abstract T ObtemPedido(ConsultaPedidoRequest requestModel);
     }
 }

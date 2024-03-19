@@ -7,7 +7,7 @@ namespace RestauranteSanduba.Infra.PersistenceGateway.SqlServer
 {
     public class InfrastructureDbContext : DbContext
     {
-        public InfrastructureDbContext(DbContextOptions options) : base(options) { }
+        public InfrastructureDbContext(DbContextOptions<InfrastructureDbContext> options) : base(options) { }
 
         internal DbSet<Cliente> Clientes { get; set; }
         internal DbSet<Produto> Produtos { get; set; }

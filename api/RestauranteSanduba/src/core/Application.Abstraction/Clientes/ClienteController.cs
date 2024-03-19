@@ -13,7 +13,7 @@ namespace RestauranteSanduba.Core.Application.Abstraction.Clientes
             this.presenter = presenter;
         }
 
-        public abstract T CadastrarCliente(CadastroClienteRequest requestModel);
+        public abstract T CadastrarCliente(CadastroClienteRequestModel requestModel);
         public abstract T ConsultarCliente(ConsultaClienteRequest requestModel);
         public abstract T ConsultarClientes();
         public abstract T ConsultaPedidosCliente(ConsultaClienteRequest requestModel);

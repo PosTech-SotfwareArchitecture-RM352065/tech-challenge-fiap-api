@@ -1,7 +1,7 @@
 ﻿using RestauranteSanduba.Core.Application.Abstraction.Clientes;
 using RestauranteSanduba.Core.Application.Abstraction.Clientes.ResponseModel;
+using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace RestauranteSanduba.Adapter.ApiAdapter.Clientes
 {
