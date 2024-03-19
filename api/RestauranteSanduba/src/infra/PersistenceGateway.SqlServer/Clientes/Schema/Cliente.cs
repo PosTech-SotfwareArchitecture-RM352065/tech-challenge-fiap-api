@@ -29,11 +29,15 @@ namespace RestauranteSanduba.Infra.PersistenceGateway.SqlServer.Clientes.Schema
         [Column(TypeName = "varchar(50)")]
         public string Email { get; init; }
 
+        [Required]
+        [Column(TypeName = "BINARY(64)")]
+        public string Senha { get; init; }
+
         public Domain.Cliente ToDomain()
         {
             if (Tipo == 0)
             {
-                return Core.Domain.Clientes.ClienteIdentificado.CriarCliente(Id, CPF, Nome, Email);
+                return Core.Domain.Clientes.ClienteIdentificado.CriarCliente(Id, CPF, Nome, Email, Senha);
             }
             else
             {

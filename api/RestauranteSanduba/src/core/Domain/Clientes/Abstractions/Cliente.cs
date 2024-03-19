@@ -12,6 +12,7 @@ namespace RestauranteSanduba.Core.Domain.Clientes.Abstractions
         public AcessoCliente Tipo { get; init; }
         public string Nome { get; init; }
         public string Email { get; init; }
+        public string Senha { get; init; } = null;
 
         public override void ValidateEntity()
         {

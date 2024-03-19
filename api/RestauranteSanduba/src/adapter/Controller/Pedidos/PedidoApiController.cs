@@ -7,7 +7,7 @@ namespace RestauranteSanduba.Adapter.ApiAdapter.Pedidos
     {
         public PedidoApiController(IPedidoInteractor interactor, PedidoPresenter<string> presenter) : base(interactor, presenter) { }
 
-        public override string CriaPedido(CriacaoPedidoRequest requestModel)
+        public override string CriaPedido(CriacaoPedidoRequestModel requestModel)
         {
             var responseModel = interactor.CriaPedido(requestModel);
             return presenter.Present(responseModel);

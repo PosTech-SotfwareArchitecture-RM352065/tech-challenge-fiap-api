@@ -25,11 +25,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersistenceGateway.SqlServe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArchitectureTest", "test\ArchitectureTest\ArchitectureTest.csproj", "{91D9D240-E9DA-45C8-9DCA-22BCD2E4E034}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{041D382F-BBCA-48BF-970C-40D4C849CD51}"
-	ProjectSection(SolutionItems) = preProject
-		database\1.0.0.0.sql = database\1.0.0.0.sql
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Abstraction", "src\core\Application.Abstraction\Application.Abstraction.csproj", "{DBBBCA9F-C602-424C-8450-E0DF6B55EEBB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{6AF7C00A-0579-4325-962B-BBCC329DB861}"
@@ -41,7 +36,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "src\api\API.csproj",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiAdapter", "src\adapter\Controller\ApiAdapter.csproj", "{D1F19EF0-A257-47D2-9E9A-38330CDE2F9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersistenceGateway.Redis", "src\infra\PersistenceGateway.Redis\PersistenceGateway.Redis.csproj", "{9F4AEF73-15EA-4AC2-AB46-2B5F2650F6F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersistenceGateway.Redis", "src\infra\PersistenceGateway.Redis\PersistenceGateway.Redis.csproj", "{9F4AEF73-15EA-4AC2-AB46-2B5F2650F6F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

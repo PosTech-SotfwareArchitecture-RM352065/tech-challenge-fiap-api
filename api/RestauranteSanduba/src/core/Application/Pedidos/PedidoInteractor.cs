@@ -1,5 +1,4 @@
-﻿using MediatR;
-using RestauranteSanduba.Core.Application.Abstraction.Cardapios;
+﻿using RestauranteSanduba.Core.Application.Abstraction.Cardapios;
 using RestauranteSanduba.Core.Application.Abstraction.Clientes;
 using RestauranteSanduba.Core.Application.Abstraction.Pedidos;
 using RestauranteSanduba.Core.Application.Abstraction.Pedidos.RequestModel;
@@ -24,7 +23,7 @@ namespace RestauranteSanduba.Core.Application.Pedidos
             this.cardapioPersistenceGateway = cardapioPersistenceGateway;
         }
 
-        public CriacaoPedidoResponse CriaPedido(CriacaoPedidoRequest requestModel)
+        public CriacaoPedidoResponse CriaPedido(CriacaoPedidoRequestModel requestModel)
         {
             var cliente = clientePersistenceGateway.ConsultarCliente(requestModel.ClienteId);
             var numeroPedido = pedidoPersistenceGateway.ConsultaProximoNumeroPedido();

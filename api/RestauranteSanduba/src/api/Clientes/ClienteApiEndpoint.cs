@@ -1,13 +1,15 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using RestauranteSanduba.API.Clientes.Requests;
 using RestauranteSanduba.Core.Application.Abstraction.Clientes;
 using RestauranteSanduba.Core.Application.Abstraction.Clientes.RequestModel;
 using RestauranteSanduba.Core.Application.Abstraction.Clientes.ResponseModel;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace RestauranteSanduba.API.Endpoints
+namespace RestauranteSanduba.API.Clientes
 {
+    [Authorize]
     [ApiController]
     [Route("cliente")]
     public class ClienteApiEndpoint : ControllerBase
@@ -21,7 +23,7 @@ namespace RestauranteSanduba.API.Endpoints
             this.clienteController = clienteController;
         }
 
-        [Authorize]
+        [AllowAnonymous]
         [HttpGet(Name = "ConsultaClientePorCPF")]
         [SwaggerOperation(Summary = "Consulta dados do cliente")]
         [SwaggerResponse(200, "Dados do Cliente", typeof(ConsultaClienteResponse))]
@@ -38,13 +40,20 @@ namespace RestauranteSanduba.API.Endpoints
             }
         }
 
-
+        [AllowAnonymous]
         [HttpPost(Name = "CadastraCliente")]
         [SwaggerOperation(Summary = "Cria novo cliente")]
         [SwaggerResponse(200, "Identificação do cliente", typeof(CadastroClienteResponse))]
-        public IActionResult Post(CadastroClienteRequest requestModel)
+        public IActionResult Post(CadastroClienteRequest request)
         {
-            return Ok(clienteController.CadastrarCliente(requestModel));
+            if (string.IsNullOrEmpty(request.CPF) || string.IsNullOrEmpty(request.Nome) || string.IsNullOrEmpty(request.Email) || string.IsNullOrEmpty(request.Senha))
+            {
+                return BadRequest(request);
+            }
+
+            var controllerRequest = new CadastroClienteRequestModel(request.CPF, request.Nome, request.Email, request.Senha);
+
+            return Ok(clienteController.CadastrarCliente(controllerRequest));
         }
     }
 }

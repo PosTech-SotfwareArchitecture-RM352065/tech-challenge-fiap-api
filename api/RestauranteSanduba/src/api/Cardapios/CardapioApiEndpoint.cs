@@ -8,7 +8,7 @@ using Swashbuckle.AspNetCore.Annotations;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace RestauranteSanduba.API.ApiEndPoints
+namespace RestauranteSanduba.API.Cardapios
 {
     [ApiController]
     [Route("cardapio")]

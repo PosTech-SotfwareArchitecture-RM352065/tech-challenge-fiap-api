@@ -6,7 +6,7 @@ namespace RestauranteSanduba.Core.Application.Abstraction.Clientes
 {
     public interface IClienteInteractor
     {
-        public CadastroClienteResponse CadastrarCliente(CadastroClienteRequest request);
+        public CadastroClienteResponse CadastrarCliente(CadastroClienteRequestModel request);
         public ConsultaClienteResponse ConsultarCliente(ConsultaClienteRequest request);
         public List<ConsultaClienteResponse> ConsultarClientes();
         public ConsultaPedidosClienteResponse ConsultaPedidosCliente(ConsultaClienteRequest request);
