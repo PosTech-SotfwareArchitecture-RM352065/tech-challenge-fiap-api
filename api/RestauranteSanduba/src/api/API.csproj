@@ -42,7 +42,6 @@
   <ItemGroup>
     <Folder Include="Carrinhos\" />
     <Folder Include="Clientes\Responses\" />
-    <Folder Include="Endpoints\" />
     <Folder Include="Pedidos\Responses\" />
   </ItemGroup>
 </Project>
