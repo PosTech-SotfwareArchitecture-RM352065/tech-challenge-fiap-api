@@ -4,7 +4,7 @@ on: [workflow_call, workflow_dispatch ]  # allow this workflow to be called from
 
 env:
     image_tag_suffix: ${{ github.ref != 'refs/heads/main' && '-beta' || '' }}
-
+ 
 jobs:
   docker:
     runs-on: ubuntu-latest
