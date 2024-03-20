@@ -18,7 +18,7 @@ namespace RestauranteSanduba.Infra.PersistenceGateway.SqlServer
         /// <param name="services">The service collection.</param>
         /// <param name="configuration">The configuration.</param>
         /// <returns>The same service collection.</returns>
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddSqlServerInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             string connectionString = configuration.GetConnectionString("MainDatabase:Value");
 

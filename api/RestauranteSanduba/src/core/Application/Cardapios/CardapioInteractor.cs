@@ -29,14 +29,14 @@ namespace RestauranteSanduba.Core.Application.Cardapios
 
             var produtoAtualizado = cardapioPersistenteceGateway.AtualizarProduto(produto);
             return new ConsultaProdutoResponse
-            {
-                Id = produtoAtualizado.Id,
-                Categoria = produtoAtualizado.Categoria,
-                Nome = produtoAtualizado.Nome,
-                Descricao = produtoAtualizado.Descricao,
-                Preco = produtoAtualizado.Preco,
-                Ativo = produtoAtualizado.Ativo
-            };
+            (
+                Id: produtoAtualizado.Id,
+                Categoria: produtoAtualizado.Categoria,
+                Nome: produtoAtualizado.Nome,
+                Descricao: produtoAtualizado.Descricao,
+                Preco: produtoAtualizado.Preco,
+                Ativo: produtoAtualizado.Ativo
+            );
         }
 
         public CadastroProdutoResponse CadastrarProduto(CadastroProdutoRequest requestModel)
@@ -53,10 +53,7 @@ namespace RestauranteSanduba.Core.Application.Cardapios
 
                 cardapioPersistenteceGateway.CadastrarProduto(produto);
 
-                return new CadastroProdutoResponse
-                {
-                    Id = produto.Id
-                };
+                return new CadastroProdutoResponse(produto.Id);
             }
             catch (DomainException ex)
             {
@@ -68,14 +65,14 @@ namespace RestauranteSanduba.Core.Application.Cardapios
         {
             var produto = cardapioPersistenteceGateway.ConsultarProduto(requestModel.Id);
             return new ConsultaProdutoResponse
-            {
-                Id = produto.Id,
-                Categoria = produto.Categoria,
-                Nome = produto.Nome,
-                Descricao = produto.Descricao,
-                Preco = produto.Preco,
-                Ativo = produto.Ativo
-            };
+            (
+                Id: produto.Id,
+                Categoria: produto.Categoria,
+                Nome: produto.Nome,
+                Descricao: produto.Descricao,
+                Preco: produto.Preco,
+                Ativo: produto.Ativo
+            );
         }
 
         public List<ConsultaProdutoResponse> ConsultarProdutos(List<ConsultaProdutoRequest> requestModel)
@@ -83,14 +80,14 @@ namespace RestauranteSanduba.Core.Application.Cardapios
             var produtos = cardapioPersistenteceGateway.ConsultarProdutos(requestModel.Select(item => item.Id).ToList());
             return produtos.Select(produto =>
                 new ConsultaProdutoResponse
-                {
-                    Id = produto.Id,
-                    Categoria = produto.Categoria,
-                    Nome = produto.Nome,
-                    Descricao = produto.Descricao,
-                    Preco = produto.Preco,
-                    Ativo = produto.Ativo
-                }).ToList();
+                (
+                    Id: produto.Id,
+                    Categoria: produto.Categoria,
+                    Nome: produto.Nome,
+                    Descricao: produto.Descricao,
+                    Preco: produto.Preco,
+                    Ativo: produto.Ativo
+                )).ToList();
         }
 
         public List<ConsultaProdutoResponse> ConsultarProdutosAtivos()
@@ -98,28 +95,28 @@ namespace RestauranteSanduba.Core.Application.Cardapios
             var produtos = cardapioPersistenteceGateway.ConsultarProdutosAtivos();
             return produtos.Select(produto =>
                 new ConsultaProdutoResponse
-                {
-                    Id = produto.Id,
-                    Categoria = produto.Categoria,
-                    Nome = produto.Nome,
-                    Descricao = produto.Descricao,
-                    Preco = produto.Preco,
-                    Ativo = produto.Ativo
-                }).ToList();
+                (
+                    Id: produto.Id,
+                    Categoria: produto.Categoria,
+                    Nome: produto.Nome,
+                    Descricao: produto.Descricao,
+                    Preco: produto.Preco,
+                    Ativo: produto.Ativo
+                )).ToList();
         }
 
         public ConsultaProdutoResponse InativarProduto(InativarProdutoRequest requestModel)
         {
             var produto = cardapioPersistenteceGateway.InativarProduto(requestModel.Id);
             return new ConsultaProdutoResponse
-            {
-                Id = produto.Id,
-                Categoria = produto.Categoria,
-                Nome = produto.Nome,
-                Descricao = produto.Descricao,
-                Preco = produto.Preco,
-                Ativo = produto.Ativo
-            };
+            (
+                Id: produto.Id,
+                Categoria: produto.Categoria,
+                Nome: produto.Nome,
+                Descricao: produto.Descricao,
+                Preco: produto.Preco,
+                Ativo: produto.Ativo
+            );
         }
     }
 }

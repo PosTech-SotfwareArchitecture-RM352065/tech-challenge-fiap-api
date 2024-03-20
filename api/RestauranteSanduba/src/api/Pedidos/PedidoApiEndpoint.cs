@@ -58,6 +58,15 @@ namespace RestauranteSanduba.API.Pedidos
         [SwaggerResponse(200, "Status pedido", typeof(AtualizaPedidoResponse))]
         public IActionResult Put(AtualizaPedidoRequest requestModel)
         {
+            var sub = User.FindFirstValue("sub");
+            Guid userId;
+
+            if (!Guid.TryParse(sub, out userId))
+            {
+                _logger.LogError($"Erro ao obter usuário na sessão. Parametro sub: {sub}");
+                return BadRequest("Usuário inválido! ");
+            }
+
             return Ok();
         }
     }

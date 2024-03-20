@@ -4,14 +4,15 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using RestauranteSanduba.Core.Application;
 using System;
+using System.Text;
+using RestauranteSanduba.Core.Application;
 using RestauranteSanduba.Adapter.ApiAdapter;
 using RestauranteSanduba.Infra.PersistenceGateway.SqlServer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using Serilog;
+using RestauranteSanduba.Infra.PersistenceGateway.Redis.PersistenceGateway.Redis;
 
 namespace RestauranteSanduba.API
 {
@@ -24,7 +25,8 @@ namespace RestauranteSanduba.API
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
 
             builder.Services.AddAuthConfiguration(builder.Configuration);
-            builder.Services.AddInfrastructure(builder.Configuration);
+            builder.Services.AddSqlServerInfrastructure(builder.Configuration);
+            builder.Services.AddRedisInfrastructure(builder.Configuration);
             builder.Services.AddApplication(builder.Configuration);
             builder.Services.AddApiAdapter(builder.Configuration);
 
