@@ -25,7 +25,7 @@ namespace RestauranteSanduba.Core.Application.Carrinhos
             }
             catch (DomainException ex)
             {
-                throw ex;
+                throw;
             }
         }
 

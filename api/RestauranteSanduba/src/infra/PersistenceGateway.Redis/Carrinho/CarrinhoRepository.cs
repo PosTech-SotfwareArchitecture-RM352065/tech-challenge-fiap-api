@@ -17,7 +17,8 @@ namespace RestauranteSanduba.Infra.PersistenceGateway.Redis.PersistenceGateway.R
         public CarrinhoRepository(IDistributedCache dbContext)
         {
             _dbContext = dbContext;
-            _options = new DistributedCacheEntryOptions { 
+            _options = new DistributedCacheEntryOptions
+            {
                 AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(15),
                 SlidingExpiration = TimeSpan.FromMinutes(10),
             };
@@ -28,7 +29,7 @@ namespace RestauranteSanduba.Infra.PersistenceGateway.Redis.PersistenceGateway.R
             List<Guid> list = new();
 
             var bytes = _dbContext.Get(cliente.ToString());
-            if (bytes is not null && bytes.Length > 0) 
+            if (bytes is not null && bytes.Length > 0)
             {
                 var strContent = Encoding.UTF8.GetString(bytes);
                 list = JsonSerializer.Deserialize<List<Guid>>(strContent);

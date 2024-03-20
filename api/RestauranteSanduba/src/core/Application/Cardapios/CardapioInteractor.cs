@@ -31,7 +31,7 @@ namespace RestauranteSanduba.Core.Application.Cardapios
             return new ConsultaProdutoResponse
             (
                 Id: produtoAtualizado.Id,
-                Categoria:  produtoAtualizado.Categoria,
+                Categoria: produtoAtualizado.Categoria,
                 Nome: produtoAtualizado.Nome,
                 Descricao: produtoAtualizado.Descricao,
                 Preco: produtoAtualizado.Preco,
