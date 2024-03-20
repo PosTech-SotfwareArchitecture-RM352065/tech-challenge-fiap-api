@@ -4,6 +4,9 @@ Projeto de entrega para POS Tech FIAP de Victor Cangelosi de Lima RM352065
 ## Video Youtube Módulo 2
 [![YouTube Link](https://img.youtube.com/vi/GzHLmtYgzV0/0.jpg)](https://www.youtube.com/watch?v=GzHLmtYgzV0)
 
+## Video Youtube Módulo 3
+[![YouTube Link](https://img.youtube.com/vi/SvFZTCRB8gU/0.jpg)](https://www.youtube.com/watch?v=SvFZTCRB8gU)
+
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=PosTech-SotfwareArchitecture-RM352065_tech-challenge-fiap&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=PosTech-SotfwareArchitecture-RM352065_tech-challenge-fiap)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=PosTech-SotfwareArchitecture-RM352065_tech-challenge-fiap&metric=coverage)](https://sonarcloud.io/summary/new_code?id=PosTech-SotfwareArchitecture-RM352065_tech-challenge-fiap)
 
