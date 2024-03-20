@@ -3,13 +3,5 @@ using System;
 
 namespace RestauranteSanduba.Core.Application.Abstraction.Cardapios.ResponseModel
 {
-    public record ConsultaProdutoResponse
-    {
-        public Guid Id { get; set; }
-        public Categoria Categoria { get; set; }
-        public string? Nome { get; set; }
-        public string? Descricao { get; set; }
-        public double Preco { get; set; }
-        public bool Ativo { get; set; }
-    }
+    public record ConsultaProdutoResponse(Guid Id, Categoria Categoria, string? Nome, string? Descricao, double Preco, bool Ativo);
 }

@@ -40,8 +40,6 @@
     <ProjectReference Include="..\core\Application\Application.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Carrinhos\" />
     <Folder Include="Clientes\Responses\" />
-    <Folder Include="Pedidos\Responses\" />
   </ItemGroup>
 </Project>

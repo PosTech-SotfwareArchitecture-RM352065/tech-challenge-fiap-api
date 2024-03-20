@@ -1,9 +1,11 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RestauranteSanduba.Adapter.ApiAdapter.Cardapios;
+using RestauranteSanduba.Adapter.ApiAdapter.Carrinhos;
 using RestauranteSanduba.Adapter.ApiAdapter.Clientes;
 using RestauranteSanduba.Adapter.ApiAdapter.Pedidos;
 using RestauranteSanduba.Core.Application.Abstraction.Cardapios;
+using RestauranteSanduba.Core.Application.Abstraction.Carrinhos;
 using RestauranteSanduba.Core.Application.Abstraction.Clientes;
 using RestauranteSanduba.Core.Application.Abstraction.Pedidos;
 
@@ -25,6 +27,8 @@ namespace RestauranteSanduba.Adapter.ApiAdapter
             services.AddTransient<ClientePresenter<string>, ClienteApiPresenter>();
             services.AddTransient<PedidoController<string>, PedidoApiController>();
             services.AddTransient<PedidoPresenter<string>, PedidoApiPresenter>();
+            services.AddTransient<CarrinhoController<string>, CarrinhoApiController>();
+            services.AddTransient<CarrinhoPresenter<string>, CarrinhoApiPresenter>();
 
             return services;
         }

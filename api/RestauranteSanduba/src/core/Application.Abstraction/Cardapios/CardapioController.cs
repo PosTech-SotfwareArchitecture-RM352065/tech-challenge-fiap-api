@@ -1,10 +1,5 @@
 ﻿using RestauranteSanduba.Core.Application.Abstraction.Cardapios.RequestModel;
-using RestauranteSanduba.Core.Application.Abstraction.Cardapios.ResponseModel;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RestauranteSanduba.Core.Application.Abstraction.Cardapios
 {
