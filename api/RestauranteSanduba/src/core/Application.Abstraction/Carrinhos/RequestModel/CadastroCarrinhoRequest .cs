@@ -2,5 +2,5 @@
 
 namespace RestauranteSanduba.Core.Application.Abstraction.Carrinhos.RequestModel
 {
-    public record CadastroCarrinhoRequest(Guid ClienteId, Guid ProdutoId);
+    public record CadastroCarrinhoRequestModel(Guid ClienteId, Guid ProdutoId);
 }

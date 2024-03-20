@@ -14,7 +14,7 @@ namespace RestauranteSanduba.Adapter.ApiAdapter.Carrinhos
             this.presenter = presenter;
         }
 
-        public override string CadastrarProduto(CadastroCarrinhoRequest requestModel)
+        public override string CadastrarProduto(CadastroCarrinhoRequestModel requestModel)
         {
             var responseModel = interactor.CadastrarProduto(requestModel);
             return presenter.Present(responseModel);
@@ -26,7 +26,7 @@ namespace RestauranteSanduba.Adapter.ApiAdapter.Carrinhos
             return presenter.Present(responseModel);
         }
 
-        public override string RemoverProduto(RemoveCarrinhoRequest requestModel)
+        public override string RemoverProduto(RemoveCarrinhoRequestModel requestModel)
         {
             var responseModel = interactor.RemoverProduto(requestModel);
             return presenter.Present(responseModel);

@@ -25,10 +25,14 @@ namespace RestauranteSanduba.Infra.PersistenceGateway.Redis.PersistenceGateway.R
 
         public void CadastrarProduto(Guid cliente, Guid produto)
         {
-            var bytes = _dbContext.Get(cliente.ToString());
-            var strContent = Encoding.UTF8.GetString(bytes);
-            var list = JsonSerializer.Deserialize<List<Guid>>(strContent);
+            List<Guid> list = new();
 
+            var bytes = _dbContext.Get(cliente.ToString());
+            if (bytes is not null && bytes.Length > 0) 
+            {
+                var strContent = Encoding.UTF8.GetString(bytes);
+                list = JsonSerializer.Deserialize<List<Guid>>(strContent);
+            }
             list.Add(produto);
 
             var json = JsonSerializer.Serialize(list);
@@ -37,9 +41,15 @@ namespace RestauranteSanduba.Infra.PersistenceGateway.Redis.PersistenceGateway.R
 
         public List<Guid> ConsultarProdutos(Guid cliente)
         {
+            List<Guid> list = new();
+
             var bytes = _dbContext.Get(cliente.ToString());
+            if (bytes is null || bytes?.Length <= 0) return list;
+
             var strContent = Encoding.UTF8.GetString(bytes);
-            var list = JsonSerializer.Deserialize<List<Guid>>(strContent);
+            if (string.IsNullOrEmpty(strContent)) return list;
+
+            list = JsonSerializer.Deserialize<List<Guid>>(strContent);
 
             return list;
         }
@@ -47,6 +57,8 @@ namespace RestauranteSanduba.Infra.PersistenceGateway.Redis.PersistenceGateway.R
         public void RemoverProduto(Guid cliente, Guid produto)
         {
             var bytes = _dbContext.Get(cliente.ToString());
+            if (bytes is null || bytes.Length <= 0) return;
+
             var strContent = Encoding.UTF8.GetString(bytes);
             var list = JsonSerializer.Deserialize<List<Guid>>(strContent);
 

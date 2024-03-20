@@ -15,13 +15,13 @@ namespace RestauranteSanduba.Core.Application.Carrinhos
         {
             this.CarrinhoPersistenteceGateway = CarrinhoPersistenceGateway;
         }
-        public CadastroCarrinhoResponse CadastrarProduto(CadastroCarrinhoRequest requestModel)
+        public CadastroCarrinhoResponseModel CadastrarProduto(CadastroCarrinhoRequestModel requestModel)
         {
             try
             {
                 CarrinhoPersistenteceGateway.CadastrarProduto(requestModel.ClienteId, requestModel.ProdutoId);
 
-                return new CadastroCarrinhoResponse(requestModel.ClienteId);
+                return new CadastroCarrinhoResponseModel(requestModel.ClienteId);
             }
             catch (DomainException ex)
             {
@@ -29,20 +29,20 @@ namespace RestauranteSanduba.Core.Application.Carrinhos
             }
         }
 
-        public List<ConsultaCarrinhoResponse> ConsultarProdutos(ConsultaCarrinhoRequest requestModel)
+        public List<ConsultaCarrinhoResponseModel> ConsultarProdutos(ConsultaCarrinhoRequest requestModel)
         {
             var produtos = CarrinhoPersistenteceGateway.ConsultarProdutos(requestModel.ClienteId);
             return produtos.Select(produto =>
-                new ConsultaCarrinhoResponse
+                new ConsultaCarrinhoResponseModel
                 (
                     Id: produto
                 )).ToList();
         }
 
-        public ConsultaCarrinhoResponse RemoverProduto(RemoveCarrinhoRequest requestModel)
+        public ConsultaCarrinhoResponseModel RemoverProduto(RemoveCarrinhoRequestModel requestModel)
         {
             CarrinhoPersistenteceGateway.RemoverProduto(requestModel.ClienteId, requestModel.ProdutoId);
-            return new ConsultaCarrinhoResponse
+            return new ConsultaCarrinhoResponseModel
             (
                 Id: requestModel.ProdutoId
             );

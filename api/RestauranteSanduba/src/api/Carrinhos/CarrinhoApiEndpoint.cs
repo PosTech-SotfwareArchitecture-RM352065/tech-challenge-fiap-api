@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using RestauranteSanduba.API.Carrinhos.Requests;
 using RestauranteSanduba.Core.Application.Abstraction.Carrinhos;
 using RestauranteSanduba.Core.Application.Abstraction.Carrinhos.RequestModel;
 using RestauranteSanduba.Core.Application.Abstraction.Carrinhos.ResponseModel;
@@ -27,7 +28,7 @@ namespace RestauranteSanduba.API.Carrinhos
         [Authorize]
         [HttpGet(Name = "ConsultaCarrinho")]
         [SwaggerOperation(Summary = "Obtem produtos no carrinho")]
-        [SwaggerResponse(200, "Itens no carrinho", typeof(List<ConsultaCarrinhoResponse>))]
+        [SwaggerResponse(200, "Itens no carrinho", typeof(List<ConsultaCarrinhoResponseModel>))]
         public IActionResult Get()
         {
             var sub = User.FindFirstValue("sub");
@@ -47,7 +48,7 @@ namespace RestauranteSanduba.API.Carrinhos
         [Authorize]
         [HttpPost(Name = "AdicionarProduto")]
         [SwaggerOperation(Summary = "Adicionar produto ao carrinho")]
-        [SwaggerResponse(200, "Lista do carrinho", typeof(CadastroCarrinhoResponse))]
+        [SwaggerResponse(200, "Lista do carrinho", typeof(CadastroCarrinhoResponseModel))]
         public IActionResult Post(CadastroCarrinhoRequest request)
         {
             var sub = User.FindFirstValue("sub");
@@ -59,13 +60,15 @@ namespace RestauranteSanduba.API.Carrinhos
                 return BadRequest("Usuário inválido! ");
             }
 
-            return Ok(CarrinhoController.CadastrarProduto(request));
+            var controllerRequest = new CadastroCarrinhoRequestModel(userId, request.ProdutoId);
+
+            return Ok(CarrinhoController.CadastrarProduto(controllerRequest));
         }
 
         [Authorize]
         [HttpDelete(Name = "RemoveProduto")]
         [SwaggerOperation(Summary = "Remove produto do carrinho")]
-        [SwaggerResponse(200, "Número do Produto", typeof(RemoveCarrinhoResponse))]
+        [SwaggerResponse(200, "Número do Produto", typeof(RemoveCarrinhoResponseModel))]
         public IActionResult Delete(RemoveCarrinhoRequest request)
         {
             var sub = User.FindFirstValue("sub");
@@ -77,7 +80,9 @@ namespace RestauranteSanduba.API.Carrinhos
                 return BadRequest("Usuário inválido! ");
             }
 
-            return Ok(CarrinhoController.RemoverProduto(request));
+            var controllerRequest = new RemoveCarrinhoRequestModel(userId, request.ProdutoId);
+
+            return Ok(CarrinhoController.RemoverProduto(controllerRequest));
         }
     }
 }

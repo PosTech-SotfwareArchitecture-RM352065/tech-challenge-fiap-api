@@ -6,8 +6,8 @@ namespace RestauranteSanduba.Core.Application.Abstraction.Carrinhos
 {
     public interface ICarrinhoInteractor
     {
-        public CadastroCarrinhoResponse CadastrarProduto(CadastroCarrinhoRequest requestModel);
-        public ConsultaCarrinhoResponse RemoverProduto(RemoveCarrinhoRequest requestModel);
-        public List<ConsultaCarrinhoResponse> ConsultarProdutos(ConsultaCarrinhoRequest requestModel);
+        public CadastroCarrinhoResponseModel CadastrarProduto(CadastroCarrinhoRequestModel requestModel);
+        public ConsultaCarrinhoResponseModel RemoverProduto(RemoveCarrinhoRequestModel requestModel);
+        public List<ConsultaCarrinhoResponseModel> ConsultarProdutos(ConsultaCarrinhoRequest requestModel);
     }
 }

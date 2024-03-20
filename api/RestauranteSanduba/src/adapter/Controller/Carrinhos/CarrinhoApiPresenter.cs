@@ -21,17 +21,17 @@ namespace RestauranteSanduba.Adapter.ApiAdapter.Cardapios
             }
         }
 
-        public override string Present(CadastroCarrinhoResponse responseModel)
+        public override string Present(CadastroCarrinhoResponseModel responseModel)
         {
             return SerializeToJsonString(responseModel);
         }
 
-        public override string Present(ConsultaCarrinhoResponse responseModel)
+        public override string Present(ConsultaCarrinhoResponseModel responseModel)
         {
             return SerializeToJsonString(responseModel);
         }
 
-        public override string Present(List<ConsultaCarrinhoResponse> responseModel)
+        public override string Present(List<ConsultaCarrinhoResponseModel> responseModel)
         {
             return SerializeToJsonString(responseModel);
         }

@@ -14,8 +14,8 @@ namespace RestauranteSanduba.Core.Application.Abstraction.Carrinhos
             this.presenter = presenter;
         }
 
-        public abstract T CadastrarProduto(CadastroCarrinhoRequest requestModel);
-        public abstract T RemoverProduto(RemoveCarrinhoRequest requestModel);
+        public abstract T CadastrarProduto(CadastroCarrinhoRequestModel requestModel);
+        public abstract T RemoverProduto(RemoveCarrinhoRequestModel requestModel);
         public abstract T ConsultarProdutos(ConsultaCarrinhoRequest requestModel);
 
     }

@@ -5,8 +5,8 @@ namespace RestauranteSanduba.Core.Application.Abstraction.Carrinhos
 {
     public abstract class CarrinhoPresenter<T>
     {
-        public abstract T Present(CadastroCarrinhoResponse responseModel);
-        public abstract T Present(ConsultaCarrinhoResponse responseModel);
-        public abstract T Present(List<ConsultaCarrinhoResponse> responseModel);
+        public abstract T Present(CadastroCarrinhoResponseModel responseModel);
+        public abstract T Present(ConsultaCarrinhoResponseModel responseModel);
+        public abstract T Present(List<ConsultaCarrinhoResponseModel> responseModel);
     }
 }
